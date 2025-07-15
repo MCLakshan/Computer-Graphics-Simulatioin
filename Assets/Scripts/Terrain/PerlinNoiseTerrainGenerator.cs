@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class PerlinNoiseTerrainGenerator : MonoBehaviour
 {
@@ -53,7 +52,7 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
         return terrainData;
     }
     
-    // Generates the heights for the terrain using Perlin noise
+    // Generates the heights for the terrain using Perlin noise (THE HEIGHT MAP)
     private float[,] GenerateHeights()
     {
         float[,] heights = new float[width, height];
