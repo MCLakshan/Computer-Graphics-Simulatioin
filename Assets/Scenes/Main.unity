@@ -225,14 +225,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dedcfda7d3761154395a131f61feddfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 256
-  height: 256
-  depth: 25
-  noiseScale: 10
-  offsetX: 0
-  offsetZ: 0
-  exponent: 1
-  realTimeUpdate: 1
+  width: 512
+  height: 512
+  depth: 100
+  noiseScale: 3
+  offsetX: 7985.1416
+  offsetZ: 4942.1035
+  octaves: 8
+  realTimeUpdate: 0
+  updateRate: 5
 --- !u!1 &1433166871
 GameObject:
   m_ObjectHideFlags: 0
