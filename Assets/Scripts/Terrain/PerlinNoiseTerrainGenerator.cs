@@ -28,6 +28,11 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
     [Header("<b><color=#F7C59F><size=12>Terrain Settings</size></color></b>\n<i><color=#F7C59F>(Dynamic - Octaves Settings)</color></i>")]
     [Range(1, 8)]
     [SerializeField] private int octaves = 4;
+    
+    [Header("<b><color=#FFB677><size=12>Terrain Settings</size></color></b>\n<i><color=#FFB677>(Dynamic - Redistribution Settings)</color></i>")]
+    [Range(0.1f, 5f)]
+    [SerializeField] private float redistributionExponent = 1.5f;  // Controls valley/peak shaping of terrain
+
 
     [Header("<b><color=#FFD6E0><size=12>Control Settings</size></color></b>")]
     [SerializeField] private bool realTimeUpdate = true;        // Whether to update the terrain in real-time
@@ -129,6 +134,11 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
                 
                 // Normalize the noise height to the range [0, 1]
                 noiseHeight = Mathf.InverseLerp(possibleMinHeight, possibleMaxHeight, noiseHeight);
+                
+                // Apply redistribution to shape the terrain
+                noiseHeight = Mathf.Pow(noiseHeight, redistributionExponent);
+                
+                // Set the height value in the heights array
                 heights[x, z] = noiseHeight;
             }
         }
