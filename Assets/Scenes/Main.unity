@@ -231,6 +231,7 @@ MonoBehaviour:
   noiseScale: 10
   offsetX: 0
   offsetZ: 0
+  exponent: 1
   realTimeUpdate: 1
 --- !u!1 &1433166871
 GameObject:

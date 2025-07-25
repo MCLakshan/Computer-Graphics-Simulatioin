@@ -13,10 +13,17 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
     [SerializeField] private float noiseScale = 20f;    // Scale of the Perlin noise
     [SerializeField] private float offsetX = 0f;        // Offset in the X direction for Perlin noise
     [SerializeField] private float offsetZ = 0f;        // Offset in the Z direction for Perlin noise
+    [SerializeField] private float exponent = 1f;         // Exponent to control the height variation
     
     [Header("Control Settings")]
     [SerializeField] bool realTimeUpdate = true;        // Whether to update the terrain in real-time
+    [Range(1, 20)]
+    [SerializeField] private int updateRate = 1;        // Update rate for real-time updates
+    
 
+    private int _frameCount = 0;                        // Frame counter for controlling update rate
+    
+    
     private void Start()
     {
         // Set the terrain offsets
@@ -30,12 +37,18 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
     
     private void Update()
     {
+        _frameCount++;
+        
         // If real-time update is enabled, regenerate the terrain
-        if (realTimeUpdate)
+        if (realTimeUpdate && _frameCount % updateRate == 0)
         {
             Terrain terrain = GetComponent<Terrain>();
             terrain.terrainData = GenerateTerrain(terrain.terrainData);
         }
+        
+        
+        if (_frameCount > 100)
+            _frameCount = 0;
     }
 
     // Generates the terrain data based terrain settings
@@ -64,7 +77,8 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
                 // Calculate the Perlin noise value at the given coordinates
                 float xCoord = (float)x / width * noiseScale + offsetX;
                 float zCoord = (float)z / height * noiseScale + offsetZ;
-                heights[x, z] = Mathf.PerlinNoise(xCoord, zCoord);
+                var e = Mathf.PerlinNoise(xCoord, zCoord);
+                heights[x, z] = Mathf.Pow(e, exponent);
             }
         }
         return heights;
