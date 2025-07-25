@@ -20,7 +20,9 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
     [SerializeField] private int depth = 20;            // Depth of the terrain
     [Range(0f, 10f)]
     [SerializeField] private float noiseScale = 20f;    // Scale of the Perlin noise
+    [Range(0f, 9999f)]
     [SerializeField] private float offsetX = 0f;        // Offset in the X direction for Perlin noise
+    [Range(0f, 9999f)]
     [SerializeField] private float offsetZ = 0f;        // Offset in the Z direction for Perlin noise
 
     [Header("<b><color=#F7C59F><size=12>Terrain Settings</size></color></b>\n<i><color=#F7C59F>(Dynamic - Octaves Settings)</color></i>")]
@@ -35,7 +37,18 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
     private Terrain _terrain;
     private int _frameCount = 0;
     
-    private void Start()
+    #region - GETTERS -
+    
+    // Get Heights of the terrain
+    public float[,] GetTerrainHeights() => _terrain.terrainData.GetHeights(0, 0, width, height);
+    
+    // Get is real-time update enabled
+    public bool IsRealTimeUpdateEnabled() => realTimeUpdate;
+    
+    #endregion
+    
+    
+    private void Awake()
     {
         // Set the terrain offsets
         offsetX = Random.Range(0f, 9999f);
