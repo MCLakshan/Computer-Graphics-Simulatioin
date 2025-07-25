@@ -34,8 +34,6 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
 
     private Terrain _terrain;
     private int _frameCount = 0;
-
-    
     
     private void Start()
     {
