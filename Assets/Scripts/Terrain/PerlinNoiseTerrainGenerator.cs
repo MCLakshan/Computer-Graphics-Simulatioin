@@ -100,6 +100,8 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
     private float[,] GenerateHeights()
     {
         float[,] heights = new float[width, height];
+        float minNoiseHeight = float.MaxValue;
+        float maxNoiseHeight = float.MinValue;
         
         for (int x = 0; x < width; x++)
         {
@@ -107,9 +109,7 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
             {
                 // Initialize variables for Perlin noise generation with octaves
                 float noiseHeight = 0f;
-                float possibleMinHeight = 0f;   // Must be always 0
-                float possibleMaxHeight = 0f;   // Must be increased with each octave
-
+                
                 // Calculate the Coordinates for the Perlin noise
                 float xCoordBase = (float)x / width * noiseScale + offsetX;
                 float zCoordBase = (float)z / height * noiseScale + offsetZ;
@@ -118,9 +118,6 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
                 for (int i = 0; i < octaves; i++)
                 {
                     var octaveScale = Mathf.Pow(2, i);
-                    
-                    // Calculate the possible height variation for this octave
-                    possibleMaxHeight += 1.0f / octaveScale; // Each octave contributes a height of 1 / octaveScale
                     
                     // Calculate the sample coordinates for the Perlin noise
                     float sampleX = xCoordBase * octaveScale;
@@ -132,16 +129,28 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
                     noiseHeight += heightValue;
                 }
                 
-                // Normalize the noise height to the range [0, 1]
-                noiseHeight = Mathf.InverseLerp(possibleMinHeight, possibleMaxHeight, noiseHeight);
+                // Track the actual min and max values
+                if (noiseHeight > maxNoiseHeight) maxNoiseHeight = noiseHeight;
+                if (noiseHeight < minNoiseHeight) minNoiseHeight = noiseHeight;
                 
-                // Apply redistribution to shape the terrain
-                noiseHeight = Mathf.Pow(noiseHeight, redistributionExponent);
-                
-                // Set the height value in the heights array
+                // Store the raw, unnormalized height for now
                 heights[x, z] = noiseHeight;
             }
         }
+        
+        // Normalize the heights 
+        for (int x = 0; x < width; x++)
+        {
+            for (int z = 0; z < height; z++)
+            {
+                // Normalize the stored height using the actual min/max
+                float normalizedHeight = Mathf.InverseLerp(minNoiseHeight, maxNoiseHeight, heights[x, z]);
+            
+                // Apply redistribution to shape the terrain
+                heights[x, z] = Mathf.Pow(normalizedHeight, redistributionExponent);
+            }
+        }
+        
         return heights;
     }
 }
