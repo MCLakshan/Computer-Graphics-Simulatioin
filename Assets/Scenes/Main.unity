@@ -532,6 +532,14 @@ MonoBehaviour:
     DiffuseTexture: {fileID: 2800000, guid: 5a213e7300d933a46962c93c9b2e6c10, type: 3}
     NormalTexture: {fileID: 0}
     MinHeight: 0.2
+    MaxHeight: 0.8
+    TileSize: {x: 1, y: 1}
+    TileOffset: {x: 0, y: 0}
+    BlendSharpness: 2
+  - LayerName: Snow
+    DiffuseTexture: {fileID: 2800000, guid: 94f1a82803cbd2b44a4f3766e0efd545, type: 3}
+    NormalTexture: {fileID: 0}
+    MinHeight: 0.6
     MaxHeight: 1
     TileSize: {x: 1, y: 1}
     TileOffset: {x: 0, y: 0}
