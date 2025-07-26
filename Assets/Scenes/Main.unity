@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7db3d23d296ce9f4a8261dd67968faec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimapType: 1
+  minimapType: 0
   minimapImage: {fileID: 759254629}
   terrainTypes:
   - Name: Water
@@ -436,8 +436,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 512
   height: 512
-  depth: 100
-  noiseScale: 3
+  depth: 10
+  noiseScale: 10
   offsetX: 0
   offsetZ: 0
   octaves: 4
@@ -520,14 +520,22 @@ MonoBehaviour:
   targetTerrain: {fileID: 1072173605}
   textureMode: 1
   textureLayers:
-  - LayerName: Water
-    DiffuseTexture: {fileID: 2800000, guid: e8230efa0c309c0408071286287ec0cf, type: 3}
+  - LayerName: Sand 1
+    DiffuseTexture: {fileID: 2800000, guid: 7c00488b3b0ca97499e1a8bd9aa2b4b7, type: 3}
     NormalTexture: {fileID: 0}
     MinHeight: 0
     MaxHeight: 0.3
     TileSize: {x: 1, y: 1}
     TileOffset: {x: 0, y: 0}
-    BlendSharpness: 2
+    BlendSharpness: 1
+  - LayerName: Sand 2
+    DiffuseTexture: {fileID: 2800000, guid: ce1ced1d1a668824e940265b2c16ab9e, type: 3}
+    NormalTexture: {fileID: 0}
+    MinHeight: 0
+    MaxHeight: 0.3
+    TileSize: {x: 1, y: 1}
+    TileOffset: {x: 0, y: 0}
+    BlendSharpness: 1
   - LayerName: Land
     DiffuseTexture: {fileID: 2800000, guid: 5a213e7300d933a46962c93c9b2e6c10, type: 3}
     NormalTexture: {fileID: 0}
@@ -648,8 +656,8 @@ Transform:
   m_GameObject: {fileID: 1433166871}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.7, y: 16.6, z: 13.5}
-  m_LocalScale: {x: 1, y: 1.5, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 1.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 357942944}
