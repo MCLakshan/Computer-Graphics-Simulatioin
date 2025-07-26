@@ -168,7 +168,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7db3d23d296ce9f4a8261dd67968faec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minimapType: 1
   minimapImage: {fileID: 759254629}
+  terrainTypes:
+  - Name: Water
+    Color: {r: 0, g: 0.4552088, b: 0.6226415, a: 1}
+    Height: 0.4
+  - Name: Land
+    Color: {r: 0.038113408, g: 0.64779866, b: 0, a: 1}
+    Height: 0.8
+  - Name: Snow
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Height: 1
 --- !u!1 &357942943
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,6 +399,7 @@ GameObject:
   - component: {fileID: 1072173605}
   - component: {fileID: 1072173604}
   - component: {fileID: 1072173603}
+  - component: {fileID: 1072173606}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -492,6 +504,40 @@ Terrain:
   m_EnableHeightmapRayTracing: 1
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
+--- !u!114 &1072173606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072173601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c34b9cb4a333bb64190d1777e74da452, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrainGenerator: {fileID: 1072173603}
+  targetTerrain: {fileID: 1072173605}
+  textureLayers:
+  - LayerName: Water
+    DiffuseTexture: {fileID: 2800000, guid: e8230efa0c309c0408071286287ec0cf, type: 3}
+    NormalTexture: {fileID: 0}
+    MinHeight: 0
+    MaxHeight: 0.2
+    TileSize: {x: 1, y: 1}
+    TileOffset: {x: 0, y: 0}
+    BlendSharpness: 2
+  - LayerName: Land
+    DiffuseTexture: {fileID: 2800000, guid: 5a213e7300d933a46962c93c9b2e6c10, type: 3}
+    NormalTexture: {fileID: 0}
+    MinHeight: 0.1
+    MaxHeight: 1
+    TileSize: {x: 1, y: 1}
+    TileOffset: {x: 0, y: 0}
+    BlendSharpness: 2
+  autoUpdate: 1
+  updateOnStart: 1
+  updateRate: 2
 --- !u!1 &1433166871
 GameObject:
   m_ObjectHideFlags: 0
@@ -703,8 +749,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 175, y: -175}
-  m_SizeDelta: {x: 300, y: 300}
+  m_AnchoredPosition: {x: 258.5, y: -258.5}
+  m_SizeDelta: {x: 517, y: 517}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1541527921
 MonoBehaviour:
@@ -1070,13 +1116,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1728847684}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.22565663, y: -0.67013365, z: 0.22565663, w: 0.67013365}
-  m_LocalPosition: {x: 662, y: 303, z: 256}
+  m_LocalRotation: {x: 0.31912476, y: 0, z: 0, w: 0.9477128}
+  m_LocalPosition: {x: 256, y: 303, z: -154}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 37.22, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 37.22, y: 0, z: 0}
 --- !u!114 &1728847688
 MonoBehaviour:
   m_ObjectHideFlags: 0
