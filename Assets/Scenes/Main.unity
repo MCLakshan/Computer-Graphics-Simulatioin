@@ -518,25 +518,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrainGenerator: {fileID: 1072173603}
   targetTerrain: {fileID: 1072173605}
+  textureMode: 1
   textureLayers:
   - LayerName: Water
     DiffuseTexture: {fileID: 2800000, guid: e8230efa0c309c0408071286287ec0cf, type: 3}
     NormalTexture: {fileID: 0}
     MinHeight: 0
-    MaxHeight: 0.2
+    MaxHeight: 0.3
     TileSize: {x: 1, y: 1}
     TileOffset: {x: 0, y: 0}
     BlendSharpness: 2
   - LayerName: Land
     DiffuseTexture: {fileID: 2800000, guid: 5a213e7300d933a46962c93c9b2e6c10, type: 3}
     NormalTexture: {fileID: 0}
-    MinHeight: 0.1
+    MinHeight: 0.2
     MaxHeight: 1
     TileSize: {x: 1, y: 1}
     TileOffset: {x: 0, y: 0}
     BlendSharpness: 2
   autoUpdate: 1
-  updateOnStart: 1
   updateRate: 2
 --- !u!1 &1433166871
 GameObject:

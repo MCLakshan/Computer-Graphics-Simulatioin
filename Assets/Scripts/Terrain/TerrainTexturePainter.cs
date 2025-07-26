@@ -10,11 +10,11 @@ public class TerrainTexturePainter : MonoBehaviour
     [SerializeField] private Terrain targetTerrain;
     
     [Header("Texture Settings")]
+    [SerializeField] private TerrainTextureMode textureMode;
     [SerializeField] private TerrainTextureLayer[] textureLayers;
     
     [Header("Update Settings")]
     [SerializeField] private bool autoUpdate = true;
-    [SerializeField] private bool updateOnStart = true;
     [Range(1, 10)]
     [SerializeField] private int updateRate = 2;
     
@@ -22,6 +22,12 @@ public class TerrainTexturePainter : MonoBehaviour
     
     private void Start()
     {
+        // If texture mode is set to Default, skip the painting process
+        if (textureMode == TerrainTextureMode.Default)
+        {
+            return;
+        }
+        
         // Auto-find components if not assigned
         if (terrainGenerator == null)
             terrainGenerator = FindFirstObjectByType<PerlinNoiseTerrainGenerator>();
@@ -38,14 +44,18 @@ public class TerrainTexturePainter : MonoBehaviour
         // Setup terrain layers
         SetupTerrainLayers();
         
-        if (updateOnStart)
-        {
-            PaintTerrain();
-        }
+        // Initial paint
+        PaintTerrain();
     }
     
     private void Update()
     {
+        // If texture mode is set to Default, skip the painting process
+        if (textureMode == TerrainTextureMode.Default)
+        {
+            return;
+        }
+        
         if (autoUpdate && terrainGenerator != null && terrainGenerator.IsRealTimeUpdateEnabled())
         {
             _frameCount++;
@@ -186,21 +196,6 @@ public class TerrainTexturePainter : MonoBehaviour
         return weights;
     }
     
-    // Public method to manually update textures
-    public void UpdateTextures()
-    {
-        PaintTerrain();
-    }
-    
-    // Validate texture layer setup
-    private void OnValidate()
-    {
-        if (textureLayers != null)
-        {
-            // Sort layers by min height for better organization
-            Array.Sort(textureLayers, (a, b) => a.MinHeight.CompareTo(b.MinHeight));
-        }
-    }
 }
 
 [Serializable]
@@ -224,4 +219,10 @@ public class TerrainTextureLayer
     [Header("Blending")]
     [Range(0.1f, 5f)]
     public float BlendSharpness = 1f;  // Controls how sharp/soft the texture transitions are
+}
+
+public enum TerrainTextureMode
+{
+    Default,
+    HeightBased
 }
