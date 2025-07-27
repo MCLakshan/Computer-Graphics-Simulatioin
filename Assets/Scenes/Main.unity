@@ -229,16 +229,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7db3d23d296ce9f4a8261dd67968faec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _terrainGenerator: {fileID: 1072173603}
   minimapType: 1
   minimapImage: {fileID: 759254629}
   terrainTypes:
-  - Name: Water
-    Color: {r: 0, g: 0.4552088, b: 0.6226415, a: 1}
+  - Name: Ocen
+    Color: {r: 0.23137255, g: 0.62352943, b: 0.7882353, a: 1}
+    Height: 0.002
+  - Name: Beach / Shoreline
+    Color: {r: 0.93333334, g: 0.8509804, b: 0.6392157, a: 1}
     Height: 0.02
-  - Name: Land
-    Color: {r: 0.038113408, g: 0.64779866, b: 0, a: 1}
-    Height: 0.7
-  - Name: Snow
+  - Name: Coastal Grassland
+    Color: {r: 0.654902, g: 0.8392157, b: 0.49411765, a: 1}
+    Height: 0.1
+  - Name: Forest
+    Color: {r: 0.13333334, g: 0.54509807, b: 0.13333334, a: 1}
+    Height: 0.3
+  - Name: Montane Forest / Hills
+    Color: {r: 0.33333334, g: 0.41960785, b: 0.18431373, a: 1}
+    Height: 0.6
+  - Name: Alpine / Subalpine
+    Color: {r: 0.84705883, g: 0.84705883, b: 0.84705883, a: 1}
+    Height: 0.8
+  - Name: Bare Rock / Snow
     Color: {r: 1, g: 1, b: 1, a: 1}
     Height: 1
 --- !u!1 &357942943
@@ -537,7 +550,7 @@ Transform:
   m_GameObject: {fileID: 844810610}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2048, y: 500, z: 2048}
+  m_LocalPosition: {x: 2640, y: 300, z: 862}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -706,30 +719,62 @@ MonoBehaviour:
   targetTerrain: {fileID: 1072173605}
   textureMode: 1
   textureLayers:
-  - LayerName: Sand 1
-    DiffuseTexture: {fileID: 2800000, guid: 7c00488b3b0ca97499e1a8bd9aa2b4b7, type: 3}
+  - LayerName: Ocen
+    DiffuseTexture: {fileID: 2800000, guid: 2cbadbbe01a91194a9e50ac7fe09e96e, type: 3}
     NormalTexture: {fileID: 0}
     MinHeight: 0
-    MaxHeight: 0.02
-    TileSize: {x: 1, y: 1}
+    MaxHeight: 0.002
+    TileSize: {x: 0, y: 0}
     TileOffset: {x: 0, y: 0}
-    BlendSharpness: 3
-  - LayerName: Sand 2
-    DiffuseTexture: {fileID: 2800000, guid: ce1ced1d1a668824e940265b2c16ab9e, type: 3}
+    BlendSharpness: 0.1
+  - LayerName: "Beach / Shoreline\t"
+    DiffuseTexture: {fileID: 2800000, guid: d3058aae329343e4dbfefd4c827d5088, type: 3}
     NormalTexture: {fileID: 0}
-    MinHeight: 0
+    MinHeight: 0.002
     MaxHeight: 0.02
-    TileSize: {x: 1, y: 1}
+    TileSize: {x: 0, y: 0}
     TileOffset: {x: 0, y: 0}
-    BlendSharpness: 3
-  - LayerName: Land
-    DiffuseTexture: {fileID: 2800000, guid: 4ec00396caf7ff14bb4378a0931986c7, type: 3}
+    BlendSharpness: 0.1
+  - LayerName: "Coastal Grassland\t"
+    DiffuseTexture: {fileID: 2800000, guid: bdf12700f23a0884496cc8335c0b5ed9, type: 3}
     NormalTexture: {fileID: 0}
-    MinHeight: 0.01
+    MinHeight: 0.02
+    MaxHeight: 0.1
+    TileSize: {x: 0, y: 0}
+    TileOffset: {x: 0, y: 0}
+    BlendSharpness: 0
+  - LayerName: Forest
+    DiffuseTexture: {fileID: 2800000, guid: 7d673383b02804e489f60fa856bcdfb1, type: 3}
+    NormalTexture: {fileID: 0}
+    MinHeight: 0.1
+    MaxHeight: 0.3
+    TileSize: {x: 0, y: 0}
+    TileOffset: {x: 0, y: 0}
+    BlendSharpness: 0
+  - LayerName: "Montane Forest / Hills\t"
+    DiffuseTexture: {fileID: 2800000, guid: 6236f9088a93c664c99aad78a0f95be0, type: 3}
+    NormalTexture: {fileID: 0}
+    MinHeight: 0.3
+    MaxHeight: 0.6
+    TileSize: {x: 0, y: 0}
+    TileOffset: {x: 0, y: 0}
+    BlendSharpness: 0
+  - LayerName: Alpine / Subalpine
+    DiffuseTexture: {fileID: 2800000, guid: 069e8693ba0c90d4c8ccf36422c01bce, type: 3}
+    NormalTexture: {fileID: 0}
+    MinHeight: 0.6
+    MaxHeight: 0.8
+    TileSize: {x: 0, y: 0}
+    TileOffset: {x: 0, y: 0}
+    BlendSharpness: 0
+  - LayerName: "Bare Rock / Snow\t"
+    DiffuseTexture: {fileID: 2800000, guid: 069e8693ba0c90d4c8ccf36422c01bce, type: 3}
+    NormalTexture: {fileID: 0}
+    MinHeight: 0.8
     MaxHeight: 1
-    TileSize: {x: 1, y: 1}
+    TileSize: {x: 0, y: 0}
     TileOffset: {x: 0, y: 0}
-    BlendSharpness: 3
+    BlendSharpness: 0
 --- !u!1 &1501046022
 GameObject:
   m_ObjectHideFlags: 0

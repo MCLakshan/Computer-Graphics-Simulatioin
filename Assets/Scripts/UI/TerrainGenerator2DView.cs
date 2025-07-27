@@ -4,10 +4,10 @@ using UnityEngine.UI;
 
 public class TerrainGenerator2DView : MonoBehaviour
 {
+    [SerializeField]private PerlinNoiseTerrainGenerator _terrainGenerator;
     [SerializeField] private MinimapType minimapType;
     [SerializeField] private RawImage minimapImage;
-
-    private PerlinNoiseTerrainGenerator _terrainGenerator;
+    
     private float[,] _heights;
     private bool _isTerrainFound = false;
     
@@ -15,8 +15,6 @@ public class TerrainGenerator2DView : MonoBehaviour
 
     private void Start()
     {
-        // Get the PerlinNoiseTerrainGenerator component from the scene
-        _terrainGenerator = FindFirstObjectByType<PerlinNoiseTerrainGenerator>();
         if (_terrainGenerator == null)
         {
             Debug.LogError("PerlinNoiseTerrainGenerator component not found in the scene.");
