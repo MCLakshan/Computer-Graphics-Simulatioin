@@ -13,13 +13,6 @@ public class TerrainTexturePainter : MonoBehaviour
     [SerializeField] private TerrainTextureMode textureMode;
     [SerializeField] private TerrainTextureLayer[] textureLayers;
     
-    [Header("Update Settings")]
-    [SerializeField] private bool autoUpdate = true;
-    [Range(1, 10)]
-    [SerializeField] private int updateRate = 2;
-    
-    private int _frameCount = 0;
-    
     private void Start()
     {
         // If texture mode is set to Default, skip the painting process
@@ -45,29 +38,7 @@ public class TerrainTexturePainter : MonoBehaviour
         SetupTerrainLayers();
         
         // Initial paint
-        PaintTerrain();
-    }
-    
-    private void Update()
-    {
-        // If texture mode is set to Default, skip the painting process
-        if (textureMode == TerrainTextureMode.Default)
-        {
-            return;
-        }
-        
-        if (autoUpdate && terrainGenerator != null && terrainGenerator.IsRealTimeUpdateEnabled())
-        {
-            _frameCount++;
-            
-            if (_frameCount % updateRate == 0)
-            {
-                PaintTerrain();
-            }
-            
-            if (_frameCount > 100)
-                _frameCount = 0;
-        }
+        //PaintTerrain();
     }
     
     private void SetupTerrainLayers()
@@ -103,6 +74,7 @@ public class TerrainTexturePainter : MonoBehaviour
         targetTerrain.terrainData.terrainLayers = unityTerrainLayers;
     }
     
+    [ContextMenu("Paint Terrain")]
     public void PaintTerrain()
     {
         if (targetTerrain == null || terrainGenerator == null || textureLayers == null)

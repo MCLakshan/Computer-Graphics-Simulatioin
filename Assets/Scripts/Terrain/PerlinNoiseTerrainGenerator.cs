@@ -33,24 +33,12 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
     [Header("<b><color=#FFB677><size=12>Terrain Settings</size></color></b>\n<i><color=#FFB677>(Dynamic - Redistribution Settings)</color></i>")]
     [Range(0.1f, 5f)]
     [SerializeField] private float redistributionExponent = 1.5f;  // Controls valley/peak shaping of terrain
-
+    
     [Header("<b><color=#E6E6FA><size=12>Island Settings</size></color></b>")]
     [SerializeField] private bool enableIslandMode = true;
-
-    [Header("<b><color=#87CEEB><size=11>Beach Width Settings</size></color></b>")]
     [Range(0f, 1f)]
-    [SerializeField] private float northBeachWidth = 0.3f;   // Top edge beach width
-    [Range(0f, 1f)]
-    [SerializeField] private float southBeachWidth = 0.3f;   // Bottom edge beach width
-    [Range(0f, 1f)]
-    [SerializeField] private float eastBeachWidth = 0.3f;    // Right edge beach width
-    [Range(0f, 1f)]
-    [SerializeField] private float westBeachWidth = 0.3f;    // Left edge beach width
-
-    [Header("<b><color=#DDA0DD><size=11>Mountain Settings</size></color></b>")]
-    [Range(0f, 3f)]
-    [SerializeField] private float mountainCentralization = 1f; // How concentrated mountains are in the center
-
+    [SerializeField] private float innerEdge = 0.3f;          // How much of the edge is beach (0.3 = 30%)
+    
     [Header("<b><color=#FFD6E0><size=12>Control Settings</size></color></b>")]
     [SerializeField] private bool realTimeUpdate = true;        // Whether to update the terrain in real-time
     [Range(1, 20)]
@@ -82,9 +70,6 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
         
         // Change the terrain data of the Terrain component
         GenerateNewTerrain();
-        
-        // Invoke the event after terrain generation is complete
-        onTerrainGenerated?.Invoke();
     }
     
     private void Update()
@@ -110,6 +95,9 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
         offsetZ = Random.Range(0f, 9999f);
         
         _terrain.terrainData = GenerateTerrain(_terrain.terrainData);
+        
+        // Invoke the terrain generated event
+        onTerrainGenerated?.Invoke();
     }
 
     // Generates the terrain data based terrain settings
@@ -192,7 +180,7 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
                 float distanceRatio = distanceFromCenter / maxDistance;
             
                 // Apply island mask with individual beach controls
-                float islandMask = CalculateIslandMask(distanceRatio, x, z);
+                float islandMask = CalculateIslandMask(distanceRatio);
             
                 // Track the min and max values
                 if (normalizedHeight > maxNoiseHeightPass2) maxNoiseHeightPass2 = normalizedHeight;
@@ -215,82 +203,23 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
                 heights[x, z] = Mathf.Clamp01(heights[x, z]);
             }
         }
-        
-        // Print the Max and Min heights for debugging
-        float debugMaxHeight = float.MinValue;
-        float debugMinHeight = float.MaxValue;
-
-        for (int x = 0; x < xRange; x++)
-        {
-            for (int z = 0; z < zRange; z++)
-            {
-                if (heights[x, z] > debugMaxHeight)
-                {
-                    debugMaxHeight = heights[x, z];
-                }
-                if (heights[x, z] < debugMinHeight)
-                {
-                    debugMinHeight = heights[x, z];
-                }
-            }
-        }
-        Debug.Log($"Final Normalized Heights - Max: {debugMaxHeight}, Min: {debugMinHeight}");
-        Debug.Log($"Pass 1 Raw Noise - Max: {maxNoiseHeightPass1}, Min: {minNoiseHeightPass1}");
-        Debug.Log($"Pass 2 After Redistribution - Max: {maxNoiseHeightPass2}, Min: {minNoiseHeightPass2}");
-        
         return heights;
     }
     
-    // Island mask function with individual beach width control
-private float CalculateIslandMask(float distanceFromCenter, int x, int z)
-{
-    if (!enableIslandMode) return 1f; // No island effect
-
-    // Calculate normalized position (0 to 1 for each axis)
-    float normalizedX = (float)x / (xRange - 1); // 0 = west, 1 = east
-    float normalizedZ = (float)z / (zRange - 1); // 0 = south, 1 = north
-
-    // Calculate distance to each edge
-    float distanceToWest = normalizedX;           // Distance from west edge
-    float distanceToEast = 1f - normalizedX;     // Distance from east edge  
-    float distanceToSouth = normalizedZ;         // Distance from south edge
-    float distanceToNorth = 1f - normalizedZ;   // Distance from north edge
-
-    // Calculate beach influence from each side
-    float westBeachInfluence = Mathf.Max(0f, westBeachWidth - distanceToWest) / westBeachWidth;
-    float eastBeachInfluence = Mathf.Max(0f, eastBeachWidth - distanceToEast) / eastBeachWidth;
-    float southBeachInfluence = Mathf.Max(0f, southBeachWidth - distanceToSouth) / southBeachWidth;
-    float northBeachInfluence = Mathf.Max(0f, northBeachWidth - distanceToNorth) / northBeachWidth;
-
-    // If any beach influence is active, reduce height
-    float maxBeachInfluence = Mathf.Max(
-        westBeachInfluence,
-        eastBeachInfluence,
-        southBeachInfluence,
-        northBeachInfluence
-    );
-
-    // Beach areas are completely flat
-    if (maxBeachInfluence >= 1f)
+    // Island mask function - smoothly fades only the outer edge of the island
+    private float CalculateIslandMask(float distanceFromCenter)
     {
-        return 0f; // Pure beach/water level
+        if (!enableIslandMode) return 1f;
+
+        distanceFromCenter = Mathf.Clamp01(distanceFromCenter);
+
+        // If inside the unaffected central area, use full height
+        if (distanceFromCenter <= innerEdge)
+            return 1f;
+
+        // Apply smooth falloff from distance = 1 to mountainCentralization
+        float t = Mathf.InverseLerp(1f, innerEdge, distanceFromCenter); // 0 at edge, 1 at inner edge
+        return Mathf.SmoothStep(0f, 1f, t);
     }
-
-    // Calculate distance from center for mountain shaping
-    float centerX = xRange * 0.5f;
-    float centerZ = zRange * 0.5f;
-    float distanceFromCenterActual = Vector2.Distance(new Vector2(x, z), new Vector2(centerX, centerZ));
-    float maxDistanceFromCenter = Mathf.Min(xRange, zRange) * 0.5f;
-    float normalizedCenterDistance = Mathf.Clamp01(distanceFromCenterActual / maxDistanceFromCenter);
-
-    // Apply mountain centralization
-    float mountainHeight = 1f - Mathf.Pow(normalizedCenterDistance, mountainCentralization);
-
-    // Reduce mountain height based on beach influence
-    float beachReduction = 1f - maxBeachInfluence;
-    mountainHeight *= beachReduction;
-
-    return Mathf.Max(0f, mountainHeight);
-}
 }
 

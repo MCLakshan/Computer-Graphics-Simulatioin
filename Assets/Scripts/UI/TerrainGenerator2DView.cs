@@ -27,14 +27,6 @@ public class TerrainGenerator2DView : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (_isTerrainFound && _terrainGenerator.IsRealTimeUpdateEnabled())
-        {
-            UpdateMinimap();
-        }
-    }
-
     private Texture2D ConvertToGrayscaleTexture(float[,] heightMap)
     {
         int width = heightMap.GetLength(0);
@@ -74,7 +66,7 @@ public class TerrainGenerator2DView : MonoBehaviour
         return texture;
     }
     
-    private void UpdateMinimap()
+    public void UpdateMinimap()
     {
         _heights = _terrainGenerator.GetTerrainHeights();
         Texture2D minimapTexture = ConvertToGrayscaleTexture(_heights);

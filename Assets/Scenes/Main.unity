@@ -527,7 +527,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &844810611
 Transform:
   m_ObjectHideFlags: 0
@@ -537,7 +537,7 @@ Transform:
   m_GameObject: {fileID: 844810610}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 651, y: 10, z: 497}
+  m_LocalPosition: {x: 2048, y: 500, z: 2048}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -597,19 +597,39 @@ MonoBehaviour:
   noiseScale: 4
   offsetX: 8574.673
   offsetZ: 6799.8726
-  octaves: 6
+  octaves: 4
   redistributionExponent: 1.5
   enableIslandMode: 1
-  northBeachWidth: 0.01
-  southBeachWidth: 0.01
-  eastBeachWidth: 0.01
-  westBeachWidth: 0.01
-  mountainCentralization: 2
+  innerEdge: 0.5
   realTimeUpdate: 0
   updateRate: 3
   onTerrainGenerated:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1072173606}
+        m_TargetAssemblyTypeName: TerrainTexturePainter, Assembly-CSharp
+        m_MethodName: PaintTerrain
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 128595474}
+        m_TargetAssemblyTypeName: TerrainGenerator2DView, Assembly-CSharp
+        m_MethodName: UpdateMinimap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!154 &1072173604
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -690,28 +710,26 @@ MonoBehaviour:
     DiffuseTexture: {fileID: 2800000, guid: 7c00488b3b0ca97499e1a8bd9aa2b4b7, type: 3}
     NormalTexture: {fileID: 0}
     MinHeight: 0
-    MaxHeight: 0.1
+    MaxHeight: 0.02
     TileSize: {x: 1, y: 1}
     TileOffset: {x: 0, y: 0}
-    BlendSharpness: 1
+    BlendSharpness: 3
   - LayerName: Sand 2
     DiffuseTexture: {fileID: 2800000, guid: ce1ced1d1a668824e940265b2c16ab9e, type: 3}
     NormalTexture: {fileID: 0}
     MinHeight: 0
-    MaxHeight: 0.1
+    MaxHeight: 0.02
     TileSize: {x: 1, y: 1}
     TileOffset: {x: 0, y: 0}
-    BlendSharpness: 1
+    BlendSharpness: 3
   - LayerName: Land
     DiffuseTexture: {fileID: 2800000, guid: 4ec00396caf7ff14bb4378a0931986c7, type: 3}
     NormalTexture: {fileID: 0}
-    MinHeight: 0.08
+    MinHeight: 0.01
     MaxHeight: 1
     TileSize: {x: 1, y: 1}
     TileOffset: {x: 0, y: 0}
-    BlendSharpness: 2
-  autoUpdate: 1
-  updateRate: 2
+    BlendSharpness: 3
 --- !u!1 &1501046022
 GameObject:
   m_ObjectHideFlags: 0
@@ -1135,7 +1153,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &1728847685
 AudioListener:
   m_ObjectHideFlags: 0
