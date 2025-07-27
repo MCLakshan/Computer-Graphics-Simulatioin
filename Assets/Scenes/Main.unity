@@ -697,7 +697,7 @@ MonoBehaviour:
     DiffuseTexture: {fileID: 2800000, guid: 7c00488b3b0ca97499e1a8bd9aa2b4b7, type: 3}
     NormalTexture: {fileID: 0}
     MinHeight: 0
-    MaxHeight: 0.3
+    MaxHeight: 0.4
     TileSize: {x: 1, y: 1}
     TileOffset: {x: 0, y: 0}
     BlendSharpness: 1
@@ -705,22 +705,14 @@ MonoBehaviour:
     DiffuseTexture: {fileID: 2800000, guid: ce1ced1d1a668824e940265b2c16ab9e, type: 3}
     NormalTexture: {fileID: 0}
     MinHeight: 0
-    MaxHeight: 0.3
+    MaxHeight: 0.4
     TileSize: {x: 1, y: 1}
     TileOffset: {x: 0, y: 0}
     BlendSharpness: 1
   - LayerName: Land
     DiffuseTexture: {fileID: 2800000, guid: 4ec00396caf7ff14bb4378a0931986c7, type: 3}
     NormalTexture: {fileID: 0}
-    MinHeight: 0.2
-    MaxHeight: 0.8
-    TileSize: {x: 1, y: 1}
-    TileOffset: {x: 0, y: 0}
-    BlendSharpness: 2
-  - LayerName: Snow
-    DiffuseTexture: {fileID: 2800000, guid: 94f1a82803cbd2b44a4f3766e0efd545, type: 3}
-    NormalTexture: {fileID: 0}
-    MinHeight: 0.6
+    MinHeight: 0.25
     MaxHeight: 1
     TileSize: {x: 1, y: 1}
     TileOffset: {x: 0, y: 0}
@@ -740,9 +732,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrain: {fileID: 1072173605}
+  terrainTexturePainter: {fileID: 1072173606}
   applyModification: 1
   minHeight: 0
-  maxHeight: 10
+  maxHeight: 15
 --- !u!1 &1501046022
 GameObject:
   m_ObjectHideFlags: 0

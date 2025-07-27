@@ -16,6 +16,7 @@ public class Terrain_1_Modifier : MonoBehaviour
     // References
     [Header("<b><color=#FF9AA2><size=12>References</size></color></b>")]
     [SerializeField] private Terrain terrain; // Reference to the Terrain component
+    [SerializeField] private TerrainTexturePainter terrainTexturePainter;
     
     // Terrain Modifier Settings
     [Header("<b><color=#FFB677><size=12>Terrain Modifier Settings</size></color></b>")]
@@ -52,12 +53,16 @@ public class Terrain_1_Modifier : MonoBehaviour
             {
                 if (heights[x, z] < targetHeightNormalized)
                 {
+                    //heights[x, z] = targetHeightNormalized;
                     heights[x, z] = (heights[x, z] + targetHeightNormalized) / 2; // Average the current height with the target height
                 }
             }
         }
         // Apply the modified heights back to the terrain
         terrainData.SetHeights(0, 0, heights);
+        
+        // Paint the terrain textures based on the modified heights
+        terrainTexturePainter.PaintTerrain();
     }
 
     private void VerifyHeightValues(TerrainData terrainData)

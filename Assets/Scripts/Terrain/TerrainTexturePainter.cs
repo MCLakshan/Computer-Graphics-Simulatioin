@@ -108,24 +108,38 @@ public class TerrainTexturePainter : MonoBehaviour
         if (targetTerrain == null || terrainGenerator == null || textureLayers == null)
             return;
         
+        TerrainData terrainData = targetTerrain.terrainData;
+        
+        // Use alphamap resolution, not heightmap resolution
+        int alphamapWidth = terrainData.alphamapWidth;
+        int alphamapHeight = terrainData.alphamapHeight;
+        
         // Get height data from terrain generator
         float[,] heights = terrainGenerator.GetTerrainHeights();
-        int width = heights.GetLength(0);
-        int height = heights.GetLength(1);
+        int heightmapWidth = heights.GetLength(0);
+        int heightmapHeight = heights.GetLength(1);
         
-        // Create alphamap (texture weight map)
-        float[,,] alphamap = new float[width, height, textureLayers.Length];
+        // Create alphamap with correct dimensions
+        float[,,] alphamap = new float[alphamapWidth, alphamapHeight, textureLayers.Length];
         
         // Calculate texture weights for each point
-        for (int x = 0; x < width; x++)
+        for (int x = 0; x < alphamapWidth; x++)
         {
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < alphamapHeight; y++)
             {
-                float currentHeight = heights[x, y];
+                // Map alphamap coordinates to heightmap coordinates
+                int heightX = Mathf.RoundToInt((float)x * (heightmapWidth - 1) / (alphamapWidth - 1));
+                int heightY = Mathf.RoundToInt((float)y * (heightmapHeight - 1) / (alphamapHeight - 1));
+                
+                // Clamp to ensure we don't go out of bounds
+                heightX = Mathf.Clamp(heightX, 0, heightmapWidth - 1);
+                heightY = Mathf.Clamp(heightY, 0, heightmapHeight - 1);
+                
+                float currentHeight = heights[heightX, heightY];
                 float[] weights = CalculateTextureWeights(currentHeight);
                 
                 // Assign weights to alphamap
-                for (int i = 0; i < textureLayers.Length; i++)
+                for (int i = 0; i < textureLayers.Length && i < weights.Length; i++)
                 {
                     alphamap[x, y, i] = weights[i];
                 }
