@@ -533,6 +533,7 @@ GameObject:
   m_Component:
   - component: {fileID: 276090923}
   - component: {fileID: 276090922}
+  - component: {fileID: 276090924}
   m_Layer: 0
   m_Name: Texture Creater
   m_TagString: Untagged
@@ -547,7 +548,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 276090921}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68396f3076df07146bc66f94fe389c96, type: 3}
   m_Name: 
@@ -578,6 +579,39 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &276090924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276090921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca1c5f872b9a6040b1e86306638d897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textureWidth: 512
+  textureHeight: 512
+  soilScale: 15
+  soilContrast: 0.6
+  pebbleCount: 800
+  pebbleSize: 2
+  pebbleSharpness: 1.2
+  particleScale: 40
+  particleStrength: 0.3
+  moistureScale: 12
+  moistureAmount: 0.4
+  organicCount: 200
+  organicSize: 3
+  organicDensity: 0.3
+  lightDirtColor: {r: 0.7, g: 0.5, b: 0.3, a: 1}
+  darkDirtColor: {r: 0.4, g: 0.3, b: 0.2, a: 1}
+  wetDirtColor: {r: 0.25, g: 0.2, b: 0.15, a: 1}
+  organicColor: {r: 0.15, g: 0.1, b: 0.05, a: 1}
+  pebbleColor: {r: 0.6, g: 0.55, b: 0.5, a: 1}
+  uiRawImage: {fileID: 204068209}
+  applyToMaterial: 1
 --- !u!1 &767352636
 GameObject:
   m_ObjectHideFlags: 0
