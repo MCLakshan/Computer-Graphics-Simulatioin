@@ -214,8 +214,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 10, y: -10}
+  m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &128595474
 MonoBehaviour:
@@ -229,15 +229,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7db3d23d296ce9f4a8261dd67968faec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimapType: 0
+  minimapType: 1
   minimapImage: {fileID: 759254629}
   terrainTypes:
   - Name: Water
     Color: {r: 0, g: 0.4552088, b: 0.6226415, a: 1}
-    Height: 0.4
+    Height: 0.02
   - Name: Land
     Color: {r: 0.038113408, g: 0.64779866, b: 0, a: 1}
-    Height: 0.8
+    Height: 0.7
   - Name: Snow
     Color: {r: 1, g: 1, b: 1, a: 1}
     Height: 1
@@ -537,7 +537,7 @@ Transform:
   m_GameObject: {fileID: 844810610}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.9, y: 18.77, z: 6.79}
+  m_LocalPosition: {x: 651, y: 10, z: 497}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -556,7 +556,6 @@ GameObject:
   - component: {fileID: 1072173605}
   - component: {fileID: 1072173604}
   - component: {fileID: 1072173603}
-  - component: {fileID: 1072173607}
   - component: {fileID: 1072173606}
   m_Layer: 0
   m_Name: Terrain - 1
@@ -592,31 +591,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dedcfda7d3761154395a131f61feddfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xRange: 512
-  zRange: 512
-  yRange: 20
-  noiseScale: 3
-  offsetX: 0
-  offsetZ: 0
-  octaves: 4
+  xRange: 4096
+  zRange: 4096
+  yRange: 500
+  noiseScale: 4
+  offsetX: 8574.673
+  offsetZ: 6799.8726
+  octaves: 6
   redistributionExponent: 1.5
+  enableIslandMode: 1
+  northBeachWidth: 0.01
+  southBeachWidth: 0.01
+  eastBeachWidth: 0.01
+  westBeachWidth: 0.01
+  mountainCentralization: 2
   realTimeUpdate: 0
   updateRate: 3
   onTerrainGenerated:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1072173607}
-        m_TargetAssemblyTypeName: Terrain_1_Modifire, Assembly-CSharp
-        m_MethodName: OnTerrainGenerated
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!154 &1072173604
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -697,7 +690,7 @@ MonoBehaviour:
     DiffuseTexture: {fileID: 2800000, guid: 7c00488b3b0ca97499e1a8bd9aa2b4b7, type: 3}
     NormalTexture: {fileID: 0}
     MinHeight: 0
-    MaxHeight: 0.4
+    MaxHeight: 0.1
     TileSize: {x: 1, y: 1}
     TileOffset: {x: 0, y: 0}
     BlendSharpness: 1
@@ -705,37 +698,20 @@ MonoBehaviour:
     DiffuseTexture: {fileID: 2800000, guid: ce1ced1d1a668824e940265b2c16ab9e, type: 3}
     NormalTexture: {fileID: 0}
     MinHeight: 0
-    MaxHeight: 0.4
+    MaxHeight: 0.1
     TileSize: {x: 1, y: 1}
     TileOffset: {x: 0, y: 0}
     BlendSharpness: 1
   - LayerName: Land
     DiffuseTexture: {fileID: 2800000, guid: 4ec00396caf7ff14bb4378a0931986c7, type: 3}
     NormalTexture: {fileID: 0}
-    MinHeight: 0.25
+    MinHeight: 0.08
     MaxHeight: 1
     TileSize: {x: 1, y: 1}
     TileOffset: {x: 0, y: 0}
     BlendSharpness: 2
   autoUpdate: 1
   updateRate: 2
---- !u!114 &1072173607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1072173601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76f21b0f29a3da547a31a1fcdbe020d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  terrain: {fileID: 1072173605}
-  terrainTexturePainter: {fileID: 1072173606}
-  applyModification: 1
-  minHeight: 0
-  maxHeight: 15
 --- !u!1 &1501046022
 GameObject:
   m_ObjectHideFlags: 0
@@ -850,8 +826,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 258.5, y: -258.5}
-  m_SizeDelta: {x: 517, y: 517}
+  m_AnchoredPosition: {x: 150, y: -150}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1541527921
 MonoBehaviour:
@@ -1200,7 +1176,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 5000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -1228,7 +1204,7 @@ Transform:
   m_GameObject: {fileID: 1728847684}
   serializedVersion: 2
   m_LocalRotation: {x: 0.31912476, y: 0, z: 0, w: 0.9477128}
-  m_LocalPosition: {x: 256, y: 303, z: -154}
+  m_LocalPosition: {x: 2048, y: 1379, z: -757}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
