@@ -897,7 +897,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridSize: 64
   gridColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  showGrid: 1
+  showGrid: 0
   showLabels: 1
   useDots: 1
   dotSize: 2
@@ -1031,7 +1031,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1503655988
 Transform:
