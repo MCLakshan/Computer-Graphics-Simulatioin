@@ -19,8 +19,8 @@ public class DEBUG_TerrainGridVisualizer : MonoBehaviour
     [Header("Reference")]
     [SerializeField] private PerlinNoiseTerrainGenerator terrainGenerator;
     
-    // List to store highlighted grid coordinates
-    private HashSet<Vector2Int> highlightedCells = new HashSet<Vector2Int>();
+    // FIXED: Using Vector3Int instead of Vector2Int to properly handle x,z coordinates
+    private HashSet<Vector3Int> highlightedCells = new HashSet<Vector3Int>();
     
     private void OnValidate()
     {
@@ -38,7 +38,8 @@ public class DEBUG_TerrainGridVisualizer : MonoBehaviour
     {
         if (IsValidGridCoordinate(x, z))
         {
-            highlightedCells.Add(new Vector2Int(x, z));
+            // FIXED: Using Vector3Int with proper x,y=0,z coordinates
+            highlightedCells.Add(new Vector3Int(x, 0, z));
         }
         else
         {
@@ -53,7 +54,8 @@ public class DEBUG_TerrainGridVisualizer : MonoBehaviour
     /// <param name="z">Z coordinate of the grid cell</param>
     public void UnhighlightCell(int x, int z)
     {
-        highlightedCells.Remove(new Vector2Int(x, z));
+        // FIXED: Using Vector3Int with proper x,y=0,z coordinates
+        highlightedCells.Remove(new Vector3Int(x, 0, z));
     }
     
     /// <summary>
@@ -72,6 +74,7 @@ public class DEBUG_TerrainGridVisualizer : MonoBehaviour
     {
         foreach (var coord in coordinates)
         {
+            // FIXED: Using coord.x and coord.y as z coordinate (Vector2Int.y represents z in grid terms)
             HighlightCell(coord.x, coord.y);
         }
     }
@@ -89,7 +92,8 @@ public class DEBUG_TerrainGridVisualizer : MonoBehaviour
     /// </summary>
     public bool IsCellHighlighted(int x, int z)
     {
-        return highlightedCells.Contains(new Vector2Int(x, z));
+        // FIXED: Using Vector3Int with proper x,y=0,z coordinates
+        return highlightedCells.Contains(new Vector3Int(x, 0, z));
     }
 
     private void OnDrawGizmos()
@@ -155,19 +159,17 @@ public class DEBUG_TerrainGridVisualizer : MonoBehaviour
         
         foreach (var cell in highlightedCells)
         {
-            // Calculate cell center and size
+            // FIXED: Now using cell.x and cell.z properly instead of cell.y
             Vector3 center = new Vector3(
                 terrainPos.x + (cell.x * cellSize) + (cellSize * 0.5f),
                 yPos,
-                terrainPos.z + (cell.y * cellSize) + (cellSize * 0.5f)
+                terrainPos.z + (cell.z * cellSize) + (cellSize * 0.5f)  // Now uses cell.z instead of cell.y
             );
             
             // Draw a simple cube instead of complex mesh
             Gizmos.DrawCube(center, new Vector3(cellSize, 0.1f, cellSize));
         }
     }
-    
-
     
     private void DrawDots(Vector3 terrainPos, float cellSize, float yPos)
     {
@@ -183,8 +185,8 @@ public class DEBUG_TerrainGridVisualizer : MonoBehaviour
         {
             for (int z = 0; z < gridSize; z++)
             {
-                // Use highlight color for highlighted cells, normal color for others
-                Vector2Int cellCoord = new Vector2Int(x, z);
+                // FIXED: Using Vector3Int with proper x,y=0,z coordinates
+                Vector3Int cellCoord = new Vector3Int(x, 0, z);
                 UnityEditor.Handles.color = highlightedCells.Contains(cellCoord) ? highlightColor : gridColor;
                 
                 // Calculate center of grid cell
@@ -216,8 +218,8 @@ public class DEBUG_TerrainGridVisualizer : MonoBehaviour
         {
             for (int z = 0; z < gridSize; z++)
             {
-                // Use highlight color for highlighted cells, normal color for others
-                Vector2Int cellCoord = new Vector2Int(x, z);
+                // FIXED: Using Vector3Int with proper x,y=0,z coordinates
+                Vector3Int cellCoord = new Vector3Int(x, 0, z);
                 labelStyle.normal.textColor = highlightedCells.Contains(cellCoord) ? highlightColor : gridColor;
                 
                 // Calculate center of grid cell

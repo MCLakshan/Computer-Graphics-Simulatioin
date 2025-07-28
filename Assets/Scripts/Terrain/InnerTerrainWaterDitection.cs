@@ -44,11 +44,11 @@ public class InnerTerrainWaterDitection : MonoBehaviour
                 {
                     // Debug log for the first grid cell
                     Debug.Log($"Processing grid cell ({x}, {z})");
-                    waterMap[x, z] = DetectWaterInGrid(x, z, heights, true);
+                    waterMap[x, z] = DetectWaterInGrid(x, z, heights);
                 }
                 else
                 {
-                    waterMap[x, z] = DetectWaterInGrid(x, z, heights, false);
+                    waterMap[x, z] = DetectWaterInGrid(x, z, heights);
                 }
             }
         }
@@ -58,21 +58,17 @@ public class InnerTerrainWaterDitection : MonoBehaviour
         {
             for (int z = 0; z < gridSize; z++)
             {
-                if (waterMap[z, x] == 1)
+                if (waterMap[x, z] == 1)
                 {
-                    if (x == 0 && z == 0)
-                    {
-                        Debug.Log("waterMap[" + x + ", " + z + "] = " + waterMap[x, z]);
-                    }
-                    
-                    // Highlight the grid cell if water is detected
-                    debugTerrainGridVisualizer.HighlightCell(x, z);
+                    // 2D Array: array[row][column] where row goes DOWN (Y direction) and column goes RIGHT (X direction)
+                    // But in Unity World : X goes RIGHT, Z goes FORWARD/UP 
+                    debugTerrainGridVisualizer.HighlightCell(z, x); 
                 }
             }
         }
     }
     
-    public int DetectWaterInGrid(int gridX, int gridZ, float[,] heights, bool print)
+    public int DetectWaterInGrid(int gridX, int gridZ, float[,] heights)
     {
         
         // Get the grid center point
@@ -80,27 +76,13 @@ public class InnerTerrainWaterDitection : MonoBehaviour
         
         // Get the height at the grid center
         float height = heights[(int)gridCenterPoint[0], (int)gridCenterPoint[1]];
-
-        if (print)
-        {
-            Debug.Log("Grid Center Point: " + gridCenterPoint);
-            Debug.Log("Height at Grid Center: " + height);
-        }
         
         // Check if the height is within the water thresholds
         if (height >= waterLowerThreshold && height <= waterUpperThreshold)
         {
-            if (print)
-            {
-                Debug.Log($"Water detected in grid ({gridX}, {gridZ}) with height: {height}");
-            }
             return 1;
         }
         
-        if (print)
-        {
-            Debug.Log($"No water detected in grid ({gridX}, {gridZ}) with height: {height}");
-        }
         // No water detected in the grid
         return 0;
     }
