@@ -571,6 +571,7 @@ GameObject:
   - component: {fileID: 1072173604}
   - component: {fileID: 1072173603}
   - component: {fileID: 1072173606}
+  - component: {fileID: 1072173608}
   - component: {fileID: 1072173607}
   m_Layer: 0
   m_Name: Terrain - 1
@@ -789,6 +790,20 @@ MonoBehaviour:
   showGrid: 1
   showLabels: 1
   terrainGenerator: {fileID: 1072173603}
+--- !u!114 &1072173608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072173601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3e894e579bea6d4d991164258bc2ce9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrainGenerator: {fileID: 1072173603}
+  gridSize: 8
 --- !u!1 &1501046022
 GameObject:
   m_ObjectHideFlags: 0

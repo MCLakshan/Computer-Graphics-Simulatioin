@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SimpleTerrainGrid : MonoBehaviour
+public class DEBUG_TerrainGridVisualizer : MonoBehaviour
 {
     [Header("Grid Settings")]
     [SerializeField] private int gridSize = 8;
