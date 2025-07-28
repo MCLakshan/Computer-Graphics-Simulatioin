@@ -96,6 +96,40 @@ public class TerrainGridFilter : MonoBehaviour
     }
     
     /// <summary>
+    /// Get the center point of a specific grid cell
+    /// </summary>
+    /// <param name="gridX">X coordinate of the grid</param>
+    /// <param name="gridZ">Z coordinate of the grid</param>
+    /// <returns>Vector2 with center coordinates</returns>
+    public Vector2 GetGridCenter(int gridX, int gridZ)
+    {
+        GridBounds bounds = GetGridBounds(gridX, gridZ);
+    
+        if (bounds.startX == -1) // Invalid bounds
+            return Vector2.zero;
+    
+        float centerX = (bounds.startX + bounds.endX + 1) * 0.5f; // +1 to include the end point
+        float centerZ = (bounds.startZ + bounds.endZ + 1) * 0.5f;
+    
+        return new Vector2(centerX, centerZ);
+    }
+
+    /// <summary>
+    /// Get the center point of a specific grid cell by name
+    /// </summary>
+    /// <param name="gridName">Grid name in format "R[x,z]"</param>
+    /// <returns>Vector2 with center coordinates</returns>
+    public Vector2 GetGridCenter(string gridName)
+    {
+        Vector2Int coords = ParseGridName(gridName);
+    
+        if (coords.x == -1 || coords.y == -1)
+            return Vector2.zero;
+    
+        return GetGridCenter(coords.x, coords.y);
+    }
+    
+    /// <summary>
     /// Parse grid name string to extract coordinates
     /// </summary>
     /// <param name="gridName">Grid name in format "R[x,z]"</param>
