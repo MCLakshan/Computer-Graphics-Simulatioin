@@ -9,21 +9,8 @@ public class TerrainGenerator2DView : MonoBehaviour
     [SerializeField] private RawImage minimapImage;
     
     private float[,] _heights;
-    private bool _isTerrainFound = false;
     
     [SerializeField] private TerrainType[] terrainTypes; // Array of terrain types for color mapping
-
-    private void Start()
-    {
-        if (_terrainGenerator == null)
-        {
-            Debug.LogError("PerlinNoiseTerrainGenerator component not found in the scene.");
-        }else
-        {
-            _isTerrainFound = true;
-            UpdateMinimap();
-        }
-    }
 
     private Texture2D ConvertToGrayscaleTexture(float[,] heightMap)
     {

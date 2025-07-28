@@ -283,6 +283,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1503655988}
   - {fileID: 1072173602}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -540,7 +541,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &844810611
 Transform:
   m_ObjectHideFlags: 0
@@ -550,7 +551,7 @@ Transform:
   m_GameObject: {fileID: 844810610}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2640, y: 300, z: 862}
+  m_LocalPosition: {x: 709, y: 59, z: 746}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -612,7 +613,7 @@ MonoBehaviour:
   offsetZ: 9571.129
   octaves: 4
   redistributionExponent: 1.5
-  islandMode: 2
+  islandMode: 1
   innerEdge: 0.5
   multiCenterCount: 3
   multiCenterInnerEdge: 0.2
@@ -722,18 +723,10 @@ MonoBehaviour:
   targetTerrain: {fileID: 1072173605}
   textureMode: 1
   textureLayers:
-  - LayerName: Ocen
-    DiffuseTexture: {fileID: 2800000, guid: 2cbadbbe01a91194a9e50ac7fe09e96e, type: 3}
-    NormalTexture: {fileID: 0}
-    MinHeight: 0
-    MaxHeight: 0.002
-    TileSize: {x: 0, y: 0}
-    TileOffset: {x: 0, y: 0}
-    BlendSharpness: 0.1
   - LayerName: "Beach / Shoreline\t"
     DiffuseTexture: {fileID: 2800000, guid: d3058aae329343e4dbfefd4c827d5088, type: 3}
     NormalTexture: {fileID: 0}
-    MinHeight: 0.002
+    MinHeight: 0
     MaxHeight: 0.02
     TileSize: {x: 0, y: 0}
     TileOffset: {x: 0, y: 0}
@@ -857,6 +850,55 @@ MonoBehaviour:
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
   m_ScrollDeltaPerTick: 6
+--- !u!1 &1503655987
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1503655988}
+  - component: {fileID: 1503655989}
+  m_Layer: 0
+  m_Name: Sky and Fog Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1503655988
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503655987}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1153.2411, y: 1381.3411, z: 11854.393}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 357942944}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1503655989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503655987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 4750b92ad9846ab4e9f9f0531d37bbd8, type: 2}
 --- !u!1 &1541527919
 GameObject:
   m_ObjectHideFlags: 0
@@ -1201,7 +1243,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &1728847685
 AudioListener:
   m_ObjectHideFlags: 0
