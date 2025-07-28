@@ -33,11 +33,17 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
     [Header("<b><color=#FFB677><size=12>Terrain Settings</size></color></b>\n<i><color=#FFB677>(Dynamic - Redistribution Settings)</color></i>")]
     [Range(0.1f, 5f)]
     [SerializeField] private float redistributionExponent = 1.5f;  // Controls valley/peak shaping of terrain
-    
-    [Header("<b><color=#E6E6FA><size=12>Island Settings</size></color></b>")]
-    [SerializeField] private bool enableIslandMode = true;
+
+    [Header("<b><color=#E6E6FA><size=12>Island Settings</size></color></b>")] 
+    [SerializeField] private IslandMode islandMode;
     [Range(0f, 1f)]
     [SerializeField] private float innerEdge = 0.3f;          // How much of the edge is beach (0.3 = 30%)
+    [Range(2, 5)]
+    [SerializeField] private int multiCenterCount = 3;        // Number of centers for multi-center islands (if applicable)
+    [Range(0f, 1f)]
+    [SerializeField] private float multiCenterInnerEdge = 0.2f; // Inner edge for multi-center islands (0.5 = 50% of the radius)
+    [Range(0f, 1f)]
+    [SerializeField] private float multiCenterRadius = 0.3f; // Radius of influence for each mountain center in multi-center mode
     
     [Header("<b><color=#FFD6E0><size=12>Control Settings</size></color></b>")]
     [SerializeField] private bool realTimeUpdate = true;        // Whether to update the terrain in real-time
@@ -49,6 +55,8 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
     
     private Terrain _terrain;
     private int _frameCount = 0;
+    private Vector2[] mountainCenters;
+    private float[] mountainWeights;
     
     #region - GETTERS -
     
@@ -94,6 +102,12 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
         offsetX = Random.Range(0f, 9999f);
         offsetZ = Random.Range(0f, 9999f);
         
+        // Generate mountain centers if using MultiCenter mode
+        if (islandMode == IslandMode.MultiCenter)
+        {
+            GenerateRandomMountainCenters();
+        }
+
         _terrain.terrainData = GenerateTerrain(_terrain.terrainData);
         
         // Invoke the terrain generated event
@@ -122,11 +136,6 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
         float maxNoiseHeightPass1 = float.MinValue;
         float minNoiseHeightPass2 = float.MaxValue;
         float maxNoiseHeightPass2 = float.MinValue;
-        
-        // Calculate terrain center
-        float centerX = xRange * 0.5f;
-        float centerZ = zRange * 0.5f;
-        float maxDistance = Mathf.Min(xRange, zRange) * 0.5f; // Distance from center to edge
         
         // First pass: Generate base Perlin noise
         for (int x = 0; x < xRange; x++)
@@ -175,12 +184,8 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
                 // Apply redistribution to shape the terrain
                 normalizedHeight = Mathf.Pow(normalizedHeight, redistributionExponent);
             
-                // ISLAND SHAPING: Calculate distance from center
-                float distanceFromCenter = Vector2.Distance(new Vector2(x, z), new Vector2(centerX, centerZ));
-                float distanceRatio = distanceFromCenter / maxDistance;
-            
                 // Apply island mask with individual beach controls
-                float islandMask = CalculateIslandMask(distanceRatio);
+                float islandMask = CalculateIslandMask(x, z);
             
                 // Track the min and max values
                 if (normalizedHeight > maxNoiseHeightPass2) maxNoiseHeightPass2 = normalizedHeight;
@@ -207,19 +212,102 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
     }
     
     // Island mask function - smoothly fades only the outer edge of the island
-    private float CalculateIslandMask(float distanceFromCenter)
+    private float CalculateIslandMask(float x, float z)
     {
-        if (!enableIslandMode) return 1f;
+        // If RealCenter mode selected
+        if (islandMode == IslandMode.RealCenter)
+        {
+            // Calculate terrain center
+            float centerX = xRange * 0.5f;
+            float centerZ = zRange * 0.5f;
+            float maxDistance = Mathf.Min(xRange, zRange) * 0.5f; // Distance from center to edge
+        
+            // ISLAND SHAPING: Calculate distance from center
+            float distanceFromCenter = Vector2.Distance(new Vector2(x, z), new Vector2(centerX, centerZ));
+            float distanceRatio = distanceFromCenter / maxDistance;
 
-        distanceFromCenter = Mathf.Clamp01(distanceFromCenter);
+            distanceRatio = Mathf.Clamp01(distanceRatio);
 
-        // If inside the unaffected central area, use full height
-        if (distanceFromCenter <= innerEdge)
-            return 1f;
+            // If inside the unaffected central area, use full height
+            if (distanceRatio <= innerEdge)
+                return 1f;
 
-        // Apply smooth falloff from distance = 1 to mountainCentralization
-        float t = Mathf.InverseLerp(1f, innerEdge, distanceFromCenter); // 0 at edge, 1 at inner edge
-        return Mathf.SmoothStep(0f, 1f, t);
+            // Apply smooth falloff from distance = 1 to inner edge
+            float t = Mathf.InverseLerp(1f, innerEdge, distanceRatio); // 0 at edge, 1 at inner edge
+            return Mathf.SmoothStep(0f, 1f, t);
+        }
+        
+        // If MultiCenter mode selected
+        if (islandMode == IslandMode.MultiCenter)
+        {
+            // Use the pre-generated mountain centers
+            float maxMountainInfluence = 0f;
+        
+            for (int i = 0; i < mountainCenters.Length; i++)
+            {
+                float distanceFromMountain = Vector2.Distance(new Vector2(x, z), mountainCenters[i]);
+            
+                // Each mountain has its own influence radius
+                float mountainInfluenceRadius = Mathf.Min(xRange, zRange) * multiCenterRadius; 
+                float normalizedDistance = Mathf.Clamp01(distanceFromMountain / mountainInfluenceRadius);
+            
+                // Calculate mountain influence (1 = full height, 0 = no influence)
+                float mountainInfluence = 0f;
+                if (normalizedDistance <= multiCenterInnerEdge)
+                {
+                    // Full influence if within the inner edge
+                    mountainInfluence = mountainWeights[i]; 
+                }
+                else
+                {
+                    // Smooth falloff from edge to inner edge
+                    float t = Mathf.InverseLerp(1f, multiCenterInnerEdge, normalizedDistance);
+                    mountainInfluence = Mathf.SmoothStep(0f, mountainWeights[i], t);
+                }
+            
+                // Take the maximum influence from any mountain
+                maxMountainInfluence = Mathf.Max(maxMountainInfluence, mountainInfluence);
+            }
+            return maxMountainInfluence;
+        }
+
+        // Default case
+        return 1;
+    }
+    
+    private void GenerateRandomMountainCenters()
+    {
+        float centerX = xRange * 0.5f;
+        float centerZ = zRange * 0.5f;
+        float maxDistance = Mathf.Min(xRange, zRange) * 0.5f;
+        float maxRange = maxDistance * multiCenterInnerEdge;
+    
+        mountainCenters = new Vector2[multiCenterCount];
+        mountainWeights = new float[multiCenterCount];
+    
+        // Generate centers ONCE for the entire terrain
+        for (int i = 0; i < multiCenterCount; i++)
+        {
+            float randomAngle = Random.Range(0f, 2f * Mathf.PI);
+            float randomRadius = Random.Range(0f, maxRange) * Mathf.Sqrt(Random.Range(0f, 1f));
+        
+            mountainCenters[i] = new Vector2(
+                centerX + randomRadius * Mathf.Cos(randomAngle),
+                centerZ + randomRadius * Mathf.Sin(randomAngle)
+            );
+        
+            // Optional: Give each mountain different strength
+            mountainWeights[i] = Random.Range(0.7f, 1f);
+        }
     }
 }
+
+[System.Serializable]
+public enum IslandMode
+{
+    None,
+    RealCenter,
+    MultiCenter,
+}
+
 

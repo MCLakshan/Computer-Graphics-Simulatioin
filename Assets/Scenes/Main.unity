@@ -608,12 +608,15 @@ MonoBehaviour:
   zRange: 4096
   yRange: 500
   noiseScale: 4
-  offsetX: 8574.673
-  offsetZ: 6799.8726
+  offsetX: 5102.859
+  offsetZ: 9571.129
   octaves: 4
   redistributionExponent: 1.5
-  enableIslandMode: 1
+  islandMode: 2
   innerEdge: 0.5
+  multiCenterCount: 3
+  multiCenterInnerEdge: 0.2
+  multiCenterRadius: 0.5
   realTimeUpdate: 0
   updateRate: 3
   onTerrainGenerated:
