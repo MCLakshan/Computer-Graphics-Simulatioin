@@ -889,7 +889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964dd7a33baa1364a9a8ac0a0d99c0b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridSize: 128
+  gridSize: 256
   gridColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   showGrid: 0
   showLabels: 1
@@ -912,7 +912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainGenerator: {fileID: 1072173603}
-  gridSize: 128
+  gridSize: 256
 --- !u!114 &1072173609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -929,13 +929,13 @@ MonoBehaviour:
   perlinNoiseTerrainGenerator: {fileID: 1072173603}
   debugTerrainGridVisualizer: {fileID: 1072173607}
   enableWaterDetection: 1
-  gridSize: 128
+  gridSize: 256
   waterLowerThreshold: 0.1
   waterUpperThreshold: 0.3
   skipDetectionWaterLowerThreshold: 0
   skipDetectionWaterUpperThreshold: 0.3
   waterHeight: 0.1
-  waterPlanePrefab: {fileID: 2778371901395010301, guid: a38267173e234c34294fe23ec3a11602, type: 3}
+  waterPlanePrefab: {fileID: 2778371901395010301, guid: 88adf3a77f6c40741b557a7c8c803ac3, type: 3}
   waterPlanesParent: {fileID: 550499363}
 --- !u!114 &1072173610
 MonoBehaviour:
@@ -953,13 +953,13 @@ MonoBehaviour:
   perlinNoiseTerrainGenerator: {fileID: 1072173603}
   debugTerrainGridVisualizer: {fileID: 1072173607}
   enableWaterDetection: 1
-  gridSize: 128
+  gridSize: 256
   waterLowerThreshold: 0.018
   waterUpperThreshold: 0.1
   skipDetectionWaterLowerThreshold: 0
   skipDetectionWaterUpperThreshold: 0.1
   waterHeight: 0.018
-  waterPlanePrefab: {fileID: 2778371901395010301, guid: a38267173e234c34294fe23ec3a11602, type: 3}
+  waterPlanePrefab: {fileID: 2778371901395010301, guid: 88adf3a77f6c40741b557a7c8c803ac3, type: 3}
   waterPlanesParent: {fileID: 567553434}
 --- !u!1 &1201517224
 GameObject:
@@ -991,7 +991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  size: {x: 4099.01, y: 370.09784, z: 4099.01}
+  size: {x: 4099.01, y: 378.5975, z: 4099.01}
   overrideRendererFilters: 0
   minRendererVolumeSize: 0.1
   objectLayerMask:
@@ -1031,7 +1031,7 @@ Transform:
   m_GameObject: {fileID: 1201517224}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2048, y: 183.54391, z: 2048}
+  m_LocalPosition: {x: 2048, y: 187.79375, z: 2048}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
