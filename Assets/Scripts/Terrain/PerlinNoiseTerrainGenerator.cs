@@ -46,9 +46,7 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
     [SerializeField] private float multiCenterRadius = 0.3f; // Radius of influence for each mountain center in multi-center mode
     
     [Header("<b><color=#FFD6E0><size=12>Control Settings</size></color></b>")]
-    [SerializeField] private bool realTimeUpdate = true;        // Whether to update the terrain in real-time
-    [Range(1, 20)]
-    [SerializeField] private int updateRate = 1;                // Update rate for real-time updates
+    [SerializeField] private bool stopGenerationOnStart = true; // If true, terrain generation will stop on start
 
     [Header("<b><color=#FF9AA2><size=12>Events</size></color></b>")]
     public UnityEvent onTerrainGenerated; // Event to trigger when the terrain is generated
@@ -68,9 +66,6 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
     
     public float[,] GetTerrainHeights() => _terrain.terrainData.GetHeights(0, 0, xRange, zRange);
     
-    // Get is real-time update enabled
-    public bool IsRealTimeUpdateEnabled() => realTimeUpdate;
-    
     #endregion
     
     private void Awake()
@@ -82,24 +77,20 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
         GenerateNewTerrain();
     }
     
-    private void Update()
-    {
-        _frameCount++;
-        
-        // If real-time update is enabled, regenerate the terrain
-        if (realTimeUpdate && _frameCount % updateRate == 0)
-        {
-            _terrain.terrainData = GenerateTerrain(_terrain.terrainData);
-        }
-        
-        if (_frameCount > 100)
-            _frameCount = 0;
-    }
 
     // Make accessible method to inspector to regenerate terrain
     [ContextMenu("Generate New Terrain")]
     public void GenerateNewTerrain()
     {
+        // If stop generation on start is enabled, skip terrain generation
+        if (stopGenerationOnStart && _frameCount == 0)
+        {
+            Debug.Log("Terrain generation stopped on start.");
+            // Invoke the terrain generated event
+            onTerrainGenerated?.Invoke();
+            return;
+        }
+        
         // Set the terrain offsets
         offsetX = Random.Range(0f, 9999f);
         offsetZ = Random.Range(0f, 9999f);

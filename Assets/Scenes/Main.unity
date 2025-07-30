@@ -685,8 +685,7 @@ MonoBehaviour:
   multiCenterCount: 3
   multiCenterInnerEdge: 0.2
   multiCenterRadius: 0.5
-  realTimeUpdate: 0
-  updateRate: 3
+  stopGenerationOnStart: 1
   onTerrainGenerated:
     m_PersistentCalls:
       m_Calls:
@@ -929,7 +928,7 @@ MonoBehaviour:
   terrainGridFilter: {fileID: 1072173608}
   perlinNoiseTerrainGenerator: {fileID: 1072173603}
   debugTerrainGridVisualizer: {fileID: 1072173607}
-  enableWaterDetection: 0
+  enableWaterDetection: 1
   gridSize: 64
   waterLowerThreshold: 0.1
   waterUpperThreshold: 0.3
@@ -953,13 +952,13 @@ MonoBehaviour:
   terrainGridFilter: {fileID: 1072173608}
   perlinNoiseTerrainGenerator: {fileID: 1072173603}
   debugTerrainGridVisualizer: {fileID: 1072173607}
-  enableWaterDetection: 0
+  enableWaterDetection: 1
   gridSize: 64
-  waterLowerThreshold: 0.02
+  waterLowerThreshold: 0.019
   waterUpperThreshold: 0.1
   skipDetectionWaterLowerThreshold: 0
   skipDetectionWaterUpperThreshold: 0.1
-  waterHeight: 0.02
+  waterHeight: 0.018
   waterPlanePrefab: {fileID: 2778371901395010301, guid: 1c5709c9fa1550c4a914a3c069e5b556, type: 3}
   waterPlanesParent: {fileID: 567553434}
 --- !u!1 &1201517224
@@ -992,7 +991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  size: {x: 4099.01, y: 346.8573, z: 4099.01}
+  size: {x: 4099.01, y: 377.8803, z: 4099.01}
   overrideRendererFilters: 0
   minRendererVolumeSize: 0.1
   objectLayerMask:
@@ -1032,7 +1031,7 @@ Transform:
   m_GameObject: {fileID: 1201517224}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2048, y: 171.92365, z: 2048}
+  m_LocalPosition: {x: 2048, y: 187.43515, z: 2048}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
