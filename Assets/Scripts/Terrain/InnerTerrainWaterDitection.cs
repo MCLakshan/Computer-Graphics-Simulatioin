@@ -20,6 +20,7 @@ public class InnerTerrainWaterDitection : MonoBehaviour
 
     // Water Detection Settings
     [Header("<b><color=#B0F2B6><size=12>Water Detection Settings</size></color></b>")]
+    [SerializeField] bool enableWaterDetection = true;
     [SerializeField] private int gridSize = 8;
     [Range(0f, 1f)]
     [SerializeField] private float waterLowerThreshold = 0.1f;
@@ -44,7 +45,10 @@ public class InnerTerrainWaterDitection : MonoBehaviour
     [ContextMenu("Process Water Detection")]
     public void Process()
     {
-        Debug.Log("Process Water Detection");
+        if(!enableWaterDetection)
+        {
+            return;
+        }
         
         // Clear all arrays and lists
         waterGridClusters.Clear();
@@ -74,7 +78,6 @@ public class InnerTerrainWaterDitection : MonoBehaviour
                 if(x == 0 && z == 0)
                 {
                     // Debug log for the first grid cell
-                    Debug.Log($"Processing grid cell ({x}, {z})");
                     waterMap[x, z] = DetectWaterInGrid(x, z, heights);
                 }
                 else
@@ -301,8 +304,6 @@ public class InnerTerrainWaterDitection : MonoBehaviour
         
             // Add all border cells to the cluster
             cluster.AddRange(borderCells);
-        
-            Debug.Log($"Cluster {clusterIndex}: Added {borderCells.Count} border cells to {cluster.Count - borderCells.Count} original cells");
         }
     }
     

@@ -913,6 +913,7 @@ MonoBehaviour:
   terrainGridFilter: {fileID: 1072173608}
   perlinNoiseTerrainGenerator: {fileID: 1072173603}
   debugTerrainGridVisualizer: {fileID: 1072173607}
+  enableWaterDetection: 0
   gridSize: 64
   waterLowerThreshold: 0.1
   waterUpperThreshold: 0.3
@@ -936,6 +937,7 @@ MonoBehaviour:
   terrainGridFilter: {fileID: 1072173608}
   perlinNoiseTerrainGenerator: {fileID: 1072173603}
   debugTerrainGridVisualizer: {fileID: 1072173607}
+  enableWaterDetection: 0
   gridSize: 64
   waterLowerThreshold: 0.02
   waterUpperThreshold: 0.1
