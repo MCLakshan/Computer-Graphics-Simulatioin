@@ -45,10 +45,9 @@ public class InnerTerrainWaterDitection : MonoBehaviour
     public void Process()
     {
         Debug.Log("Process Water Detection");
-        // Get the terrain data
-        float[,] heights = perlinNoiseTerrainGenerator.GetTerrainHeights();
-        float terrainMaxHeight = perlinNoiseTerrainGenerator.GetYRange();
         
+        // Clear all arrays and lists
+        waterGridClusters.Clear();
         
         // Initialize the water map all to zero
         waterMap = new int[gridSize, gridSize];
@@ -59,7 +58,10 @@ public class InnerTerrainWaterDitection : MonoBehaviour
                 waterMap[x, z] = 0;
             }
         }
-
+        
+        // Get the terrain data
+        float[,] heights = perlinNoiseTerrainGenerator.GetTerrainHeights();
+        float terrainMaxHeight = perlinNoiseTerrainGenerator.GetYRange();
         
         // Loop through each grid cell
         for (int x = 0; x < gridSize; x++)
