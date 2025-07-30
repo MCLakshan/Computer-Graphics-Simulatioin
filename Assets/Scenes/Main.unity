@@ -889,7 +889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964dd7a33baa1364a9a8ac0a0d99c0b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridSize: 64
+  gridSize: 128
   gridColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   showGrid: 0
   showLabels: 1
@@ -912,7 +912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainGenerator: {fileID: 1072173603}
-  gridSize: 64
+  gridSize: 128
 --- !u!114 &1072173609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -929,13 +929,13 @@ MonoBehaviour:
   perlinNoiseTerrainGenerator: {fileID: 1072173603}
   debugTerrainGridVisualizer: {fileID: 1072173607}
   enableWaterDetection: 1
-  gridSize: 64
+  gridSize: 128
   waterLowerThreshold: 0.1
   waterUpperThreshold: 0.3
   skipDetectionWaterLowerThreshold: 0
   skipDetectionWaterUpperThreshold: 0.3
   waterHeight: 0.1
-  waterPlanePrefab: {fileID: 2778371901395010301, guid: 1c5709c9fa1550c4a914a3c069e5b556, type: 3}
+  waterPlanePrefab: {fileID: 2778371901395010301, guid: a38267173e234c34294fe23ec3a11602, type: 3}
   waterPlanesParent: {fileID: 550499363}
 --- !u!114 &1072173610
 MonoBehaviour:
@@ -953,13 +953,13 @@ MonoBehaviour:
   perlinNoiseTerrainGenerator: {fileID: 1072173603}
   debugTerrainGridVisualizer: {fileID: 1072173607}
   enableWaterDetection: 1
-  gridSize: 64
+  gridSize: 128
   waterLowerThreshold: 0.018
   waterUpperThreshold: 0.1
   skipDetectionWaterLowerThreshold: 0
   skipDetectionWaterUpperThreshold: 0.1
   waterHeight: 0.018
-  waterPlanePrefab: {fileID: 2778371901395010301, guid: 1c5709c9fa1550c4a914a3c069e5b556, type: 3}
+  waterPlanePrefab: {fileID: 2778371901395010301, guid: a38267173e234c34294fe23ec3a11602, type: 3}
   waterPlanesParent: {fileID: 567553434}
 --- !u!1 &1201517224
 GameObject:
