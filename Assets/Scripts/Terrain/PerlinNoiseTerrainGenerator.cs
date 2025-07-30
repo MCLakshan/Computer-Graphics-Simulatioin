@@ -63,6 +63,8 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
     // Get Heights of the terrain
     
     public float GetXRange() => xRange;
+    public float GetZRange() => zRange;
+    public float GetYRange() => yRange;
     
     public float[,] GetTerrainHeights() => _terrain.terrainData.GetHeights(0, 0, xRange, zRange);
     
