@@ -815,53 +815,69 @@ MonoBehaviour:
   textureMode: 1
   textureLayers:
   - LayerName: "Beach / Shoreline\t"
-    DiffuseTexture: {fileID: 2800000, guid: d3058aae329343e4dbfefd4c827d5088, type: 3}
-    NormalTexture: {fileID: 0}
+    DiffuseTexture: {fileID: 2800000, guid: ebba95c8257d99a468f4ce4a82389b38, type: 3}
+    NormalTexture: {fileID: 2800000, guid: c1a16a658a9ebf444baf7acb47affcd7, type: 3}
     MinHeight: 0
-    MaxHeight: 0.02
-    TileSize: {x: 0, y: 0}
+    MaxHeight: 0.018
+    TileSize: {x: 3, y: 3}
     TileOffset: {x: 0, y: 0}
     BlendSharpness: 0.1
-  - LayerName: "Coastal Grassland\t"
-    DiffuseTexture: {fileID: 2800000, guid: bdf12700f23a0884496cc8335c0b5ed9, type: 3}
-    NormalTexture: {fileID: 0}
-    MinHeight: 0.02
-    MaxHeight: 0.1
-    TileSize: {x: 0, y: 0}
+  - LayerName: mud
+    DiffuseTexture: {fileID: 2800000, guid: 8e351e77ef37b0d4abc2cb769c9cb6e3, type: 3}
+    NormalTexture: {fileID: 2800000, guid: fb18e4f6f815d3d4c804dfba4a923b8a, type: 3}
+    MinHeight: 0.018
+    MaxHeight: 0.022
+    TileSize: {x: 2, y: 2}
     TileOffset: {x: 0, y: 0}
-    BlendSharpness: 0
-  - LayerName: Forest
-    DiffuseTexture: {fileID: 2800000, guid: 7d673383b02804e489f60fa856bcdfb1, type: 3}
-    NormalTexture: {fileID: 0}
-    MinHeight: 0.1
+    BlendSharpness: 0.1
+  - LayerName: Grass
+    DiffuseTexture: {fileID: 2800000, guid: 2db8303128c55e64ab80ad1f92faa504, type: 3}
+    NormalTexture: {fileID: 2800000, guid: 859a87512f5d33744a5f9b7272967633, type: 3}
+    MinHeight: 0.022
+    MaxHeight: 0.095
+    TileSize: {x: 2.5, y: 2.5}
+    TileOffset: {x: 0, y: 0}
+    BlendSharpness: 0.1
+  - LayerName: Betwwen Grass and Forest
+    DiffuseTexture: {fileID: 2800000, guid: 14dceffc9222b0d42a5c02b9bc507c58, type: 3}
+    NormalTexture: {fileID: 2800000, guid: 832b51983e28b784184c2131d3c6ddc2, type: 3}
+    MinHeight: 0.095
+    MaxHeight: 0.105
+    TileSize: {x: 2.5, y: 2.5}
+    TileOffset: {x: 0, y: 0}
+    BlendSharpness: 0.1
+  - LayerName: 'Forest '
+    DiffuseTexture: {fileID: 2800000, guid: e3d03cd8d2a879a45a464f22d9bdc710, type: 3}
+    NormalTexture: {fileID: 2800000, guid: 5c9694834f57068469683278adec9544, type: 3}
+    MinHeight: 0.105
     MaxHeight: 0.3
-    TileSize: {x: 0, y: 0}
+    TileSize: {x: 2, y: 2}
     TileOffset: {x: 0, y: 0}
     BlendSharpness: 0.1
-  - LayerName: "Montane Forest / Hills\t"
-    DiffuseTexture: {fileID: 2800000, guid: 6236f9088a93c664c99aad78a0f95be0, type: 3}
-    NormalTexture: {fileID: 0}
+  - LayerName: Thundra
+    DiffuseTexture: {fileID: 2800000, guid: 50f2313095837d74abc0adb737a65ff2, type: 3}
+    NormalTexture: {fileID: 2800000, guid: fa2fcacd23bb3da449cce37716771ad6, type: 3}
     MinHeight: 0.3
     MaxHeight: 0.6
-    TileSize: {x: 0, y: 0}
+    TileSize: {x: 2, y: 1}
     TileOffset: {x: 0, y: 0}
     BlendSharpness: 0.1
-  - LayerName: Alpine / Subalpine
-    DiffuseTexture: {fileID: 2800000, guid: 069e8693ba0c90d4c8ccf36422c01bce, type: 3}
-    NormalTexture: {fileID: 0}
-    MinHeight: 0.6
-    MaxHeight: 0.8
-    TileSize: {x: 0, y: 0}
+  - LayerName: 'Rocky '
+    DiffuseTexture: {fileID: 2800000, guid: c597e49d96b2c4b478efa30309ce460c, type: 3}
+    NormalTexture: {fileID: 2800000, guid: 54749575a86503949af15065d56ae736, type: 3}
+    MinHeight: 0.5
+    MaxHeight: 0.7
+    TileSize: {x: 100, y: 100}
     TileOffset: {x: 0, y: 0}
-    BlendSharpness: 0
-  - LayerName: "Bare Rock / Snow\t"
-    DiffuseTexture: {fileID: 2800000, guid: 069e8693ba0c90d4c8ccf36422c01bce, type: 3}
-    NormalTexture: {fileID: 0}
-    MinHeight: 0.8
+    BlendSharpness: 0.1
+  - LayerName: Snow
+    DiffuseTexture: {fileID: 2800000, guid: d1c47f487cbc59240b89058d4bea39f3, type: 3}
+    NormalTexture: {fileID: 2800000, guid: 7cddb6fa8021c4c4381ebbbd3986bdd5, type: 3}
+    MinHeight: 0.65
     MaxHeight: 1
-    TileSize: {x: 0, y: 0}
+    TileSize: {x: 1, y: 1}
     TileOffset: {x: 0, y: 0}
-    BlendSharpness: 0
+    BlendSharpness: 0.1
 --- !u!114 &1072173607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -946,6 +962,82 @@ MonoBehaviour:
   waterHeight: 0.02
   waterPlanePrefab: {fileID: 2778371901395010301, guid: 1c5709c9fa1550c4a914a3c069e5b556, type: 3}
   waterPlanesParent: {fileID: 567553434}
+--- !u!1 &1201517224
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1201517226}
+  - component: {fileID: 1201517225}
+  m_Layer: 0
+  m_Name: Adaptive Probe Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1201517225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201517224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cded085d155cde949b60f67a11dbc3bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mode: 1
+  size: {x: 4099.01, y: 346.8573, z: 4099.01}
+  overrideRendererFilters: 0
+  minRendererVolumeSize: 0.1
+  objectLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  lowestSubdivLevelOverride: 0
+  highestSubdivLevelOverride: 7
+  overridesSubdivLevels: 0
+  mightNeedRebaking: 1
+  cachedTransform:
+    e00: 0
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 0
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 0
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 0
+  cachedHashCode: 0
+  fillEmptySpaces: 0
+  version: 2
+  globalVolume: 0
+--- !u!4 &1201517226
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201517224}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2048, y: 171.92365, z: 2048}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1323354579
 GameObject:
   m_ObjectHideFlags: 0
@@ -1697,6 +1789,56 @@ Transform:
   - {fileID: 843296172}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2025726815
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2025726817}
+  - component: {fileID: 2025726816}
+  m_Layer: 0
+  m_Name: ProbeVolumePerSceneData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2025726816
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025726815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83d2f7ae04ab6f4f99b0d85377be998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedBakingSet: {fileID: 0}
+  sceneGUID: a05754b4393d30e43ba981c2b07bfe30
+  obsoleteAsset: {fileID: 0}
+  obsoleteCellSharedDataAsset: {fileID: 0}
+  obsoleteCellSupportDataAsset: {fileID: 0}
+  obsoleteSerializedScenarios: []
+--- !u!4 &2025726817
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025726815}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1707,3 +1849,5 @@ SceneRoots:
   - {fileID: 1940748033}
   - {fileID: 844810611}
   - {fileID: 1501046025}
+  - {fileID: 1201517226}
+  - {fileID: 2025726817}

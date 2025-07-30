@@ -203,7 +203,7 @@ public class TerrainTextureLayer
     public Vector2 TileOffset = Vector2.zero;
     
     [Header("Blending")]
-    [Range(0.1f, 5f)]
+    [Range(0f, 5f)]
     public float BlendSharpness = 1f;  // Controls how sharp/soft the texture transitions are
 }
 
