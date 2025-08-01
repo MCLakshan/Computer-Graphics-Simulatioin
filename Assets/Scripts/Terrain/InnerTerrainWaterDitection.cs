@@ -38,6 +38,10 @@ public class InnerTerrainWaterDitection : MonoBehaviour
     [SerializeField] private GameObject waterPlanePrefab;
     [SerializeField] private GameObject waterPlanesParent;
     
+    // UI
+    [Header("<b><color=#FFB6C1><size=12>UI</size></color></b>")]
+    [SerializeField] private TMPro.TMP_Text waterDetectionInfoText;
+    
     private int[,] waterMap;
     private int[,] waterMapTransposed;
     private List<List<Vector2Int>> waterGridClusters = new List<List<Vector2Int>>();
@@ -49,6 +53,9 @@ public class InnerTerrainWaterDitection : MonoBehaviour
         {
             return;
         }
+        
+        // Update UI text
+        waterDetectionInfoText.text = $"Processing Water Detection... Water Height: {waterHeight}";
         
         // Clear all arrays and lists
         waterGridClusters.Clear();
@@ -132,6 +139,9 @@ public class InnerTerrainWaterDitection : MonoBehaviour
                 debugTerrainGridVisualizer.HighlightCell(cell.x, cell.y);
             }
         }
+        
+        // Update UI text with the number of water clusters found
+        waterDetectionInfoText.text = $"Water Detection Complete! Found {waterGridClusters.Count} water clusters.";
     }
     
     public int DetectWaterInGrid(int gridX, int gridZ, float[,] heights)

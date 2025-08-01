@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -45,9 +46,13 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
     [Range(0f, 1f)]
     [SerializeField] private float multiCenterRadius = 0.3f; // Radius of influence for each mountain center in multi-center mode
     
+    // User Interface
+    [Header("<b><color=#FFB6C1><size=12>UI</size></color></b>")]
+    [SerializeField] private TMP_Text terrainGenerationInfoText; // Text to display terrain generation info
+    
     [Header("<b><color=#FFD6E0><size=12>Control Settings</size></color></b>")]
     [SerializeField] private bool stopGenerationOnStart = true; // If true, terrain generation will stop on start
-
+    
     [Header("<b><color=#FF9AA2><size=12>Events</size></color></b>")]
     public UnityEvent onTerrainGenerated; // Event to trigger when the terrain is generated
     
@@ -86,10 +91,19 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
         if (stopGenerationOnStart && _frameCount == 0)
         {
             Debug.Log("Terrain generation stopped on start.");
+            
+            // Update the terrain generation info text
+            terrainGenerationInfoText.text = "<color=#89CFF0>Terrain generation stopped on start Using Existing Terrain.</color>";
+            
             // Invoke the terrain generated event
             onTerrainGenerated?.Invoke();
             return;
         }
+        
+        // Update the terrain generation info text
+        // set color to orange
+        // print Generating Terrain, Please Wait...
+        terrainGenerationInfoText.text = "<color=#FFA500>Generating Terrain, Please Wait...</color>";
         
         // Set the terrain offsets
         offsetX = Random.Range(0f, 9999f);
@@ -102,6 +116,9 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
         }
 
         _terrain.terrainData = GenerateTerrain(_terrain.terrainData);
+        
+        // Update the terrain generation info text
+        terrainGenerationInfoText.text = "<color=#F7C59F>Terrain generated successfully!</color>";
         
         // Invoke the terrain generated event
         onTerrainGenerated?.Invoke();
@@ -292,6 +309,13 @@ public class PerlinNoiseTerrainGenerator : MonoBehaviour
             // Optional: Give each mountain different strength
             mountainWeights[i] = Random.Range(0.7f, 1f);
         }
+    }
+    
+    public void GenerateNewTerrainByUIButton()
+    {
+        // This method can be called from a UI button to regenerate the terrain
+        stopGenerationOnStart = false; // Allow regeneration
+        GenerateNewTerrain();
     }
 }
 

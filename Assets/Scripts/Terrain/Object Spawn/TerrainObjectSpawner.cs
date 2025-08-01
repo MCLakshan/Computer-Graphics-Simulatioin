@@ -44,8 +44,9 @@ public class TerrainObjectSpawner : MonoBehaviour
     [Header("Performance")]
     [Tooltip("Process this many positions per frame to avoid lag")]
     public int positionsPerFrame = 100;
-    
+
     [Header("User Interface")]
+    [SerializeField] private string spawningObjectName;
     [SerializeField] private TMP_Text poggressBarText;
     [SerializeField] private Slider spawnCountSlider;
 
@@ -88,7 +89,7 @@ public class TerrainObjectSpawner : MonoBehaviour
         int maxAttempts = spawnCount * 10; // Prevent infinite loop
         
         if (showDebugInfo)
-            Debug.Log($"Starting to spawn exactly {spawnCount} objects");
+            Debug.Log($"Starting to spawn {spawnCount} objects");
         
         // Keep spawning until we reach exact count
         while (spawnedCount < spawnCount && attempts < maxAttempts)
@@ -123,7 +124,7 @@ public class TerrainObjectSpawner : MonoBehaviour
                 }
                 
                 // Update UI
-                poggressBarText.text = "Generating Large Pine Trees : Attempts - " + attempts + " / Spawned - " + spawnedCount + " / Target - " + spawnCount;
+                poggressBarText.text = "Generating "+ spawningObjectName + " : Attempts - " + attempts + " / Spawned - " + spawnedCount + " / Target - " + spawnCount;
                 spawnCountSlider.value = (float)spawnedCount / spawnCount;
                 
                 attempts++;

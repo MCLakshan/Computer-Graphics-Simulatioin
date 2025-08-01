@@ -1,5 +1,7 @@
 using System;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TerrainTexturePainter : MonoBehaviour
 {
@@ -12,6 +14,12 @@ public class TerrainTexturePainter : MonoBehaviour
     [Header("Texture Settings")]
     [SerializeField] private TerrainTextureMode textureMode;
     [SerializeField] private TerrainTextureLayer[] textureLayers;
+    
+    [Header("<b><color=#FFB6C1><size=12>UI</size></color></b>")]
+    [SerializeField] private TMP_Text terrainPainterInfoText;
+    
+    // Event to trigger when terrain is painted
+    [SerializeField] private UnityEvent onTerrainPainted;
     
     private void Start()
     {
@@ -49,6 +57,9 @@ public class TerrainTexturePainter : MonoBehaviour
             return;
         }
         
+        // Update terrain info text ("Setting up terrain with X layers")
+        terrainPainterInfoText.text = $"Setting up terrain with {textureLayers.Length} layers...";
+        
         // Create TerrainLayer array for Unity's terrain system
         TerrainLayer[] unityTerrainLayers = new TerrainLayer[textureLayers.Length];
         
@@ -72,6 +83,9 @@ public class TerrainTexturePainter : MonoBehaviour
         
         // Assign layers to terrain
         targetTerrain.terrainData.terrainLayers = unityTerrainLayers;
+        
+        // Update terrain info text ("Terrain setup complete with X layers")
+        terrainPainterInfoText.text = $"Terrain setup complete with {textureLayers.Length} layers.";
     }
     
     [ContextMenu("Paint Terrain")]
@@ -79,6 +93,9 @@ public class TerrainTexturePainter : MonoBehaviour
     {
         if (targetTerrain == null || terrainGenerator == null || textureLayers == null)
             return;
+        
+        // Update terrain info text ("Painting terrain textures...")
+        terrainPainterInfoText.text = "<color=#FFB6C1>Painting terrain textures Please Wait ...</color>";
         
         TerrainData terrainData = targetTerrain.terrainData;
         
@@ -120,6 +137,12 @@ public class TerrainTexturePainter : MonoBehaviour
         
         // Apply the alphamap to terrain
         targetTerrain.terrainData.SetAlphamaps(0, 0, alphamap);
+        
+        // Update terrain info text ("Terrain textures painted successfully!")
+        terrainPainterInfoText.text = "<color=#F7C59F>Terrain textures painted successfully!</color>";
+        
+        // Invoke the terrain painted event
+        onTerrainPainted?.Invoke();
     }
     
     private float[] CalculateTextureWeights(float height)
