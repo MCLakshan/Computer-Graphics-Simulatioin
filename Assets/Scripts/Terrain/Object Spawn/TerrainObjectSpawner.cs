@@ -227,19 +227,6 @@ public class TerrainObjectSpawner : MonoBehaviour
             Gizmos.DrawWireSphere(pos, minDistanceBetweenObjects * 0.5f);
         }
     }
-    
-    void OnGUI()
-    {
-        if (!Application.isPlaying || !showDebugInfo) return;
-        
-        GUI.Label(new Rect(10, 10, 300, 20), $"Spawned Objects: {spawnedObjects.Count}");
-        
-        if (GUI.Button(new Rect(10, 40, 120, 30), "Spawn Objects"))
-            SpawnObjects();
-            
-        if (GUI.Button(new Rect(140, 40, 120, 30), "Clear Objects"))
-            ClearObjects();
-    }
 }
 
 /*
