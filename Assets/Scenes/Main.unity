@@ -1998,17 +1998,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrain: {fileID: 1072173605}
   player: {fileID: 1614241048}
-  grassMesh: {fileID: 4300000, guid: 9e0af751bc36ea146940ba245193e28c, type: 3}
-  grassMaterial: {fileID: 2100000, guid: 145c54b45a6fb5b40ac4b96dadd03e7c, type: 2}
+  grassMesh: {fileID: 4300000, guid: fe3717c414428fd42bfbb373c6421e29, type: 3}
+  grassMaterial: {fileID: 2100000, guid: b7458f8c77e12ac42a96776e17365bf2, type: 2}
+  grassYOffset: -0.05
   blueNoiseTexture: {fileID: 2800000, guid: d6a9ba5e69770dd42a4d43bc754a7f4d, type: 3}
   noiseScale: 0.1
   noiseThreshold: 0.3
-  grassDensity: 100
+  grassDensity: 2000
   minGrassScale: 0.8
   maxGrassScale: 1.2
   chunksToRender: 10
   chunkSize: 50
-  maxGrassPerChunk: 1000
+  lowerBound: 0.022
+  upperBound: 0.095
+  maxGrassPerChunk: 2000
   cullingDistance: 200
 --- !u!1 &1201517224
 GameObject:

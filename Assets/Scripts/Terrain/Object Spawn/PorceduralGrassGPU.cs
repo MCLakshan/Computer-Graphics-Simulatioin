@@ -11,6 +11,7 @@ public class ProceduralGrassGPU : MonoBehaviour
     [Header("Grass Mesh & Material")]
     public Mesh grassMesh;
     public Material grassMaterial; // MUST have "Enable GPU Instancing" checked!
+    [SerializeField] float grassYOffset = 0.1f; // Offset to avoid z-fighting with terrain
     
     [Header("Blue Noise Settings")]
     public Texture2D blueNoiseTexture; // Your blue noise texture
@@ -23,10 +24,16 @@ public class ProceduralGrassGPU : MonoBehaviour
     public float maxGrassScale = 1.2f;
     public int chunksToRender = 10;       // How many chunks around player
     public float chunkSize = 50f;         // Size of each grass chunk
+    [Range(0f, 1f)]
+    [SerializeField] float lowerBound = 0f; // Lower bound for grass placement
+    [Range(0f, 1f)]
+    [SerializeField] float upperBound = 1f; // Upper bound for grass placement
     
     [Header("Performance")]
     public int maxGrassPerChunk = 1000;   // Limit for performance
     public float cullingDistance = 200f;  // Don't render grass beyond this
+    
+    private float maxTerrainHeight; // Max height of terrain for bounds checking
     
     // GPU Instancing data
     private Dictionary<Vector2Int, GrassChunk> grassChunks;
@@ -66,6 +73,8 @@ public class ProceduralGrassGPU : MonoBehaviour
         {
             Debug.LogWarning("No blue noise texture assigned! Using random noise instead.");
         }
+        
+        maxTerrainHeight = terrain != null ? terrain.terrainData.size.y : 100f;
     }
     
     void Update()
@@ -154,6 +163,15 @@ public class ProceduralGrassGPU : MonoBehaviour
                 // Sample terrain height
                 float terrainHeight = SampleTerrainHeight(worldPos);
                 worldPos.y = terrainHeight;
+                
+                // Check if within bounds
+                if (!IsWithinBounds(worldPos.y))
+                {
+                    continue;
+                }
+                
+                // Apply slight offset to avoid z-fighting
+                worldPos.y += grassYOffset;
                 
                 // Get terrain slope (don't place grass on steep slopes)
                 float slope = GetTerrainSlope(worldPos);
@@ -322,6 +340,13 @@ public class ProceduralGrassGPU : MonoBehaviour
             }
         }
     }
+    
+    private bool IsWithinBounds(float height)
+    {
+        var normalizedHeight = height / maxTerrainHeight;
+        return normalizedHeight >= lowerBound && normalizedHeight <= upperBound;
+    }
+    
     
     // Debug info
     void OnGUI()
