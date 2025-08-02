@@ -347,24 +347,4 @@ public class ProceduralGrassGPU : MonoBehaviour
         return normalizedHeight >= lowerBound && normalizedHeight <= upperBound;
     }
     
-    
-    // Debug info
-    void OnGUI()
-    {
-        if (Application.isPlaying)
-        {
-            int totalGrass = 0;
-            int visibleChunks = 0;
-            
-            foreach (var chunk in grassChunks.Values)
-            {
-                totalGrass += chunk.grassCount;
-                visibleChunks++;
-            }
-            
-            GUI.Label(new Rect(10, 10, 300, 20), $"Grass Chunks: {visibleChunks}");
-            GUI.Label(new Rect(10, 30, 300, 20), $"Total Grass Blades: {totalGrass}");
-            GUI.Label(new Rect(10, 50, 300, 20), $"Draw Calls: {visibleChunks} (instead of {totalGrass})");
-        }
-    }
 }

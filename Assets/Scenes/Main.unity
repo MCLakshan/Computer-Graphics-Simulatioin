@@ -180,6 +180,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
+--- !u!1 &14626653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 14626654}
+  - component: {fileID: 14626655}
+  m_Layer: 0
+  m_Name: '----- Grass1 - Forest ----- '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &14626654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14626653}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1380078146}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &14626655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14626653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4fd929019455ae41acec27de088c4b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrain: {fileID: 1072173605}
+  player: {fileID: 1614241048}
+  grassMesh: {fileID: 4300000, guid: fe3717c414428fd42bfbb373c6421e29, type: 3}
+  grassMaterial: {fileID: 2100000, guid: b7458f8c77e12ac42a96776e17365bf2, type: 2}
+  grassYOffset: -0.05
+  blueNoiseTexture: {fileID: 2800000, guid: d6a9ba5e69770dd42a4d43bc754a7f4d, type: 3}
+  noiseScale: 0.1
+  noiseThreshold: 0.3
+  grassDensity: 1000
+  minGrassScale: 0.8
+  maxGrassScale: 1.2
+  chunksToRender: 10
+  chunkSize: 50
+  lowerBound: 0.095
+  upperBound: 0.3
+  maxGrassPerChunk: 2000
+  cullingDistance: 200
 --- !u!1 &22661589
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,6 +277,40 @@ RectTransform:
   m_AnchoredPosition: {x: 25, y: 518}
   m_SizeDelta: {x: -50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &98610618
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 98610619}
+  m_Layer: 0
+  m_Name: '[ TREES ]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &98610619
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 98610618}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 929317498}
+  - {fileID: 1670907079}
+  - {fileID: 1270603588}
+  m_Father: {fileID: 693639553}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &101460514
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,6 +557,128 @@ MonoBehaviour:
   - Name: Bare Rock / Snow
     Color: {r: 1, g: 1, b: 1, a: 1}
     Height: 1
+--- !u!1 &140758168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 140758169}
+  - component: {fileID: 140758170}
+  m_Layer: 0
+  m_Name: ----- Clover2 - Forest -----
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &140758169
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140758168}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1380078146}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &140758170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140758168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4fd929019455ae41acec27de088c4b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrain: {fileID: 1072173605}
+  player: {fileID: 1614241048}
+  grassMesh: {fileID: 4300000, guid: 88d402d3ad0802946b9056adb766a672, type: 3}
+  grassMaterial: {fileID: 2100000, guid: e33764665f9890643acabc57abc4932b, type: 2}
+  grassYOffset: -0.05
+  blueNoiseTexture: {fileID: 2800000, guid: d6a9ba5e69770dd42a4d43bc754a7f4d, type: 3}
+  noiseScale: 0.1
+  noiseThreshold: 0.3
+  grassDensity: 1000
+  minGrassScale: 0.8
+  maxGrassScale: 1.2
+  chunksToRender: 10
+  chunkSize: 50
+  lowerBound: 0.095
+  upperBound: 0.3
+  maxGrassPerChunk: 2000
+  cullingDistance: 200
+--- !u!1 &226611696
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 226611697}
+  - component: {fileID: 226611698}
+  m_Layer: 0
+  m_Name: ----- Grass5 - Grass -----
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &226611697
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226611696}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1380078146}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &226611698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226611696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4fd929019455ae41acec27de088c4b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrain: {fileID: 1072173605}
+  player: {fileID: 1614241048}
+  grassMesh: {fileID: 4300000, guid: 4502a3116c0387d4ba6bd0269a886fea, type: 3}
+  grassMaterial: {fileID: 2100000, guid: ccb79f59620ad1f40b1bcc1657d05488, type: 2}
+  grassYOffset: -0.05
+  blueNoiseTexture: {fileID: 2800000, guid: d6a9ba5e69770dd42a4d43bc754a7f4d, type: 3}
+  noiseScale: 0.1
+  noiseThreshold: 0.3
+  grassDensity: 200
+  minGrassScale: 0.8
+  maxGrassScale: 1.2
+  chunksToRender: 10
+  chunkSize: 50
+  lowerBound: 0.022
+  upperBound: 0.095
+  maxGrassPerChunk: 2000
+  cullingDistance: 200
 --- !u!1 &266298702
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,6 +995,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1323354580}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &570629926
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 570629927}
+  - component: {fileID: 570629928}
+  m_Layer: 0
+  m_Name: ----- Grass3 - Grass -----
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &570629927
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570629926}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1380078146}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &570629928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570629926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4fd929019455ae41acec27de088c4b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrain: {fileID: 1072173605}
+  player: {fileID: 1614241048}
+  grassMesh: {fileID: 4300000, guid: 960ed3a0fc3f46f47bf9d9086bf2dac0, type: 3}
+  grassMaterial: {fileID: 2100000, guid: 2754d044be4c50f41bcd9657d51cc585, type: 2}
+  grassYOffset: -0.05
+  blueNoiseTexture: {fileID: 2800000, guid: d6a9ba5e69770dd42a4d43bc754a7f4d, type: 3}
+  noiseScale: 0.1
+  noiseThreshold: 0.3
+  grassDensity: 200
+  minGrassScale: 0.8
+  maxGrassScale: 1.2
+  chunksToRender: 10
+  chunkSize: 50
+  lowerBound: 0.022
+  upperBound: 0.095
+  maxGrassPerChunk: 2000
+  cullingDistance: 200
 --- !u!1 &665368814
 GameObject:
   m_ObjectHideFlags: 0
@@ -943,9 +1221,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 929317498}
-  - {fileID: 1670907079}
-  - {fileID: 1131744148}
+  - {fileID: 1380078146}
+  - {fileID: 98610619}
   m_Father: {fileID: 357942944}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &739946087
@@ -1335,7 +1612,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &844810611
 Transform:
   m_ObjectHideFlags: 0
@@ -1510,12 +1787,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 929317497}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 693639553}
+  m_Father: {fileID: 98610619}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &929317499
 MonoBehaviour:
@@ -1529,7 +1806,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc062af4ecf1c794885ba1e4c61d1d3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrainObjectSpawner_largePineTrees: {fileID: 1670907080}
+  largePineTrees_Grass: {fileID: 1670907080}
+  largePineTrees_Forest: {fileID: 1270603589}
 --- !u!1 &1005884603
 GameObject:
   m_ObjectHideFlags: 0
@@ -1563,7 +1841,7 @@ RectTransform:
   m_Father: {fileID: 1586297661}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1952,6 +2230,67 @@ MonoBehaviour:
   waterPlanePrefab: {fileID: 2778371901395010301, guid: 88adf3a77f6c40741b557a7c8c803ac3, type: 3}
   waterPlanesParent: {fileID: 567553434}
   waterDetectionInfoText: {fileID: 1583864611}
+--- !u!1 &1125489409
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1125489410}
+  - component: {fileID: 1125489411}
+  m_Layer: 0
+  m_Name: '----- Clover1 - Forest ----- '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1125489410
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125489409}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1380078146}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1125489411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125489409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4fd929019455ae41acec27de088c4b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrain: {fileID: 1072173605}
+  player: {fileID: 1614241048}
+  grassMesh: {fileID: 4300000, guid: d4c37bdc26ed5e94eb253ed82ca1f384, type: 3}
+  grassMaterial: {fileID: 2100000, guid: 7d7bb712e9fa5194b88129a036bedc90, type: 2}
+  grassYOffset: -0.05
+  blueNoiseTexture: {fileID: 2800000, guid: d6a9ba5e69770dd42a4d43bc754a7f4d, type: 3}
+  noiseScale: 0.1
+  noiseThreshold: 0.3
+  grassDensity: 1000
+  minGrassScale: 0.8
+  maxGrassScale: 1.2
+  chunksToRender: 10
+  chunkSize: 50
+  lowerBound: 0.095
+  upperBound: 0.3
+  maxGrassPerChunk: 2000
+  cullingDistance: 200
 --- !u!1 &1131744147
 GameObject:
   m_ObjectHideFlags: 0
@@ -1963,7 +2302,7 @@ GameObject:
   - component: {fileID: 1131744148}
   - component: {fileID: 1131744149}
   m_Layer: 0
-  m_Name: ----- Grass -----
+  m_Name: ----- Grass1 - Grass -----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1977,12 +2316,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1131744147}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 693639553}
+  m_Father: {fileID: 1380078146}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1131744149
 MonoBehaviour:
@@ -2011,6 +2350,67 @@ MonoBehaviour:
   chunkSize: 50
   lowerBound: 0.022
   upperBound: 0.095
+  maxGrassPerChunk: 2000
+  cullingDistance: 200
+--- !u!1 &1157357563
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1157357564}
+  - component: {fileID: 1157357565}
+  m_Layer: 0
+  m_Name: ----- Grass1 - Thundra -----
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1157357564
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157357563}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1380078146}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1157357565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157357563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4fd929019455ae41acec27de088c4b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrain: {fileID: 1072173605}
+  player: {fileID: 1614241048}
+  grassMesh: {fileID: 4300000, guid: fe3717c414428fd42bfbb373c6421e29, type: 3}
+  grassMaterial: {fileID: 2100000, guid: b7458f8c77e12ac42a96776e17365bf2, type: 2}
+  grassYOffset: -0.05
+  blueNoiseTexture: {fileID: 2800000, guid: d6a9ba5e69770dd42a4d43bc754a7f4d, type: 3}
+  noiseScale: 0.1
+  noiseThreshold: 0.3
+  grassDensity: 500
+  minGrassScale: 0.8
+  maxGrassScale: 1.2
+  chunksToRender: 10
+  chunkSize: 50
+  lowerBound: 0.3
+  upperBound: 0.6
   maxGrassPerChunk: 2000
   cullingDistance: 200
 --- !u!1 &1201517224
@@ -2297,6 +2697,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1242885305}
   m_CullTransparentMesh: 1
+--- !u!1 &1270603587
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1270603588}
+  - component: {fileID: 1270603589}
+  m_Layer: 0
+  m_Name: ----- Large Pine Trees - Forest -----
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1270603588
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270603587}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 98610619}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1270603589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270603587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59cc2cf4cf4f5a146a714011f8f1a732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrain: {fileID: 1072173605}
+  prefabToSpawn: {fileID: 6948803800378873062, guid: f9b3b15e2aa420a4094f0734a4b10dc8, type: 3}
+  blueNoiseTexture: {fileID: 2800000, guid: e7121dd914d72de43b6b00c3c135bb5a, type: 3}
+  noiseThreshold: 0.5
+  spawnCount: 3000
+  minDistanceBetweenObjects: 4
+  minHeightPercent: 0.095
+  maxHeightPercent: 0.3
+  randomRotation: 1
+  positionsPerFrame: 100
+  spawningObjectName: Large Pine Trees
+  poggressBarText: {fileID: 1272422918}
+  spawnCountSlider: {fileID: 1410970994}
+  showDebugInfo: 1
+  visualizeSpawnArea: 1
 --- !u!1 &1272422916
 GameObject:
   m_ObjectHideFlags: 0
@@ -2602,6 +3061,45 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1333768358}
   m_CullTransparentMesh: 1
+--- !u!1 &1380078145
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1380078146}
+  m_Layer: 0
+  m_Name: '[ GRASS ]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1380078146
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380078145}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1131744148}
+  - {fileID: 570629927}
+  - {fileID: 226611697}
+  - {fileID: 1752782755}
+  - {fileID: 14626654}
+  - {fileID: 1125489410}
+  - {fileID: 140758169}
+  - {fileID: 1157357564}
+  m_Father: {fileID: 693639553}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1410970992
 GameObject:
   m_ObjectHideFlags: 0
@@ -3233,12 +3731,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1670907078}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 693639553}
+  m_Father: {fileID: 98610619}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1670907080
 MonoBehaviour:
@@ -3530,7 +4028,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &1728847685
 AudioListener:
   m_ObjectHideFlags: 0
@@ -3744,6 +4242,67 @@ MonoBehaviour:
       enableFptlForForwardOpaque: 0
       enableBigTilePrepass: 0
       isFptlEnabled: 0
+--- !u!1 &1752782754
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1752782755}
+  - component: {fileID: 1752782756}
+  m_Layer: 0
+  m_Name: ----- Grass6 - Grass -----
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1752782755
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752782754}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1380078146}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1752782756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752782754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4fd929019455ae41acec27de088c4b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrain: {fileID: 1072173605}
+  player: {fileID: 1614241048}
+  grassMesh: {fileID: 4300000, guid: c892c98465aca7b4dbfee46536b2a23c, type: 3}
+  grassMaterial: {fileID: 2100000, guid: 68d4823de5ce57c428d59922f8e8d2ed, type: 2}
+  grassYOffset: -0.05
+  blueNoiseTexture: {fileID: 2800000, guid: d6a9ba5e69770dd42a4d43bc754a7f4d, type: 3}
+  noiseScale: 0.1
+  noiseThreshold: 0.3
+  grassDensity: 50
+  minGrassScale: 0.8
+  maxGrassScale: 1.2
+  chunksToRender: 10
+  chunkSize: 50
+  lowerBound: 0.022
+  upperBound: 0.095
+  maxGrassPerChunk: 2000
+  cullingDistance: 200
 --- !u!1 &1773854404
 GameObject:
   m_ObjectHideFlags: 0
@@ -3832,7 +4391,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1940748033
 Transform:
   m_ObjectHideFlags: 0
