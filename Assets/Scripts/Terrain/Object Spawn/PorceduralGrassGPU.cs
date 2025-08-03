@@ -7,6 +7,7 @@ public class ProceduralGrassGPU : MonoBehaviour
     [Header("Terrain Settings")]
     public Terrain terrain;
     public Transform player;
+    public Transform camera;
     
     [Header("Grass Mesh & Material")]
     public Mesh grassMesh;
@@ -32,8 +33,14 @@ public class ProceduralGrassGPU : MonoBehaviour
     [Header("Performance")]
     public int maxGrassPerChunk = 1000;   // Limit for performance
     public float cullingDistance = 200f;  // Don't render grass beyond this
+    public float cameraFieldOfView = 60f; // Camera FOV for culling in degrees
+    
+    // Debugging variables
+    [Header("Debugging")]
+    [SerializeField] private bool enableOnDrawGizmos = true; // Toggle for drawing gizmos
     
     private float maxTerrainHeight; // Max height of terrain for bounds checking
+    private float cosHalfFOV;       // For the edge case of frustum culling (prevent crashes)
     
     // GPU Instancing data
     private Dictionary<Vector2Int, GrassChunk> grassChunks;
@@ -61,6 +68,8 @@ public class ProceduralGrassGPU : MonoBehaviour
     
     void Start()
     {
+        cosHalfFOV = Mathf.Cos(cameraFieldOfView * 0.5f * Mathf.Deg2Rad);
+        
         grassChunks = new Dictionary<Vector2Int, GrassChunk>();
         
         // Validate setup
@@ -316,17 +325,35 @@ public class ProceduralGrassGPU : MonoBehaviour
         if (player == null) return;
         
         Vector3 playerPos = player.position;
+        var playerChunk = WorldToChunkCoord(playerPos);
         
         foreach (var kvp in grassChunks)
         {
             GrassChunk chunk = kvp.Value;
             if (!chunk.isGenerated || chunk.grassCount == 0) continue;
             
+            // Always render the player's chunk and its 8 neighbors
+            if (chunk.coordinate == playerChunk ||
+                Mathf.Abs(chunk.coordinate.x - playerChunk.x) <= 1 &&
+                Mathf.Abs(chunk.coordinate.y - playerChunk.y) <= 1)
+            {
+                // Use the chunk's own property block (colors already set during generation)
+                Graphics.DrawMeshInstanced(
+                    grassMesh,
+                    0,
+                    grassMaterial,
+                    chunk.transforms,
+                    chunk.grassCount,
+                    chunk.propertyBlock
+                );
+                continue; // Skip further checks for player's chunk
+            }
+            
             // Check if chunk is close enough to render
             Vector3 chunkCenter = ChunkCoordToWorldPos(chunk.coordinate) + Vector3.one * chunkSize * 0.5f;
             float distanceToPlayer = Vector3.Distance(playerPos, chunkCenter);
             
-            if (distanceToPlayer <= cullingDistance)
+            if (distanceToPlayer <= cullingDistance && AngleBasedFrustumCullingAngleCheck(chunkCenter))
             {
                 // Use the chunk's own property block (colors already set during generation)
                 Graphics.DrawMeshInstanced(
@@ -346,5 +373,142 @@ public class ProceduralGrassGPU : MonoBehaviour
         var normalizedHeight = height / maxTerrainHeight;
         return normalizedHeight >= lowerBound && normalizedHeight <= upperBound;
     }
+
+    private bool AngleBasedFrustumCullingAngleCheck(Vector3 chunkPosition)
+    {
+        Vector3 camaraForwardDirection = camera.forward;
+        Vector2 camaraForwardDirection2D = new Vector2(camaraForwardDirection.x, camaraForwardDirection.z).normalized;
+        Vector3 camaraPosition = camera.position;
+        Vector2 camaraPosition2D = new Vector2(camaraPosition.x, camaraPosition.z);
+        Vector2 chunkPosition2D = new Vector2(chunkPosition.x, chunkPosition.z);
+        Vector2 directionToChunk = (chunkPosition2D - camaraPosition2D).normalized;
+        float dotProduct = Vector2.Dot(camaraForwardDirection2D, directionToChunk);
+        return dotProduct > cosHalfFOV; // Check if chunk is within camera FOV
+    }
     
+    
+    // On Draw Gizmos, visualize grass chunks - useful for debugging ---------------------------------------------------
+    
+    void OnDrawGizmos()
+    {
+        if (!enableOnDrawGizmos) return; // Skip if gizmos are disabled
+        if (camera == null) return;
+        
+        // Set gizmo color for FOV visualization
+        Gizmos.color = Color.yellow;
+        
+        Vector3 cameraPos = camera.position;
+        Vector3 cameraForward = camera.forward;
+        
+        // Calculate the FOV angle in radians
+        float halfFOVRadians = cameraFieldOfView * 0.5f * Mathf.Deg2Rad;
+        
+        // Calculate the left and right directions for the FOV cone
+        Vector3 rightDirection = Quaternion.AngleAxis(cameraFieldOfView * 0.5f, Vector3.up) * cameraForward;
+        Vector3 leftDirection = Quaternion.AngleAxis(-cameraFieldOfView * 0.5f, Vector3.up) * cameraForward;
+        
+        // Draw the FOV cone lines
+        float fovDistance = cullingDistance; // Use culling distance as the FOV visualization range
+        
+        // Draw center line (camera forward direction)
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(cameraPos, cameraPos + cameraForward * fovDistance);
+        
+        // Draw left and right FOV boundary lines
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(cameraPos, cameraPos + leftDirection * fovDistance);
+        Gizmos.DrawLine(cameraPos, cameraPos + rightDirection * fovDistance);
+        
+        // Draw the arc at the end of the FOV
+        Vector3 leftEndPoint = cameraPos + leftDirection * fovDistance;
+        Vector3 rightEndPoint = cameraPos + rightDirection * fovDistance;
+        Gizmos.DrawLine(leftEndPoint, rightEndPoint);
+        
+        // Optional: Draw FOV arc with multiple segments for smoother visualization
+        Gizmos.color = Color.cyan;
+        int arcSegments = 20;
+        Vector3 previousPoint = leftEndPoint;
+        
+        for (int i = 1; i <= arcSegments; i++)
+        {
+            float angle = Mathf.Lerp(-cameraFieldOfView * 0.5f, cameraFieldOfView * 0.5f, (float)i / arcSegments);
+            Vector3 direction = Quaternion.AngleAxis(angle, Vector3.up) * cameraForward;
+            Vector3 currentPoint = cameraPos + direction * fovDistance;
+            
+            Gizmos.DrawLine(previousPoint, currentPoint);
+            previousPoint = currentPoint;
+        }
+        
+        // Visualize chunk centers and their culling status
+        if (grassChunks != null && player != null)
+        {
+            Vector2Int playerChunk = WorldToChunkCoord(player.position);
+            
+            foreach (var kvp in grassChunks)
+            {
+                GrassChunk chunk = kvp.Value;
+                if (!chunk.isGenerated) continue;
+                
+                Vector3 chunkCenter = ChunkCoordToWorldPos(chunk.coordinate) + Vector3.one * chunkSize * 0.5f;
+                
+                // Different colors based on culling status
+                if (chunk.coordinate == playerChunk || 
+                    (Mathf.Abs(chunk.coordinate.x - playerChunk.x) <= 1 &&
+                     Mathf.Abs(chunk.coordinate.y - playerChunk.y) <= 1))
+                {
+                    // Player's chunk - always rendered (green)
+                    // And also its immediate neighbors
+                    Gizmos.color = Color.green;
+                }
+                else if (Vector3.Distance(player.position, chunkCenter) > cullingDistance)
+                {
+                    // Too far - not rendered (red)
+                    Gizmos.color = Color.red;
+                }
+                else if (AngleBasedFrustumCullingAngleCheck(chunkCenter))
+                {
+                    // Within FOV - rendered (blue)
+                    Gizmos.color = Color.blue;
+                }
+                else
+                {
+                    // Outside FOV - not rendered (orange)
+                    Gizmos.color = Color.magenta;
+                }
+                
+                // Draw chunk center as a sphere
+                Gizmos.DrawSphere(chunkCenter, 2f);
+                
+                // Draw chunk bounds as wireframe cube
+                Gizmos.color = Color.white * 0.3f; // Semi-transparent white
+                Gizmos.DrawWireCube(chunkCenter, new Vector3(chunkSize, 10f, chunkSize));
+            }
+        }
+        
+        // Draw player position
+        if (player != null)
+        {
+            Gizmos.color = Color.white;
+            Gizmos.DrawSphere(player.position, 3f);
+            
+            // Draw culling distance circle around player
+            Gizmos.color = Color.white * 0.5f;
+            DrawCircle(player.position, cullingDistance, 32);
+        }
+    }
+
+    // Helper function to draw a circle
+    void DrawCircle(Vector3 center, float radius, int segments)
+    {
+        float angleStep = 360f / segments;
+        Vector3 previousPoint = center + Vector3.forward * radius;
+        
+        for (int i = 1; i <= segments; i++)
+        {
+            float angle = i * angleStep * Mathf.Deg2Rad;
+            Vector3 currentPoint = center + new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle)) * radius;
+            Gizmos.DrawLine(previousPoint, currentPoint);
+            previousPoint = currentPoint;
+        }
+    }
 }

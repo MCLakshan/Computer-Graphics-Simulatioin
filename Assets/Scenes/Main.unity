@@ -226,6 +226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrain: {fileID: 1072173605}
   player: {fileID: 1614241048}
+  camera: {fileID: 1696499538}
   grassMesh: {fileID: 4300000, guid: fe3717c414428fd42bfbb373c6421e29, type: 3}
   grassMaterial: {fileID: 2100000, guid: b7458f8c77e12ac42a96776e17365bf2, type: 2}
   grassYOffset: -0.05
@@ -241,6 +242,8 @@ MonoBehaviour:
   upperBound: 0.3
   maxGrassPerChunk: 2000
   cullingDistance: 500
+  cameraFieldOfView: 100
+  enableOnDrawGizmos: 0
 --- !u!1 &22661589
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,6 +746,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrain: {fileID: 1072173605}
   player: {fileID: 1614241048}
+  camera: {fileID: 1696499538}
   grassMesh: {fileID: 4300000, guid: 88d402d3ad0802946b9056adb766a672, type: 3}
   grassMaterial: {fileID: 2100000, guid: e33764665f9890643acabc57abc4932b, type: 2}
   grassYOffset: -0.05
@@ -758,6 +762,8 @@ MonoBehaviour:
   upperBound: 0.3
   maxGrassPerChunk: 2000
   cullingDistance: 100
+  cameraFieldOfView: 100
+  enableOnDrawGizmos: 0
 --- !u!1 &226611696
 GameObject:
   m_ObjectHideFlags: 0
@@ -804,6 +810,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrain: {fileID: 1072173605}
   player: {fileID: 1614241048}
+  camera: {fileID: 1696499538}
   grassMesh: {fileID: 4300000, guid: 4502a3116c0387d4ba6bd0269a886fea, type: 3}
   grassMaterial: {fileID: 2100000, guid: ccb79f59620ad1f40b1bcc1657d05488, type: 2}
   grassYOffset: -0.05
@@ -819,6 +826,8 @@ MonoBehaviour:
   upperBound: 0.095
   maxGrassPerChunk: 2000
   cullingDistance: 200
+  cameraFieldOfView: 100
+  enableOnDrawGizmos: 0
 --- !u!1 &266298702
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,6 +1226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrain: {fileID: 1072173605}
   player: {fileID: 1614241048}
+  camera: {fileID: 1696499538}
   grassMesh: {fileID: 4300000, guid: 960ed3a0fc3f46f47bf9d9086bf2dac0, type: 3}
   grassMaterial: {fileID: 2100000, guid: 2754d044be4c50f41bcd9657d51cc585, type: 2}
   grassYOffset: -0.05
@@ -1232,6 +1242,8 @@ MonoBehaviour:
   upperBound: 0.095
   maxGrassPerChunk: 2000
   cullingDistance: 200
+  cameraFieldOfView: 100
+  enableOnDrawGizmos: 0
 --- !u!1 &665368814
 GameObject:
   m_ObjectHideFlags: 0
@@ -1936,7 +1948,7 @@ Transform:
   m_GameObject: {fileID: 844810610}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 709, y: 140, z: 1744}
+  m_LocalPosition: {x: 536, y: 140, z: 2257}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2544,6 +2556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrain: {fileID: 1072173605}
   player: {fileID: 1614241048}
+  camera: {fileID: 1696499538}
   grassMesh: {fileID: 4300000, guid: d4c37bdc26ed5e94eb253ed82ca1f384, type: 3}
   grassMaterial: {fileID: 2100000, guid: 7d7bb712e9fa5194b88129a036bedc90, type: 2}
   grassYOffset: -0.05
@@ -2559,6 +2572,8 @@ MonoBehaviour:
   upperBound: 0.3
   maxGrassPerChunk: 2000
   cullingDistance: 100
+  cameraFieldOfView: 100
+  enableOnDrawGizmos: 0
 --- !u!1 &1131744147
 GameObject:
   m_ObjectHideFlags: 0
@@ -2605,6 +2620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrain: {fileID: 1072173605}
   player: {fileID: 1614241048}
+  camera: {fileID: 1696499538}
   grassMesh: {fileID: 4300000, guid: fe3717c414428fd42bfbb373c6421e29, type: 3}
   grassMaterial: {fileID: 2100000, guid: b7458f8c77e12ac42a96776e17365bf2, type: 2}
   grassYOffset: -0.05
@@ -2620,6 +2636,8 @@ MonoBehaviour:
   upperBound: 0.095
   maxGrassPerChunk: 2000
   cullingDistance: 500
+  cameraFieldOfView: 100
+  enableOnDrawGizmos: 1
 --- !u!1 &1157357563
 GameObject:
   m_ObjectHideFlags: 0
@@ -2666,6 +2684,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrain: {fileID: 1072173605}
   player: {fileID: 1614241048}
+  camera: {fileID: 1696499538}
   grassMesh: {fileID: 4300000, guid: fe3717c414428fd42bfbb373c6421e29, type: 3}
   grassMaterial: {fileID: 2100000, guid: b7458f8c77e12ac42a96776e17365bf2, type: 2}
   grassYOffset: -0.05
@@ -2681,6 +2700,8 @@ MonoBehaviour:
   upperBound: 0.6
   maxGrassPerChunk: 2000
   cullingDistance: 500
+  cameraFieldOfView: 100
+  enableOnDrawGizmos: 0
 --- !u!1 &1201517224
 GameObject:
   m_ObjectHideFlags: 0
@@ -4606,6 +4627,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrain: {fileID: 1072173605}
   player: {fileID: 1614241048}
+  camera: {fileID: 1696499538}
   grassMesh: {fileID: 4300000, guid: c892c98465aca7b4dbfee46536b2a23c, type: 3}
   grassMaterial: {fileID: 2100000, guid: 68d4823de5ce57c428d59922f8e8d2ed, type: 2}
   grassYOffset: -0.05
@@ -4621,6 +4643,8 @@ MonoBehaviour:
   upperBound: 0.095
   maxGrassPerChunk: 2000
   cullingDistance: 200
+  cameraFieldOfView: 100
+  enableOnDrawGizmos: 0
 --- !u!1 &1762588445
 GameObject:
   m_ObjectHideFlags: 0
