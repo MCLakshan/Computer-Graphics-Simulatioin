@@ -40,6 +40,7 @@ public class ProceduralGrassGPU : MonoBehaviour
     [SerializeField] private bool enableOnDrawGizmos = true; // Toggle for drawing gizmos
     [SerializeField] private bool enableFrustumCulling = true; // Toggle for frustum culling
     
+    private Vector2Int _lastPlayerChunk;
     private float maxTerrainHeight; // Max height of terrain for bounds checking
     private float cosHalfFOV;       // For the edge case of frustum culling (prevent crashes)
     
@@ -56,6 +57,10 @@ public class ProceduralGrassGPU : MonoBehaviour
         public bool isGenerated;
         public MaterialPropertyBlock propertyBlock; // Each chunk gets its own property block
         
+        // Optimization: Use a flag to track if chunk is active
+        // This can be used to quickly check if chunk should be rendered
+        public bool isActive;
+        
         public GrassChunk(Vector2Int coord)
         {
             coordinate = coord;
@@ -64,6 +69,7 @@ public class ProceduralGrassGPU : MonoBehaviour
             grassCount = 0;
             isGenerated = false;
             propertyBlock = new MaterialPropertyBlock(); // Create property block for this chunk
+            isActive = true; // Initially active
         }
     }
     
@@ -89,7 +95,15 @@ public class ProceduralGrassGPU : MonoBehaviour
     
     void Update()
     {
-        UpdateGrassChunks();
+        
+        // OPTIMIZATION: Only update chunks if player has moved to a new chunk
+        var currentChunk = WorldToChunkCoord(player.position);
+        if (_lastPlayerChunk != currentChunk)
+        {
+            UpdateGrassChunks();
+            _lastPlayerChunk = currentChunk;
+        }
+        
         RenderVisibleGrass();
     }
     
@@ -107,23 +121,32 @@ public class ProceduralGrassGPU : MonoBehaviour
             {
                 Vector2Int chunkCoord = new Vector2Int(playerChunk.x + x, playerChunk.y + z);
                 
-                // Check if chunk should be loaded
-                float distanceToChunk = Vector2.Distance(playerChunk, chunkCoord) * chunkSize;
-                
-                if (distanceToChunk <= cullingDistance)
+                // Check if chunk should be loaded 
+                // OPTIMIZATION: Use squared distance to avoid sqrt calculation for performance
+                float sqrDistanceToChunk = (chunkCoord - playerChunk).sqrMagnitude * chunkSize * chunkSize;
+                float sqrCullingDistance = cullingDistance * cullingDistance;
+
+                if (sqrDistanceToChunk <= sqrCullingDistance)
                 {
                     // Generate chunk if not exists
-                    if (!grassChunks.ContainsKey(chunkCoord))
+                    if (grassChunks.ContainsKey(chunkCoord))
                     {
+                        // OPTIMIZATION: Reuse existing chunk if it exists
+                        grassChunks[chunkCoord].isActive = true; // Mark as active
+                    }
+                    else
+                    {
+                        // Generate new chunk if it doesn't exist
                         GenerateGrassChunk(chunkCoord);
                     }
                 }
                 else
                 {
-                    // Remove distant chunks to save memory
                     if (grassChunks.ContainsKey(chunkCoord))
                     {
-                        grassChunks.Remove(chunkCoord);
+                        // OPTIMIZATION: Mark as inactive if within culling distance
+                        // This allows us to skip rendering it if not in FOV
+                        grassChunks[chunkCoord].isActive = false;
                     }
                 }
             }
@@ -331,7 +354,8 @@ public class ProceduralGrassGPU : MonoBehaviour
         foreach (var kvp in grassChunks)
         {
             GrassChunk chunk = kvp.Value;
-            if (!chunk.isGenerated || chunk.grassCount == 0) continue;
+            // OPTIMIZATION: Skip chunks that are not generated, have no grass, or are inactive
+            if (!chunk.isGenerated || chunk.grassCount == 0 || !chunk.isActive) continue;
             
             // Always render the player's chunk and its 8 neighbors
             if (chunk.coordinate == playerChunk ||

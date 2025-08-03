@@ -233,14 +233,14 @@ MonoBehaviour:
   blueNoiseTexture: {fileID: 2800000, guid: d6a9ba5e69770dd42a4d43bc754a7f4d, type: 3}
   noiseScale: 0.1
   noiseThreshold: 0.3
-  grassDensity: 1000
+  grassDensity: 500
   minGrassScale: 0.8
   maxGrassScale: 1.2
-  chunksToRender: 10
-  chunkSize: 50
+  chunksToRender: 6
+  chunkSize: 32
   lowerBound: 0.095
   upperBound: 0.3
-  maxGrassPerChunk: 2000
+  maxGrassPerChunk: 1000
   cullingDistance: 300
   cameraFieldOfView: 100
   enableOnDrawGizmos: 0
@@ -754,14 +754,14 @@ MonoBehaviour:
   blueNoiseTexture: {fileID: 2800000, guid: d6a9ba5e69770dd42a4d43bc754a7f4d, type: 3}
   noiseScale: 0.1
   noiseThreshold: 0.3
-  grassDensity: 1000
+  grassDensity: 500
   minGrassScale: 0.8
   maxGrassScale: 1.2
-  chunksToRender: 10
-  chunkSize: 50
+  chunksToRender: 2
+  chunkSize: 32
   lowerBound: 0.095
   upperBound: 0.3
-  maxGrassPerChunk: 2000
+  maxGrassPerChunk: 1000
   cullingDistance: 100
   cameraFieldOfView: 100
   enableOnDrawGizmos: 0
@@ -819,14 +819,14 @@ MonoBehaviour:
   blueNoiseTexture: {fileID: 2800000, guid: d6a9ba5e69770dd42a4d43bc754a7f4d, type: 3}
   noiseScale: 0.1
   noiseThreshold: 0.3
-  grassDensity: 200
+  grassDensity: 100
   minGrassScale: 0.8
   maxGrassScale: 1.2
-  chunksToRender: 10
-  chunkSize: 50
+  chunksToRender: 2
+  chunkSize: 32
   lowerBound: 0.022
   upperBound: 0.095
-  maxGrassPerChunk: 2000
+  maxGrassPerChunk: 1000
   cullingDistance: 100
   cameraFieldOfView: 100
   enableOnDrawGizmos: 0
@@ -1236,14 +1236,14 @@ MonoBehaviour:
   blueNoiseTexture: {fileID: 2800000, guid: d6a9ba5e69770dd42a4d43bc754a7f4d, type: 3}
   noiseScale: 0.1
   noiseThreshold: 0.3
-  grassDensity: 200
+  grassDensity: 100
   minGrassScale: 0.8
   maxGrassScale: 1.2
-  chunksToRender: 10
-  chunkSize: 50
+  chunksToRender: 2
+  chunkSize: 32
   lowerBound: 0.022
   upperBound: 0.095
-  maxGrassPerChunk: 2000
+  maxGrassPerChunk: 1000
   cullingDistance: 100
   cameraFieldOfView: 100
   enableOnDrawGizmos: 0
@@ -1816,7 +1816,7 @@ Transform:
   m_GameObject: {fileID: 844810610}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 536, y: 140, z: 2257}
+  m_LocalPosition: {x: 368, y: 140, z: 2375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2431,14 +2431,14 @@ MonoBehaviour:
   blueNoiseTexture: {fileID: 2800000, guid: d6a9ba5e69770dd42a4d43bc754a7f4d, type: 3}
   noiseScale: 0.1
   noiseThreshold: 0.3
-  grassDensity: 1000
+  grassDensity: 500
   minGrassScale: 0.8
   maxGrassScale: 1.2
-  chunksToRender: 10
-  chunkSize: 50
+  chunksToRender: 2
+  chunkSize: 32
   lowerBound: 0.095
   upperBound: 0.3
-  maxGrassPerChunk: 2000
+  maxGrassPerChunk: 1000
   cullingDistance: 100
   cameraFieldOfView: 100
   enableOnDrawGizmos: 0
@@ -2496,14 +2496,14 @@ MonoBehaviour:
   blueNoiseTexture: {fileID: 2800000, guid: d6a9ba5e69770dd42a4d43bc754a7f4d, type: 3}
   noiseScale: 0.1
   noiseThreshold: 0.3
-  grassDensity: 2000
+  grassDensity: 1000
   minGrassScale: 0.8
   maxGrassScale: 1.2
-  chunksToRender: 10
-  chunkSize: 50
+  chunksToRender: 6
+  chunkSize: 32
   lowerBound: 0.022
   upperBound: 0.095
-  maxGrassPerChunk: 2000
+  maxGrassPerChunk: 1000
   cullingDistance: 300
   cameraFieldOfView: 100
   enableOnDrawGizmos: 0
@@ -2561,14 +2561,14 @@ MonoBehaviour:
   blueNoiseTexture: {fileID: 2800000, guid: d6a9ba5e69770dd42a4d43bc754a7f4d, type: 3}
   noiseScale: 0.1
   noiseThreshold: 0.3
-  grassDensity: 500
+  grassDensity: 100
   minGrassScale: 0.8
   maxGrassScale: 1.2
-  chunksToRender: 10
-  chunkSize: 50
+  chunksToRender: 8
+  chunkSize: 32
   lowerBound: 0.3
   upperBound: 0.6
-  maxGrassPerChunk: 2000
+  maxGrassPerChunk: 1000
   cullingDistance: 300
   cameraFieldOfView: 100
   enableOnDrawGizmos: 0
@@ -4641,14 +4641,14 @@ MonoBehaviour:
   blueNoiseTexture: {fileID: 2800000, guid: d6a9ba5e69770dd42a4d43bc754a7f4d, type: 3}
   noiseScale: 0.1
   noiseThreshold: 0.3
-  grassDensity: 50
+  grassDensity: 10
   minGrassScale: 0.8
   maxGrassScale: 1.2
-  chunksToRender: 10
-  chunkSize: 50
+  chunksToRender: 2
+  chunkSize: 32
   lowerBound: 0.022
   upperBound: 0.095
-  maxGrassPerChunk: 2000
+  maxGrassPerChunk: 1000
   cullingDistance: 100
   cameraFieldOfView: 100
   enableOnDrawGizmos: 0
