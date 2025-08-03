@@ -38,6 +38,7 @@ public class ProceduralGrassGPU : MonoBehaviour
     // Debugging variables
     [Header("Debugging")]
     [SerializeField] private bool enableOnDrawGizmos = true; // Toggle for drawing gizmos
+    [SerializeField] private bool enableFrustumCulling = true; // Toggle for frustum culling
     
     private float maxTerrainHeight; // Max height of terrain for bounds checking
     private float cosHalfFOV;       // For the edge case of frustum culling (prevent crashes)
@@ -353,8 +354,22 @@ public class ProceduralGrassGPU : MonoBehaviour
             Vector3 chunkCenter = ChunkCoordToWorldPos(chunk.coordinate) + Vector3.one * chunkSize * 0.5f;
             float distanceToPlayer = Vector3.Distance(playerPos, chunkCenter);
             
-            if (distanceToPlayer <= cullingDistance && AngleBasedFrustumCullingAngleCheck(chunkCenter))
+            if (distanceToPlayer <= cullingDistance && AngleBasedFrustumCullingAngleCheck(chunkCenter) && enableFrustumCulling)
             {
+                // Render this chunk if within culling distance and FOV
+                // Use the chunk's own property block (colors already set during generation)
+                Graphics.DrawMeshInstanced(
+                    grassMesh,
+                    0,
+                    grassMaterial,
+                    chunk.transforms,
+                    chunk.grassCount,
+                    chunk.propertyBlock
+                );
+            }
+            else if (!enableFrustumCulling) 
+            {
+                // If frustum culling is disabled, render all chunks
                 // Use the chunk's own property block (colors already set during generation)
                 Graphics.DrawMeshInstanced(
                     grassMesh,
