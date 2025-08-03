@@ -9,9 +9,6 @@ public class TerrainObjectSpawner : MonoBehaviour
 {
     [Header("References")]
     public Terrain terrain;
-    
-    [Tooltip("Prefab to spawn (tree, rock, etc.)")]
-    public GameObject prefabToSpawn;
 
     [Header("Blue Noise Settings")]
     [Tooltip("Blue noise texture (PNG) for natural distribution - maps 1:1 with terrain size")]
@@ -20,22 +17,9 @@ public class TerrainObjectSpawner : MonoBehaviour
     [Range(0f, 1f)]
     [Tooltip("Only spawn where noise > this value. Higher = fewer objects")]
     public float noiseThreshold = 0.5f;
-
-    [Header("Spawn Settings")]
-    [Tooltip("Exact number of objects to spawn")]
-    public int spawnCount = 1000;
-
-    [Tooltip("Minimum distance between objects")]
-    public float minDistanceBetweenObjects = 5f;
-
-    [Header("Height Constraints (0-1 percentages)")]
-    [Range(0f, 1f)]
-    [Tooltip("Don't spawn below this height percentage (0 = lowest, 1 = highest)")]
-    public float minHeightPercent = 0.2f;
-
-    [Range(0f, 1f)]
-    [Tooltip("Don't spawn above this height percentage (0 = lowest, 1 = highest)")]
-    public float maxHeightPercent = 0.8f;
+    
+    [Header("Spawn Objects")]
+    [SerializeField] ObjectToSpawn[] listOfObjectsToSpawn;
 
     [Header("Randomization")]
     [Tooltip("Random rotation on Y axis")]
@@ -51,11 +35,10 @@ public class TerrainObjectSpawner : MonoBehaviour
     [SerializeField] private Slider spawnCountSlider;
 
     [Header("Debug")]
-    public bool showDebugInfo = true;
     public bool visualizeSpawnArea = false;
     
     // Private variables
-    private List<Vector3> spawnedPositions = new List<Vector3>();
+    private List<(Vector3, SpawnType)> spawnedPositions = new List<(Vector3, SpawnType)>();
     private List<GameObject> spawnedObjects = new List<GameObject>();
     private bool isSpawning = false;
     
@@ -63,7 +46,7 @@ public class TerrainObjectSpawner : MonoBehaviour
     public void SpawnObjects()
     {
         if (isSpawning) return;
-        if (terrain == null || prefabToSpawn == null) return;
+        if (terrain == null) return;
         
         // UI slider for spawn count
         spawnCountSlider.value = 0f;
@@ -84,62 +67,79 @@ public class TerrainObjectSpawner : MonoBehaviour
         Vector3 terrainPos = terrain.transform.position;
         int heightmapRes = terrain.terrainData.heightmapResolution;
         
-        int spawnedCount = 0;
-        int attempts = 0;
-        int maxAttempts = spawnCount * 10; // Prevent infinite loop
-        
-        if (showDebugInfo)
-            Debug.Log($"Starting to spawn {spawnCount} objects");
-        
-        // Keep spawning until we reach exact count
-        while (spawnedCount < spawnCount && attempts < maxAttempts)
+        // Track Spawned count
+        int currentSpawnedCount = 0;
+        int currentAttemptCount = 0;
+        int totalSpawnedCount = 0;
+        foreach (ObjectToSpawn objectToSpawn in listOfObjectsToSpawn)
         {
-            int processedThisFrame = 0;
-            
-            while (processedThisFrame < positionsPerFrame && spawnedCount < spawnCount && attempts < maxAttempts)
-            {
-                // Generate random position
-                int x = Random.Range(0, heightmapRes);
-                int z = Random.Range(0, heightmapRes);
-                
-                // Get height percentage
-                float heightPercent = heightMap[z, x];
-                
-                // Check height constraints
-                if (heightPercent >= minHeightPercent && heightPercent <= maxHeightPercent)
-                {
-                    // Convert to world position
-                    Vector3 worldPos = new Vector3(
-                        terrainPos.x + ((float)x / (heightmapRes - 1)) * terrainSize.x,
-                        terrainPos.y + heightPercent * terrainSize.y,
-                        terrainPos.z + ((float)z / (heightmapRes - 1)) * terrainSize.z
-                    );
-                    
-                    // Check blue noise and distance constraints
-                    if (ShouldSpawnAtPosition(worldPos) && IsValidPosition(worldPos))
-                    {
-                        SpawnObjectAt(worldPos);
-                        spawnedCount++;
-                    }
-                }
-                
-                // Update UI
-                poggressBarText.text = "Generating "+ spawningObjectName + " : Attempts - " + attempts + " / Spawned - " + spawnedCount + " / Target - " + spawnCount;
-                spawnCountSlider.value = (float)spawnedCount / spawnCount;
-                
-                attempts++;
-                processedThisFrame++;
-            }
-            
-            yield return null; // Wait one frame
+            totalSpawnedCount += objectToSpawn.SpawnCount;
         }
         
-        if (showDebugInfo)
+        // for each object type Do spawn
+        foreach (var objectToSpawn in listOfObjectsToSpawn)
         {
-            if (spawnedCount == spawnCount)
-                Debug.Log($"Successfully spawned exactly {spawnedCount} objects in {attempts} attempts");
-            else
-                Debug.LogWarning($"Could only spawn {spawnedCount} out of {spawnCount} objects after {attempts} attempts. Try adjusting constraints or increasing terrain size.");
+            // Skip if not allowed to spawn
+            if (!objectToSpawn.canSpawn)
+            {
+                continue;
+            }
+            
+            int spawnedCount = 0;
+            int attempts = 0;
+            int spawnCount = objectToSpawn.SpawnCount;
+            GameObject prefabToSpawn = objectToSpawn.Prefab;
+            float minHeightPercent = objectToSpawn.MinHeightPercent;
+            float maxHeightPercent = objectToSpawn.MaxHeightPercent;
+            float minDistanceBetweenObjects = objectToSpawn.MindistanceBetweenType;
+            SpawnType spawnType = objectToSpawn.Type;
+            int maxAttempts = spawnCount * 10; // Prevent infinite loop
+            
+            // Keep spawning until we reach exact count
+            while (spawnedCount < spawnCount && attempts < maxAttempts)
+            {
+                int processedThisFrame = 0;
+            
+                while (processedThisFrame < positionsPerFrame && spawnedCount < spawnCount && attempts < maxAttempts)
+                {
+                    // Generate random position
+                    int x = Random.Range(0, heightmapRes);
+                    int z = Random.Range(0, heightmapRes);
+                
+                    // Get height percentage
+                    float heightPercent = heightMap[z, x];
+                
+                    // Check height constraints
+                    if (heightPercent >= minHeightPercent && heightPercent <= maxHeightPercent)
+                    {
+                        // Convert to world position
+                        Vector3 worldPos = new Vector3(
+                            terrainPos.x + ((float)x / (heightmapRes - 1)) * terrainSize.x,
+                            terrainPos.y + heightPercent * terrainSize.y,
+                            terrainPos.z + ((float)z / (heightmapRes - 1)) * terrainSize.z
+                        );
+                    
+                        // Check blue noise and distance constraints
+                        if (ShouldSpawnAtPosition(worldPos) && IsValidPosition(worldPos, minDistanceBetweenObjects, spawnType))
+                        {
+                            SpawnObjectAt(worldPos, spawnType, prefabToSpawn);
+                            spawnedCount++;
+                            currentSpawnedCount++;
+                        }
+                    }
+                
+                    // Update UI
+                    poggressBarText.text = "Generating "+ spawningObjectName + " : Attempts - " + currentAttemptCount + " / Spawned - " + currentSpawnedCount + " / Target - " + totalSpawnedCount;
+                    spawnCountSlider.value = (float)currentSpawnedCount / totalSpawnedCount;
+                
+                    attempts++;
+                    currentAttemptCount++;
+                    processedThisFrame++;
+                }
+            
+                yield return null; // Wait one frame
+            }
+            
         }
             
         isSpawning = false;
@@ -174,25 +174,25 @@ public class TerrainObjectSpawner : MonoBehaviour
         return noiseIntensity > noiseThreshold;
     }
     
-    bool IsValidPosition(Vector3 position)
+    bool IsValidPosition(Vector3 position, float minDistanceBetweenObjects, SpawnType spawnType)
     {
         // Check distance to other spawned objects
-        foreach (Vector3 existingPos in spawnedPositions)
+        foreach (var (pos, type) in spawnedPositions)
         {
-            if (Vector3.Distance(position, existingPos) < minDistanceBetweenObjects)
+            if (Vector3.Distance(position, pos) < minDistanceBetweenObjects && type == spawnType)
                 return false;
         }
         return true;
     }
     
-    void SpawnObjectAt(Vector3 position)
+    void SpawnObjectAt(Vector3 position, SpawnType spawnType, GameObject prefabToSpawn)
     {
         Quaternion rotation = randomRotation ? Quaternion.Euler(0, Random.Range(0, 360), 0) : Quaternion.identity;
         
         GameObject spawnedObject = Instantiate(prefabToSpawn, position, rotation);
         spawnedObject.transform.SetParent(this.transform);
         
-        spawnedPositions.Add(position);
+        spawnedPositions.Add((position, spawnType));
         spawnedObjects.Add(spawnedObject);
     }
     
@@ -222,17 +222,42 @@ public class TerrainObjectSpawner : MonoBehaviour
         Gizmos.DrawWireCube(center, terrainSize);
         
         Gizmos.color = Color.red;
-        foreach (Vector3 pos in spawnedPositions)
+        foreach (var (pos, type ) in spawnedPositions)
         {
-            Gizmos.DrawWireSphere(pos, minDistanceBetweenObjects * 0.5f);
+            Gizmos.DrawWireSphere(pos, 1f);
         }
     }
+}
+
+[System.Serializable]
+class ObjectToSpawn
+{
+    // All the properties that need to spawn an object
+    public string Name;
+    public SpawnType Type;
+    public GameObject Prefab;
+    public int SpawnCount;
+    public float MindistanceBetweenType;
+    [Range(0f, 1f)]
+    public float MinHeightPercent;
+    [Range(0f, 1f)]
+    public float MaxHeightPercent;
+    public bool canSpawn = true;
+}
+
+[System.Serializable]
+public enum SpawnType
+{
+    Grass_Tree,
+    Forest_Tree,
+    Rock,
+    Bush,
 }
 
 /*
 SIMPLE USAGE:
 1. Assign Terrain to "Terrain" field
-2. Assign prefab to "Prefab To Spawn" 
+2. Assign prefab to "Prefab To Spawn"
 3. Assign blue noise texture (optional)
 4. Set height constraints as percentages (0-1)
 5. Click "Spawn Objects"

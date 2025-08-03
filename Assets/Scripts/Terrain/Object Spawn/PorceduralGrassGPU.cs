@@ -88,7 +88,7 @@ public class ProceduralGrassGPU : MonoBehaviour
         if (player == null) return;
         
         Vector2Int playerChunk = WorldToChunkCoord(player.position);
-        Debug.Log($"Player is in chunk: {playerChunk}");
+        //Debug.Log($"Player is in chunk: {playerChunk}");
         
         // Generate chunks around player
         for (int x = -chunksToRender; x <= chunksToRender; x++)
@@ -212,7 +212,7 @@ public class ProceduralGrassGPU : MonoBehaviour
         
         grassChunks.Add(chunkCoord, newChunk);
         
-        Debug.Log($"Generated grass chunk {chunkCoord} with {newChunk.grassCount} grass blades");
+        // Debug.Log($"Generated grass chunk {chunkCoord} with {newChunk.grassCount} grass blades");
     }
     
     bool ShouldPlaceGrassAt(Vector3 worldPos)

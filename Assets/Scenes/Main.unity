@@ -240,7 +240,7 @@ MonoBehaviour:
   lowerBound: 0.095
   upperBound: 0.3
   maxGrassPerChunk: 2000
-  cullingDistance: 200
+  cullingDistance: 500
 --- !u!1 &22661589
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,6 +286,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 98610619}
+  - component: {fileID: 98610620}
   m_Layer: 0
   m_Name: '[ TREES ]'
   m_TagString: Untagged
@@ -305,12 +306,151 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 929317498}
-  - {fileID: 1670907079}
-  - {fileID: 1270603588}
+  m_Children: []
   m_Father: {fileID: 693639553}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &98610620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 98610618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59cc2cf4cf4f5a146a714011f8f1a732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrain: {fileID: 1072173605}
+  blueNoiseTexture: {fileID: 2800000, guid: e7121dd914d72de43b6b00c3c135bb5a, type: 3}
+  noiseThreshold: 0.5
+  listOfObjectsToSpawn:
+  - Name: '[ GRASS ] - Large Pine Tree 1'
+    Type: 0
+    Prefab: {fileID: 6948803800378873062, guid: f9b3b15e2aa420a4094f0734a4b10dc8, type: 3}
+    SpawnCount: 500
+    MindistanceBetweenType: 5
+    MinHeightPercent: 0.022
+    MaxHeightPercent: 0.095
+    canSpawn: 1
+  - Name: '[ GRASS ] - Large Pine Tree 2'
+    Type: 0
+    Prefab: {fileID: 4292624513649165816, guid: 81d0bfaceee996b4badf04a58c5cb008, type: 3}
+    SpawnCount: 500
+    MindistanceBetweenType: 5
+    MinHeightPercent: 0.022
+    MaxHeightPercent: 0.095
+    canSpawn: 1
+  - Name: '[ GRASS ] - Lalic Single Tree 1'
+    Type: 0
+    Prefab: {fileID: 8705127756659204674, guid: 77ae1aa4ef1092148954fe6c9328c13d, type: 3}
+    SpawnCount: 500
+    MindistanceBetweenType: 5
+    MinHeightPercent: 0.022
+    MaxHeightPercent: 0.095
+    canSpawn: 1
+  - Name: '[ GRASS ] - Lilac Bush 1'
+    Type: 0
+    Prefab: {fileID: 1883170641425228574, guid: 4c0b8208976ee3e49a67c44caecad8e2, type: 3}
+    SpawnCount: 500
+    MindistanceBetweenType: 5
+    MinHeightPercent: 0.022
+    MaxHeightPercent: 0.095
+    canSpawn: 1
+  - Name: '[ GRASS ] - Lilac Bush 3'
+    Type: 0
+    Prefab: {fileID: 833014445901549575, guid: a138659f48e6cd747a1299de327e0088, type: 3}
+    SpawnCount: 500
+    MindistanceBetweenType: 5
+    MinHeightPercent: 0.022
+    MaxHeightPercent: 0.095
+    canSpawn: 1
+  - Name: '[ FOREST ] - Large Pine Tree 1'
+    Type: 1
+    Prefab: {fileID: 6948803800378873062, guid: f9b3b15e2aa420a4094f0734a4b10dc8, type: 3}
+    SpawnCount: 1000
+    MindistanceBetweenType: 3
+    MinHeightPercent: 0.105
+    MaxHeightPercent: 0.3
+    canSpawn: 1
+  - Name: '[ FOREST ] - Large Pine Tree 2'
+    Type: 1
+    Prefab: {fileID: 4292624513649165816, guid: 81d0bfaceee996b4badf04a58c5cb008, type: 3}
+    SpawnCount: 1000
+    MindistanceBetweenType: 3
+    MinHeightPercent: 0.105
+    MaxHeightPercent: 0.3
+    canSpawn: 1
+  - Name: '[ FOREST ] - Medium Pine Tree 2'
+    Type: 1
+    Prefab: {fileID: 4292624513649165816, guid: 81d0bfaceee996b4badf04a58c5cb008, type: 3}
+    SpawnCount: 500
+    MindistanceBetweenType: 3
+    MinHeightPercent: 0.105
+    MaxHeightPercent: 0.3
+    canSpawn: 1
+  - Name: '[ FOREST ] - Medium Pine Tree 3'
+    Type: 1
+    Prefab: {fileID: 2772202851513751404, guid: efa056c6d11f1c14fac7afd034ce4c5e, type: 3}
+    SpawnCount: 500
+    MindistanceBetweenType: 3
+    MinHeightPercent: 0.105
+    MaxHeightPercent: 0.3
+    canSpawn: 1
+  - Name: '[ FOREST ] - Pine Sapling 3 (small tree)'
+    Type: 1
+    Prefab: {fileID: 3138988572906740420, guid: 7eb7c431de794fe4581d554cf42679fa, type: 3}
+    SpawnCount: 1000
+    MindistanceBetweenType: 3
+    MinHeightPercent: 0.105
+    MaxHeightPercent: 0.3
+    canSpawn: 1
+  - Name: '[ FOREST ] - Lilac Bush 1'
+    Type: 1
+    Prefab: {fileID: 1883170641425228574, guid: 4c0b8208976ee3e49a67c44caecad8e2, type: 3}
+    SpawnCount: 1000
+    MindistanceBetweenType: 5
+    MinHeightPercent: 0.105
+    MaxHeightPercent: 0.3
+    canSpawn: 1
+  - Name: '[ FOREST ] - Lilac Bush 3'
+    Type: 1
+    Prefab: {fileID: 833014445901549575, guid: a138659f48e6cd747a1299de327e0088, type: 3}
+    SpawnCount: 1000
+    MindistanceBetweenType: 5
+    MinHeightPercent: 0.105
+    MaxHeightPercent: 0.3
+    canSpawn: 1
+  - Name: '[ FOREST ] - Lilac Single Tree 1'
+    Type: 1
+    Prefab: {fileID: 8705127756659204674, guid: 77ae1aa4ef1092148954fe6c9328c13d, type: 3}
+    SpawnCount: 1000
+    MindistanceBetweenType: 2
+    MinHeightPercent: 0.105
+    MaxHeightPercent: 0.3
+    canSpawn: 1
+  - Name: '[ FOREST ] - Lilac Single Tree 2'
+    Type: 1
+    Prefab: {fileID: 3643364694243093372, guid: 9dacd38a75f19964ba7d98ec9aebdfa4, type: 3}
+    SpawnCount: 1000
+    MindistanceBetweenType: 2
+    MinHeightPercent: 0.105
+    MaxHeightPercent: 0.3
+    canSpawn: 1
+  - Name: '[ FOREST ] - Lilac Single Tree 3'
+    Type: 1
+    Prefab: {fileID: 1605009373134017249, guid: a1bf2fa38a7edcf46af56a6acda997d5, type: 3}
+    SpawnCount: 1000
+    MindistanceBetweenType: 2
+    MinHeightPercent: 0.105
+    MaxHeightPercent: 0.3
+    canSpawn: 1
+  randomRotation: 1
+  positionsPerFrame: 100
+  spawningObjectName: Trees
+  poggressBarText: {fileID: 1272422918}
+  spawnCountSlider: {fileID: 1410970994}
+  visualizeSpawnArea: 1
 --- !u!1 &101460514
 GameObject:
   m_ObjectHideFlags: 0
@@ -617,7 +757,7 @@ MonoBehaviour:
   lowerBound: 0.095
   upperBound: 0.3
   maxGrassPerChunk: 2000
-  cullingDistance: 200
+  cullingDistance: 100
 --- !u!1 &226611696
 GameObject:
   m_ObjectHideFlags: 0
@@ -850,6 +990,42 @@ Transform:
   - {fileID: 693639553}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &384501550
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 384501551}
+  m_Layer: 0
+  m_Name: FPS Count
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &384501551
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384501550}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 674777571}
+  m_Father: {fileID: 843296172}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -50}
+  m_SizeDelta: {x: 0, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &430420435 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4135013735270702856, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
@@ -1192,6 +1368,142 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 665368814}
   m_CullTransparentMesh: 1
+--- !u!1 &674777570
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 674777571}
+  - component: {fileID: 674777573}
+  - component: {fileID: 674777572}
+  m_Layer: 0
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &674777571
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674777570}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 384501551}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -150, y: -50}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &674777572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674777570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 'FPS : 0'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4291493632
+  m_fontColor: {r: 0, g: 1, b: 0.79230404, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 4
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &674777573
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674777570}
+  m_CullTransparentMesh: 1
 --- !u!1 &693639552
 GameObject:
   m_ObjectHideFlags: 0
@@ -1525,8 +1837,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 384501551}
   - {fileID: 128595473}
   - {fileID: 522694276}
+  - {fileID: 1762588446}
   m_Father: {fileID: 1940748033}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1622,7 +1936,7 @@ Transform:
   m_GameObject: {fileID: 844810610}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 709, y: 59, z: 746}
+  m_LocalPosition: {x: 709, y: 140, z: 1744}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1712,8 +2026,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 929317499}
-        m_TargetAssemblyTypeName: TerrainObjectSpawnManager, Assembly-CSharp
+      - m_Target: {fileID: 98610620}
+        m_TargetAssemblyTypeName: TerrainObjectSpawner, Assembly-CSharp
         m_MethodName: SpawnObjects
         m_Mode: 1
         m_Arguments:
@@ -1762,52 +2076,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 925450157}
   m_CullTransparentMesh: 1
---- !u!1 &929317497
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 929317498}
-  - component: {fileID: 929317499}
-  m_Layer: 0
-  m_Name: '[ MANAGER ]'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &929317498
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 929317497}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 98610619}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &929317499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 929317497}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc062af4ecf1c794885ba1e4c61d1d3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  largePineTrees_Grass: {fileID: 1670907080}
-  largePineTrees_Forest: {fileID: 1270603589}
 --- !u!1 &1005884603
 GameObject:
   m_ObjectHideFlags: 0
@@ -2290,7 +2558,7 @@ MonoBehaviour:
   lowerBound: 0.095
   upperBound: 0.3
   maxGrassPerChunk: 2000
-  cullingDistance: 200
+  cullingDistance: 100
 --- !u!1 &1131744147
 GameObject:
   m_ObjectHideFlags: 0
@@ -2351,7 +2619,7 @@ MonoBehaviour:
   lowerBound: 0.022
   upperBound: 0.095
   maxGrassPerChunk: 2000
-  cullingDistance: 200
+  cullingDistance: 500
 --- !u!1 &1157357563
 GameObject:
   m_ObjectHideFlags: 0
@@ -2412,7 +2680,7 @@ MonoBehaviour:
   lowerBound: 0.3
   upperBound: 0.6
   maxGrassPerChunk: 2000
-  cullingDistance: 200
+  cullingDistance: 500
 --- !u!1 &1201517224
 GameObject:
   m_ObjectHideFlags: 0
@@ -2443,7 +2711,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  size: {x: 4099.01, y: 378.5975, z: 4099.01}
+  size: {x: 4099.01, y: 400.90723, z: 4099.01}
   overrideRendererFilters: 0
   minRendererVolumeSize: 0.1
   objectLayerMask:
@@ -2483,7 +2751,7 @@ Transform:
   m_GameObject: {fileID: 1201517224}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2048, y: 187.79375, z: 2048}
+  m_LocalPosition: {x: 2048, y: 198.94861, z: 2048}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2697,7 +2965,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1242885305}
   m_CullTransparentMesh: 1
---- !u!1 &1270603587
+--- !u!1 &1244636536
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2705,57 +2973,166 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1270603588}
-  - component: {fileID: 1270603589}
+  - component: {fileID: 1244636537}
+  - component: {fileID: 1244636539}
+  - component: {fileID: 1244636538}
   m_Layer: 0
-  m_Name: ----- Large Pine Trees - Forest -----
+  m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1270603588
-Transform:
+--- !u!224 &1244636537
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1270603587}
-  serializedVersion: 2
+  m_GameObject: {fileID: 1244636536}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 98610619}
+  m_Father: {fileID: 1762588446}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1270603589
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1244636538
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1270603587}
+  m_GameObject: {fileID: 1244636536}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59cc2cf4cf4f5a146a714011f8f1a732, type: 3}
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrain: {fileID: 1072173605}
-  prefabToSpawn: {fileID: 6948803800378873062, guid: f9b3b15e2aa420a4094f0734a4b10dc8, type: 3}
-  blueNoiseTexture: {fileID: 2800000, guid: e7121dd914d72de43b6b00c3c135bb5a, type: 3}
-  noiseThreshold: 0.5
-  spawnCount: 3000
-  minDistanceBetweenObjects: 4
-  minHeightPercent: 0.095
-  maxHeightPercent: 0.3
-  randomRotation: 1
-  positionsPerFrame: 100
-  spawningObjectName: Large Pine Trees
-  poggressBarText: {fileID: 1272422918}
-  spawnCountSlider: {fileID: 1410970994}
-  showDebugInfo: 1
-  visualizeSpawnArea: 1
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: PLAY
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 50
+  m_fontSizeBase: 50
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1244636539
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244636536}
+  m_CullTransparentMesh: 1
+--- !u!1 &1266906199
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1266906200}
+  m_Layer: 0
+  m_Name: '[ MANAGERS ]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1266906200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266906199}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2107633337}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1272422916
 GameObject:
   m_ObjectHideFlags: 0
@@ -3706,65 +4083,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8997996947095583982, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
   m_PrefabInstance: {fileID: 739946087}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1670907078
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1670907079}
-  - component: {fileID: 1670907080}
-  m_Layer: 0
-  m_Name: ----- Large Pine Trees - Grass -----
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1670907079
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1670907078}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 98610619}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1670907080
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1670907078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59cc2cf4cf4f5a146a714011f8f1a732, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  terrain: {fileID: 1072173605}
-  prefabToSpawn: {fileID: 6948803800378873062, guid: f9b3b15e2aa420a4094f0734a4b10dc8, type: 3}
-  blueNoiseTexture: {fileID: 2800000, guid: e7121dd914d72de43b6b00c3c135bb5a, type: 3}
-  noiseThreshold: 0.5
-  spawnCount: 1000
-  minDistanceBetweenObjects: 5
-  minHeightPercent: 0.022
-  maxHeightPercent: 0.095
-  randomRotation: 1
-  positionsPerFrame: 100
-  spawningObjectName: Large Pine Trees
-  poggressBarText: {fileID: 1272422918}
-  spawnCountSlider: {fileID: 1410970994}
-  showDebugInfo: 1
-  visualizeSpawnArea: 1
 --- !u!4 &1696499538 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
@@ -4303,6 +4621,175 @@ MonoBehaviour:
   upperBound: 0.095
   maxGrassPerChunk: 2000
   cullingDistance: 200
+--- !u!1 &1762588445
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1762588446}
+  - component: {fileID: 1762588449}
+  - component: {fileID: 1762588448}
+  - component: {fileID: 1762588447}
+  m_Layer: 0
+  m_Name: Play Button
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1762588446
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762588445}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1244636537}
+  m_Father: {fileID: 843296172}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -341}
+  m_SizeDelta: {x: 322.1963, y: 80.976}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1762588447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762588445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1762588448}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 522694275}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1728847684}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 844810610}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1762588445}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1762588448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762588445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.28704524, g: 0.7830189, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1762588449
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762588445}
+  m_CullTransparentMesh: 1
 --- !u!1 &1773854404
 GameObject:
   m_ObjectHideFlags: 0
@@ -4458,6 +4945,58 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2107633336
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2107633337}
+  - component: {fileID: 2107633338}
+  m_Layer: 0
+  m_Name: Mng_FpsCounter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2107633337
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107633336}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1266906200}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2107633338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107633336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e3f3b5ab0c35544ca7e162ac1fbe0a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fpsText: {fileID: 674777572}
+  updateInterval: 0.5
+  showFPS: 1
+  goodFpsColor: {r: 0, g: 1, b: 0, a: 1}
+  averageFpsColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  badFpsColor: {r: 1, g: 0, b: 0, a: 1}
+  goodFpsThreshold: 60
+  averageFpsThreshold: 30
 --- !u!1 &2142869820
 GameObject:
   m_ObjectHideFlags: 0
@@ -4637,6 +5176,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1728847687}
   - {fileID: 1713114668}
+  - {fileID: 1266906200}
   - {fileID: 357942944}
   - {fileID: 1940748033}
   - {fileID: 844810611}
