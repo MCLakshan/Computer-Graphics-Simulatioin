@@ -4,6 +4,9 @@ using System.Collections.Generic;
 // PROCEDURAL OBJECT GENERATION + GPU INSTANCING + FRUSTUM CULLING
 public class ProceduralObjectSpawnerGPU : MonoBehaviour
 {
+    [Header("GPU Instancing Master")]
+    [SerializeField] private ProceduralObjectSpawnerGPUMaster master; // Reference to the master script
+    
     [Header("Terrain Settings")]
     public Terrain terrain;
     public Transform player;
@@ -74,6 +77,17 @@ public class ProceduralObjectSpawnerGPU : MonoBehaviour
         }
     }
     
+    void OnEnable()
+    {
+        master.onPlayerMovedToNewChunk += UpdateObjectChunks;
+    }
+
+    void OnDisable()
+    {
+        master.onPlayerMovedToNewChunk -= UpdateObjectChunks;
+    }
+
+
     void Start()
     {
         cosHalfFOV = Mathf.Cos(cameraFieldOfView * 0.5f * Mathf.Deg2Rad);
@@ -96,7 +110,7 @@ public class ProceduralObjectSpawnerGPU : MonoBehaviour
     
     void Update()
     {
-        
+        /*
         // OPTIMIZATION: Only update chunks if player has moved to a new chunk
         var currentChunk = WorldToChunkCoord(player.position);
         if (_lastPlayerChunk != currentChunk)
@@ -104,11 +118,13 @@ public class ProceduralObjectSpawnerGPU : MonoBehaviour
             UpdateObjectChunks();
             _lastPlayerChunk = currentChunk;
         }
+        */
         
         RenderVisibleObjects();
     }
     
-    void UpdateObjectChunks()
+    
+    private void UpdateObjectChunks()
     {
         if (player == null) return;
         
@@ -282,7 +298,7 @@ public class ProceduralObjectSpawnerGPU : MonoBehaviour
         return terrain.terrainData.GetSteepness(normalizedPos.x, normalizedPos.y);
     }
     
-    void RenderVisibleObjects()
+    private void RenderVisibleObjects()
     {
         if (player == null) return;
         
