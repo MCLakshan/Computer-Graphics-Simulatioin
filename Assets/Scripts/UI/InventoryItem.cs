@@ -4,10 +4,27 @@ using UnityEngine.UI;
 
 public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    public Item item;
+    
     [Header("UI")]
     [SerializeField] private Image image;
 
     public Transform parentAfterDrag;
+    
+    private void Start()
+    {
+        // Initialize the item image when the script starts
+        if (item != null)
+        {
+            Initialize(item);
+        }
+    }
+    
+    public void Initialize(Item newItem)
+    {
+        item = newItem;
+        image.sprite = newItem.image;
+    }
     
     public void OnBeginDrag(PointerEventData eventData)
     {
