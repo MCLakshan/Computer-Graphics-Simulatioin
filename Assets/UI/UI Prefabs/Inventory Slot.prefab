@@ -150,6 +150,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryItemParentAnchor: {fileID: 7739318318500525106}
+  backgroundImage: {fileID: 757351789755549238}
+  selectedColor: {r: 0.8805031, g: 0.69910824, b: 0.32949638, a: 1}
+  defaultColor: {r: 0.62352943, g: 0.62352943, b: 0.61960787, a: 1}
 --- !u!1 &7535398348220505309
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ public class Mng_InventoryManager : MonoBehaviour
     [SerializeField] private Item testItem; // Debugging item to add to the inventory
     
     private bool isMainInventoryOpen = false;
+    private int selectedHotbarSlot = -1; // -1 means no slot is selected
 
     private void Start()
     {
@@ -28,8 +29,27 @@ public class Mng_InventoryManager : MonoBehaviour
             ToggleMainInventory();
         }
         
+        // Change the selected hotbar slot when the number keys (1-6) are pressed
+        for (int i = 0; i < hotbarSlots.Length; i++)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1 + i))
+            {
+                ChangeSelectedSlot(i);
+            }
+        }
+        
+        // Press "x" to deselect the currently selected hotbar slot
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            if (selectedHotbarSlot >= 0 && selectedHotbarSlot < hotbarSlots.Length)
+            {
+                hotbarSlots[selectedHotbarSlot].Deselect();
+                selectedHotbarSlot = -1; // Reset the selected slot
+            }
+        }
+        
         // Debugging: add an item to the main inventory when the "A" key is pressed
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.L))
         {
             AddItemToMainInventory(testItem);
         }
@@ -78,7 +98,15 @@ public class Mng_InventoryManager : MonoBehaviour
             InventorySlot slot = mainInventorySlots[i];
             var itemInSlot = slot.GetComponentInChildren<InventoryItem>();
             
-            // If the slot is empty, create a new InventoryItem and set it in the slot
+            // If the slot already contains an item and it is stackable, try to add to the existing stack
+            if (itemInSlot != null && itemInSlot.item == item && itemInSlot.itemCount < item.maxStackSize)
+            {
+                itemInSlot.itemCount++;
+                itemInSlot.RefreshCount();
+                return true; // Item was successfully added to an existing stack
+            }
+            
+            // If the slot is empty or contains a different item, or the item is not stackable
             if (itemInSlot == null)
             {
                 // Spawn a new InventoryItem 
@@ -92,4 +120,23 @@ public class Mng_InventoryManager : MonoBehaviour
         }
         return false;
     }
+    
+    // Change the selected hotbar slot
+    private void ChangeSelectedSlot(int newSelectedSlot)
+    {
+        // Deselect the previously selected slot
+        if (selectedHotbarSlot >= 0 && selectedHotbarSlot < hotbarSlots.Length)
+        {
+            hotbarSlots[selectedHotbarSlot].Deselect();
+        }
+        
+        // Select the new slot
+        if (newSelectedSlot >= 0 && newSelectedSlot < hotbarSlots.Length)
+        {
+            hotbarSlots[newSelectedSlot].Select();
+            selectedHotbarSlot = newSelectedSlot;
+        }
+    }
+    
+    
 }

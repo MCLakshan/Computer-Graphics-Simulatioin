@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -8,8 +9,11 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     
     [Header("UI")]
     [SerializeField] private Image image;
+    [SerializeField] private TMP_Text itemCountText;
 
+    [Header("For Dragging Unless Hide in Inspector")]
     public Transform parentAfterDrag;
+    public int itemCount = 1; // Default item count
     
     private void Start()
     {
@@ -24,6 +28,12 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         item = newItem;
         image.sprite = newItem.image;
+        RefreshCount();
+    }
+
+    public void RefreshCount()
+    {
+        itemCountText.text = itemCount.ToString();
     }
     
     public void OnBeginDrag(PointerEventData eventData)

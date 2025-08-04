@@ -10,7 +10,7 @@ public class ProceduralObjectSpawnerGPU : MonoBehaviour
     [Header("Terrain Settings")]
     public Terrain terrain;
     public Transform player;
-    public Transform camera;
+    public Transform playerCamera;
     
     [Header("Object Mesh & Material")]
     public Mesh objectMesh;
@@ -366,14 +366,14 @@ public class ProceduralObjectSpawnerGPU : MonoBehaviour
 
     private bool AngleBasedFrustumCullingAngleCheck(Vector3 chunkPosition)
     {
-        Vector3 camaraForwardDirection = camera.forward;
+        Vector3 camaraForwardDirection = playerCamera.forward;
         Vector2 camaraForwardDirection2D = new Vector2(camaraForwardDirection.x, camaraForwardDirection.z).normalized;
-        Vector3 camaraPosition = camera.position;
+        Vector3 camaraPosition = playerCamera.position;
         Vector2 camaraPosition2D = new Vector2(camaraPosition.x, camaraPosition.z);
         Vector2 chunkPosition2D = new Vector2(chunkPosition.x, chunkPosition.z);
         Vector2 directionToChunk = (chunkPosition2D - camaraPosition2D).normalized;
         float dotProduct = Vector2.Dot(camaraForwardDirection2D, directionToChunk);
-        return dotProduct > cosHalfFOV; // Check if chunk is within camera FOV
+        return dotProduct > cosHalfFOV; // Check if chunk is within playerCamera FOV
     }
     
     
@@ -382,13 +382,13 @@ public class ProceduralObjectSpawnerGPU : MonoBehaviour
     void OnDrawGizmos()
     {
         if (!enableOnDrawGizmos) return; // Skip if gizmos are disabled
-        if (camera == null) return;
+        if (playerCamera == null) return;
         
         // Set gizmo color for FOV visualization
         Gizmos.color = Color.yellow;
         
-        Vector3 cameraPos = camera.position;
-        Vector3 cameraForward = camera.forward;
+        Vector3 cameraPos = playerCamera.position;
+        Vector3 cameraForward = playerCamera.forward;
         
         // Calculate the FOV angle in radians
         float halfFOVRadians = cameraFieldOfView * 0.5f * Mathf.Deg2Rad;
@@ -400,7 +400,7 @@ public class ProceduralObjectSpawnerGPU : MonoBehaviour
         // Draw the FOV cone lines
         float fovDistance = cullingDistance; // Use culling distance as the FOV visualization range
         
-        // Draw center line (camera forward direction)
+        // Draw center line (playerCamera forward direction)
         Gizmos.color = Color.green;
         Gizmos.DrawLine(cameraPos, cameraPos + cameraForward * fovDistance);
         
