@@ -1,59 +1,61 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-// PROCEDURAL GRASS GENERATION + GPU INSTANCING
-public class ProceduralGrassGPU : MonoBehaviour
+// PROCEDURAL OBJECT GENERATION + GPU INSTANCING + FRUSTUM CULLING
+public class ProceduralObjectSpawnerGPU : MonoBehaviour
 {
     [Header("Terrain Settings")]
     public Terrain terrain;
     public Transform player;
     public Transform camera;
     
-    [Header("Grass Mesh & Material")]
-    public Mesh grassMesh;
-    public Material grassMaterial; // MUST have "Enable GPU Instancing" checked!
-    [SerializeField] float grassYOffset = 0.1f; // Offset to avoid z-fighting with terrain
+    [Header("Object Mesh & Material")]
+    public Mesh objectMesh;
+    public Material objectMaterial; // MUST have "Enable GPU Instancing" checked!
+    [SerializeField] float objectYOffset = -0.05f; // Offset to avoid z-fighting with terrain
     
     [Header("Blue Noise Settings")]
     public Texture2D blueNoiseTexture; // Your blue noise texture
     public float noiseScale = 0.1f;    // How zoomed in the noise is
-    public float noiseThreshold = 0.3f; // Only spawn grass where noise > this value
+    public float noiseThreshold = 0.3f; // Only spawn objects where noise > this value
     
-    [Header("Grass Distribution")]
-    public float grassDensity = 100f;     // Grass blades per chunk
-    public float minGrassScale = 0.8f;
-    public float maxGrassScale = 1.2f;
+    [Header("Object Distribution Settings")]
+    [Range(0f, 1024f)]
+    public float objectDensity = 100f;     // Objects per chunk (should be less than maxObjectsPerChunk)
+    public float minObjectScale = 0.8f;
+    public float maxObjectScale = 1.2f;
     public int chunksToRender = 10;       // How many chunks around player
-    public float chunkSize = 50f;         // Size of each grass chunk
+    public float chunkSize = 32f;         // Size of each Objects chunk
     [Range(0f, 1f)]
-    [SerializeField] float lowerBound = 0f; // Lower bound for grass placement
+    [SerializeField] float lowerBound = 0f; // Lower bound for Object placement
     [Range(0f, 1f)]
-    [SerializeField] float upperBound = 1f; // Upper bound for grass placement
+    [SerializeField] float upperBound = 1f; // Upper bound for Object placement
     
     [Header("Performance")]
-    public int maxGrassPerChunk = 1000;   // Limit for performance
-    public float cullingDistance = 200f;  // Don't render grass beyond this
-    public float cameraFieldOfView = 60f; // Camera FOV for culling in degrees
+    [Range(0, 1024)]
+    public int maxObjectsPerChunk = 1000;   // Limit for performance (Should be less than 1024 because of GPU instancing limits)
+    public float cullingDistance = 200f;  // Don't render Objects beyond this
+    [Range(0f, 180f)]
+    public float cameraFieldOfView = 100f; // Camera FOV for culling in degrees
+    [SerializeField] private bool enableFrustumCulling = true; // Toggle for frustum culling
     
     // Debugging variables
     [Header("Debugging")]
     [SerializeField] private bool enableOnDrawGizmos = true; // Toggle for drawing gizmos
-    [SerializeField] private bool enableFrustumCulling = true; // Toggle for frustum culling
     
     private Vector2Int _lastPlayerChunk;
     private float maxTerrainHeight; // Max height of terrain for bounds checking
     private float cosHalfFOV;       // For the edge case of frustum culling (prevent crashes)
     
     // GPU Instancing data
-    private Dictionary<Vector2Int, GrassChunk> grassChunks;
+    private Dictionary<Vector2Int, ObjectChunk> objectChunks;
     
-    // Grass chunk class
-    public class GrassChunk
+    // Object chunk class
+    public class ObjectChunk
     {
         public Vector2Int coordinate;
         public Matrix4x4[] transforms;
-        public Vector4[] colors;
-        public int grassCount;
+        public int objectCount;
         public bool isGenerated;
         public MaterialPropertyBlock propertyBlock; // Each chunk gets its own property block
         
@@ -61,12 +63,11 @@ public class ProceduralGrassGPU : MonoBehaviour
         // This can be used to quickly check if chunk should be rendered
         public bool isActive;
         
-        public GrassChunk(Vector2Int coord)
+        public ObjectChunk(Vector2Int coord)
         {
             coordinate = coord;
             transforms = new Matrix4x4[0];
-            colors = new Vector4[0];
-            grassCount = 0;
+            objectCount = 0;
             isGenerated = false;
             propertyBlock = new MaterialPropertyBlock(); // Create property block for this chunk
             isActive = true; // Initially active
@@ -77,12 +78,12 @@ public class ProceduralGrassGPU : MonoBehaviour
     {
         cosHalfFOV = Mathf.Cos(cameraFieldOfView * 0.5f * Mathf.Deg2Rad);
         
-        grassChunks = new Dictionary<Vector2Int, GrassChunk>();
+        objectChunks = new Dictionary<Vector2Int, ObjectChunk>();
         
         // Validate setup
-        if (grassMaterial != null && !grassMaterial.enableInstancing)
+        if (objectMaterial != null && !objectMaterial.enableInstancing)
         {
-            Debug.LogError("Grass material MUST have 'Enable GPU Instancing' checked!");
+            Debug.LogError("Object material MUST have 'Enable GPU Instancing' checked!");
         }
         
         if (blueNoiseTexture == null)
@@ -100,14 +101,14 @@ public class ProceduralGrassGPU : MonoBehaviour
         var currentChunk = WorldToChunkCoord(player.position);
         if (_lastPlayerChunk != currentChunk)
         {
-            UpdateGrassChunks();
+            UpdateObjectChunks();
             _lastPlayerChunk = currentChunk;
         }
         
-        RenderVisibleGrass();
+        RenderVisibleObjects();
     }
     
-    void UpdateGrassChunks()
+    void UpdateObjectChunks()
     {
         if (player == null) return;
         
@@ -129,24 +130,24 @@ public class ProceduralGrassGPU : MonoBehaviour
                 if (sqrDistanceToChunk <= sqrCullingDistance)
                 {
                     // Generate chunk if not exists
-                    if (grassChunks.ContainsKey(chunkCoord))
+                    if (objectChunks.ContainsKey(chunkCoord))
                     {
                         // OPTIMIZATION: Reuse existing chunk if it exists
-                        grassChunks[chunkCoord].isActive = true; // Mark as active
+                        objectChunks[chunkCoord].isActive = true; // Mark as active
                     }
                     else
                     {
                         // Generate new chunk if it doesn't exist
-                        GenerateGrassChunk(chunkCoord);
+                        GenerateObjectChunk(chunkCoord);
                     }
                 }
                 else
                 {
-                    if (grassChunks.ContainsKey(chunkCoord))
+                    if (objectChunks.ContainsKey(chunkCoord))
                     {
                         // OPTIMIZATION: Mark as inactive if within culling distance
                         // This allows us to skip rendering it if not in FOV
-                        grassChunks[chunkCoord].isActive = false;
+                        objectChunks[chunkCoord].isActive = false;
                     }
                 }
             }
@@ -170,16 +171,15 @@ public class ProceduralGrassGPU : MonoBehaviour
         );
     }
     
-    void GenerateGrassChunk(Vector2Int chunkCoord)
+    void GenerateObjectChunk(Vector2Int chunkCoord)
     {
-        GrassChunk newChunk = new GrassChunk(chunkCoord);
+        ObjectChunk newChunk = new ObjectChunk(chunkCoord);
         Vector3 chunkWorldPos = ChunkCoordToWorldPos(chunkCoord);
         
         List<Matrix4x4> chunkTransforms = new List<Matrix4x4>();
-        List<Vector4> chunkColors = new List<Vector4>();
         
-        // Generate grass positions within chunk
-        for (int i = 0; i < grassDensity && chunkTransforms.Count < maxGrassPerChunk; i++)
+        // Generate Object positions within chunk
+        for (int i = 0; i < objectDensity && chunkTransforms.Count < maxObjectsPerChunk; i++)
         {
             // Random position within chunk
             Vector3 localPos = new Vector3(
@@ -190,8 +190,8 @@ public class ProceduralGrassGPU : MonoBehaviour
             
             Vector3 worldPos = chunkWorldPos + localPos;
             
-            // Check if this position should have grass using blue noise + terrain data
-            if (ShouldPlaceGrassAt(worldPos))
+            // Check if this position should have Objects using blue noise + terrain data
+            if (ShouldPlaceObjectAt(worldPos))
             {
                 // Sample terrain height
                 float terrainHeight = SampleTerrainHeight(worldPos);
@@ -204,51 +204,36 @@ public class ProceduralGrassGPU : MonoBehaviour
                 }
                 
                 // Apply slight offset to avoid z-fighting
-                worldPos.y += grassYOffset;
+                worldPos.y += objectYOffset;
                 
-                // Get terrain slope (don't place grass on steep slopes)
+                // Get terrain slope (don't place Objects on steep slopes)
                 float slope = GetTerrainSlope(worldPos);
                 if (slope > 45f) continue; // Skip steep areas
                 
-                // Check terrain texture (optional - don't place on rocks/water)
-                if (!IsGrassCompatibleTerrain(worldPos)) continue;
-                
-                // Create grass transform
+                // Create Object transform
                 Quaternion rotation = Quaternion.Euler(
                     Random.Range(-5f, 5f),  // Slight tilt
                     Random.Range(0, 360f),  // Random rotation
                     Random.Range(-5f, 5f)   // Slight tilt
                 );
                 
-                Vector3 scale = Vector3.one * Random.Range(minGrassScale, maxGrassScale);
-                Matrix4x4 grassTransform = Matrix4x4.TRS(worldPos, rotation, scale);
-                
-                // Vary grass color based on position/noise
-                Vector4 grassColor = GetGrassColor(worldPos);
-                
-                chunkTransforms.Add(grassTransform);
-                chunkColors.Add(grassColor);
+                Vector3 scale = Vector3.one * Random.Range(minObjectScale, maxObjectScale);
+                Matrix4x4 objectTransform = Matrix4x4.TRS(worldPos, rotation, scale);
+                chunkTransforms.Add(objectTransform);
             }
         }
         
         // Store in chunk
         newChunk.transforms = chunkTransforms.ToArray();
-        newChunk.colors = chunkColors.ToArray();
-        newChunk.grassCount = chunkTransforms.Count;
+        newChunk.objectCount = chunkTransforms.Count;
         newChunk.isGenerated = true;
         
-        // Set the colors in the chunk's property block once when generating
-        if (newChunk.grassCount > 0)
-        {
-            newChunk.propertyBlock.SetVectorArray("_Colors", newChunk.colors);
-        }
+        objectChunks.Add(chunkCoord, newChunk);
         
-        grassChunks.Add(chunkCoord, newChunk);
-        
-        // Debug.Log($"Generated grass chunk {chunkCoord} with {newChunk.grassCount} grass blades");
+        // Debug.Log($"Generated Objects chunk {chunkCoord} with {newChunk.objectCount} Objects");
     }
     
-    bool ShouldPlaceGrassAt(Vector3 worldPos)
+    bool ShouldPlaceObjectAt(Vector3 worldPos)
     {
         if (blueNoiseTexture == null)
         {
@@ -269,7 +254,7 @@ public class ProceduralGrassGPU : MonoBehaviour
         // Sample the blue noise texture
         Color noiseValue = blueNoiseTexture.GetPixelBilinear(noiseUV.x, noiseUV.y);
         
-        // Use red channel for grass distribution
+        // Use red channel for Object distribution
         return noiseValue.r > noiseThreshold;
     }
     
@@ -297,79 +282,31 @@ public class ProceduralGrassGPU : MonoBehaviour
         return terrain.terrainData.GetSteepness(normalizedPos.x, normalizedPos.y);
     }
     
-    bool IsGrassCompatibleTerrain(Vector3 worldPos)
-    {
-        // Optional: Check terrain texture layers
-        // You can sample terrain textures to avoid placing grass on rocks, water, etc.
-        
-        if (terrain == null) return true;
-        
-        // Example: Check if position is on grass texture
-        Vector3 terrainPos = worldPos - terrain.transform.position;
-        Vector2 normalizedPos = new Vector2(
-            terrainPos.x / terrain.terrainData.size.x,
-            terrainPos.z / terrain.terrainData.size.z
-        );
-        
-        // Clamp to terrain bounds
-        normalizedPos.x = Mathf.Clamp01(normalizedPos.x);
-        normalizedPos.y = Mathf.Clamp01(normalizedPos.y);
-        
-        // Sample terrain texture weights (if you have multiple terrain textures)
-        // float[,,] alphamaps = terrain.terrainData.GetAlphamaps(
-        //     Mathf.FloorToInt(normalizedPos.x * terrain.terrainData.alphamapWidth),
-        //     Mathf.FloorToInt(normalizedPos.y * terrain.terrainData.alphamapHeight),
-        //     1, 1
-        // );
-        // 
-        // // Check if grass texture (index 0) is dominant
-        // return alphamaps[0, 0, 0] > 0.5f; // Grass texture weight > 50%
-        
-        return true; // For now, allow grass everywhere
-    }
-    
-    Vector4 GetGrassColor(Vector3 worldPos)
-    {
-        // Vary grass color based on position for natural look
-        float noise = Mathf.PerlinNoise(worldPos.x * 0.02f, worldPos.z * 0.02f);
-        
-        // Base green color with variation
-        float greenness = 0.8f + noise * 0.2f;
-        
-        return new Vector4(
-            0.3f + noise * 0.2f,  // Red (slight brown tint)
-            greenness,            // Green (dominant)
-            0.2f + noise * 0.1f,  // Blue 
-            1.0f                  // Alpha
-        );
-    }
-    
-    void RenderVisibleGrass()
+    void RenderVisibleObjects()
     {
         if (player == null) return;
         
         Vector3 playerPos = player.position;
         var playerChunk = WorldToChunkCoord(playerPos);
         
-        foreach (var kvp in grassChunks)
+        foreach (var kvp in objectChunks)
         {
-            GrassChunk chunk = kvp.Value;
-            // OPTIMIZATION: Skip chunks that are not generated, have no grass, or are inactive
-            if (!chunk.isGenerated || chunk.grassCount == 0 || !chunk.isActive) continue;
+            ObjectChunk chunk = kvp.Value;
+            // OPTIMIZATION: Skip chunks that are not generated, have no Objects, or are inactive
+            if (!chunk.isGenerated || chunk.objectCount == 0 || !chunk.isActive) continue;
             
             // Always render the player's chunk and its 8 neighbors
             if (chunk.coordinate == playerChunk ||
                 Mathf.Abs(chunk.coordinate.x - playerChunk.x) <= 1 &&
                 Mathf.Abs(chunk.coordinate.y - playerChunk.y) <= 1)
             {
-                // Use the chunk's own property block (colors already set during generation)
                 Graphics.DrawMeshInstanced(
-                    grassMesh,
+                    objectMesh,
                     0,
-                    grassMaterial,
+                    objectMaterial,
                     chunk.transforms,
-                    chunk.grassCount,
-                    chunk.propertyBlock
+                    chunk.objectCount,
+                    null    // Use null for property block if not needed (cuz the material already has colors set)
                 );
                 continue; // Skip further checks for player's chunk
             }
@@ -381,27 +318,25 @@ public class ProceduralGrassGPU : MonoBehaviour
             if (distanceToPlayer <= cullingDistance && AngleBasedFrustumCullingAngleCheck(chunkCenter) && enableFrustumCulling)
             {
                 // Render this chunk if within culling distance and FOV
-                // Use the chunk's own property block (colors already set during generation)
                 Graphics.DrawMeshInstanced(
-                    grassMesh,
+                    objectMesh,
                     0,
-                    grassMaterial,
+                    objectMaterial,
                     chunk.transforms,
-                    chunk.grassCount,
-                    chunk.propertyBlock
+                    chunk.objectCount,
+                    null    // Use null for property block if not needed (cuz the material already has colors set)
                 );
             }
             else if (!enableFrustumCulling) 
             {
                 // If frustum culling is disabled, render all chunks
-                // Use the chunk's own property block (colors already set during generation)
                 Graphics.DrawMeshInstanced(
-                    grassMesh,
+                    objectMesh,
                     0,
-                    grassMaterial,
+                    objectMaterial,
                     chunk.transforms,
-                    chunk.grassCount,
-                    chunk.propertyBlock
+                    chunk.objectCount,
+                    null    // Use null for property block if not needed (cuz the material already has colors set)
                 );
             }
         }
@@ -426,7 +361,7 @@ public class ProceduralGrassGPU : MonoBehaviour
     }
     
     
-    // On Draw Gizmos, visualize grass chunks - useful for debugging ---------------------------------------------------
+    // On Draw Gizmos, visualize Object chunks - useful for debugging ---------------------------------------------------
     
     void OnDrawGizmos()
     {
@@ -479,13 +414,13 @@ public class ProceduralGrassGPU : MonoBehaviour
         }
         
         // Visualize chunk centers and their culling status
-        if (grassChunks != null && player != null)
+        if (objectChunks != null && player != null)
         {
             Vector2Int playerChunk = WorldToChunkCoord(player.position);
             
-            foreach (var kvp in grassChunks)
+            foreach (var kvp in objectChunks)
             {
-                GrassChunk chunk = kvp.Value;
+                ObjectChunk chunk = kvp.Value;
                 if (!chunk.isGenerated) continue;
                 
                 Vector3 chunkCenter = ChunkCoordToWorldPos(chunk.coordinate) + Vector3.one * chunkSize * 0.5f;
