@@ -938,7 +938,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1503655988}
   - {fileID: 1072173602}
   - {fileID: 1323354580}
   - {fileID: 693639553}
@@ -1663,7 +1662,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -2201,7 +2200,7 @@ MonoBehaviour:
   skipDetectionWaterLowerThreshold: 0
   skipDetectionWaterUpperThreshold: 0.3
   waterHeight: 0.1
-  waterPlanePrefab: {fileID: 2778371901395010301, guid: 88adf3a77f6c40741b557a7c8c803ac3, type: 3}
+  waterPlanePrefab: {fileID: 2778371901395010301, guid: f00070f58b9fe0443b92e0c848943ce2, type: 3}
   waterPlanesParent: {fileID: 550499363}
   waterDetectionInfoText: {fileID: 2142869822}
 --- !u!114 &1072173610
@@ -2226,7 +2225,7 @@ MonoBehaviour:
   skipDetectionWaterLowerThreshold: 0
   skipDetectionWaterUpperThreshold: 0.1
   waterHeight: 0.018
-  waterPlanePrefab: {fileID: 2778371901395010301, guid: 88adf3a77f6c40741b557a7c8c803ac3, type: 3}
+  waterPlanePrefab: {fileID: 2778371901395010301, guid: f00070f58b9fe0443b92e0c848943ce2, type: 3}
   waterPlanesParent: {fileID: 567553434}
   waterDetectionInfoText: {fileID: 1583864611}
 --- !u!1 &1125489409
@@ -3495,12 +3494,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1503655987}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1153.2411, y: 1381.3411, z: 11854.393}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 357942944}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1503655989
 MonoBehaviour:
@@ -5205,6 +5204,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1728847687}
   - {fileID: 1713114668}
+  - {fileID: 1503655988}
   - {fileID: 1266906200}
   - {fileID: 357942944}
   - {fileID: 1940748033}
