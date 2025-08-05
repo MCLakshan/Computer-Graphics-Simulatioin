@@ -26,6 +26,12 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     
     public void Initialize(Item newItem)
     {
+        if(image == null || itemCountText == null)
+        {
+            Debug.Log("Image or Item Count Text is not assigned in the InventoryItem script.");
+            return;
+        }
+        
         item = newItem;
         image.sprite = newItem.image;
         RefreshCount();
@@ -33,6 +39,13 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void RefreshCount()
     {
+        if (!item.isStackable)
+        {
+            // If the item is not stackable, hide the count text
+            itemCountText.gameObject.SetActive(false);
+            itemCount = 1; // Reset item count to 1 for non-stackable items
+        }
+        
         itemCountText.text = itemCount.ToString();
     }
     
