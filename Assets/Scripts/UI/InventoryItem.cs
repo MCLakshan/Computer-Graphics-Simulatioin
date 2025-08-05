@@ -35,6 +35,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         item = newItem;
         image.sprite = newItem.image;
         RefreshCount();
+        
+        parentAfterDrag = transform.parent; // Store the initial parent for dragging
     }
 
     public void RefreshCount()
