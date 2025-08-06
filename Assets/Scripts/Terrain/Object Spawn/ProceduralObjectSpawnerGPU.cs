@@ -205,6 +205,7 @@ public class ProceduralObjectSpawnerGPU : MonoBehaviour
             );
             
             Vector3 worldPos = chunkWorldPos + localPos;
+            Vector3 terrainNormal = GetTerrainNormal(worldPos);
             
             // Check if this position should have Objects using blue noise + terrain data
             if (ShouldPlaceObjectAt(worldPos))
@@ -224,14 +225,27 @@ public class ProceduralObjectSpawnerGPU : MonoBehaviour
                 
                 // Get terrain slope (don't place Objects on steep slopes)
                 float slope = GetTerrainSlope(worldPos);
-                if (slope > 45f) continue; // Skip steep areas
+                if (slope > 45f)
+                {
+                    var probability = 1f - (slope / 90f);
+                    if (Random.value > probability)
+                    {
+                        continue; // Skip placing Object on steep slopes
+                    }
+                }
                 
-                // Create Object transform
-                Quaternion rotation = Quaternion.Euler(
-                    Random.Range(-5f, 5f),  // Slight tilt
-                    Random.Range(0, 360f),  // Random rotation
-                    Random.Range(-5f, 5f)   // Slight tilt
+                // Align grass with terrain normal
+                Quaternion normalRotation = Quaternion.FromToRotation(Vector3.up, terrainNormal);
+                
+                // Add some random rotation around the Y-axis (up vector) and  Small random tilts
+                Vector3 randomTilt = new Vector3(
+                    Random.Range(-5f, 5f),
+                    Random.Range(0, 360f),
+                    Random.Range(-5f, 5f)
                 );
+                
+                // Combine rotations
+                Quaternion rotation = normalRotation * Quaternion.Euler(randomTilt);
                 
                 Vector3 scale = Vector3.one * Random.Range(minObjectScale, maxObjectScale);
                 Matrix4x4 objectTransform = Matrix4x4.TRS(worldPos, rotation, scale);
@@ -296,6 +310,24 @@ public class ProceduralObjectSpawnerGPU : MonoBehaviour
         normalizedPos.y = Mathf.Clamp01(normalizedPos.y);
         
         return terrain.terrainData.GetSteepness(normalizedPos.x, normalizedPos.y);
+    }
+    
+    Vector3 GetTerrainNormal(Vector3 worldPos)
+    {
+        if (terrain == null) return Vector3.up;
+    
+        // Convert to terrain local coordinates
+        Vector3 terrainPos = worldPos - terrain.transform.position;
+        Vector2 normalizedPos = new Vector2(
+            terrainPos.x / terrain.terrainData.size.x,
+            terrainPos.z / terrain.terrainData.size.z
+        );
+    
+        // Clamp to terrain bounds
+        normalizedPos.x = Mathf.Clamp01(normalizedPos.x);
+        normalizedPos.y = Mathf.Clamp01(normalizedPos.y);
+    
+        return terrain.terrainData.GetInterpolatedNormal(normalizedPos.x, normalizedPos.y);
     }
     
     private void RenderVisibleObjects()
