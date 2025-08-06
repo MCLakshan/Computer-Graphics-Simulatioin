@@ -389,8 +389,17 @@ MonoBehaviour:
     MinHeightPercent: 0.105
     MaxHeightPercent: 0.3
     canSpawn: 1
+  - Name: '[ THUNDRA ] - Lilac Single Tree 2'
+    Type: 2
+    Prefab: {fileID: 3643364694243093372, guid: 9dacd38a75f19964ba7d98ec9aebdfa4, type: 3}
+    SpawnCount: 500
+    MindistanceBetweenType: 5
+    MinHeightPercent: 0.3
+    MaxHeightPercent: 0.5
+    canSpawn: 1
   randomRotation: 1
   positionsPerFrame: 100
+  maxSpawnAttemptsMultiplier: 100
   spawningObjectName: Trees
   poggressBarText: {fileID: 1272422918}
   spawnCountSlider: {fileID: 1410970994}
@@ -2177,7 +2186,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainGenerator: {fileID: 1072173603}
-  gridSize: 256
 --- !u!114 &1072173609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2190,7 +2198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a01b13e113b8bd742bb841f06d0d2a03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrainGridFilter: {fileID: 1072173608}
+  helperTerrainGridFilter: {fileID: 1072173608}
   perlinNoiseTerrainGenerator: {fileID: 1072173603}
   debugTerrainGridVisualizer: {fileID: 1072173607}
   enableWaterDetection: 1
@@ -2215,7 +2223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a01b13e113b8bd742bb841f06d0d2a03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrainGridFilter: {fileID: 1072173608}
+  helperTerrainGridFilter: {fileID: 1072173608}
   perlinNoiseTerrainGenerator: {fileID: 1072173603}
   debugTerrainGridVisualizer: {fileID: 1072173607}
   enableWaterDetection: 1

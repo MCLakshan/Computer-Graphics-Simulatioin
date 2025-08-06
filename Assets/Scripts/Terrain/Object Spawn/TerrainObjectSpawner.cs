@@ -28,6 +28,7 @@ public class TerrainObjectSpawner : MonoBehaviour
     [Header("Performance")]
     [Tooltip("Process this many positions per frame to avoid lag")]
     public int positionsPerFrame = 100;
+    public int maxSpawnAttemptsMultiplier = 100; // Max attempts per object type to prevent infinite loops
 
     [Header("User Interface")]
     [SerializeField] private string spawningObjectName;
@@ -93,7 +94,7 @@ public class TerrainObjectSpawner : MonoBehaviour
             float maxHeightPercent = objectToSpawn.MaxHeightPercent;
             float minDistanceBetweenObjects = objectToSpawn.MindistanceBetweenType;
             SpawnType spawnType = objectToSpawn.Type;
-            int maxAttempts = spawnCount * 10; // Prevent infinite loop
+            int maxAttempts = spawnCount * maxSpawnAttemptsMultiplier; // Prevent infinite loop
             
             // Keep spawning until we reach exact count
             while (spawnedCount < spawnCount && attempts < maxAttempts)
@@ -129,7 +130,7 @@ public class TerrainObjectSpawner : MonoBehaviour
                     }
                 
                     // Update UI
-                    poggressBarText.text = "Generating "+ spawningObjectName + " : Attempts - " + currentAttemptCount + " / Spawned - " + currentSpawnedCount + " / Target - " + totalSpawnedCount;
+                    poggressBarText.text = "Generating "+ spawningObjectName + " : Attempts(" + maxAttempts + ") - " + currentAttemptCount + " / Spawned - " + currentSpawnedCount + " / Target - " + totalSpawnedCount;
                     spawnCountSlider.value = (float)currentSpawnedCount / totalSpawnedCount;
                 
                     attempts++;
@@ -139,7 +140,7 @@ public class TerrainObjectSpawner : MonoBehaviour
             
                 yield return null; // Wait one frame
             }
-            
+            Debug.Log($"Spawned {spawnedCount} of {spawnCount} form  {attempts}/{maxAttempts} attempts for {objectToSpawn.Name}");
         }
             
         isSpawning = false;
@@ -250,6 +251,7 @@ public enum SpawnType
 {
     Grass_Tree,
     Forest_Tree,
+    Thundra_Tree,
     Rock,
     Bush,
 }

@@ -14,7 +14,7 @@ public class InnerTerrainWaterDitection : MonoBehaviour
 
     // References
     [Header("<b><color=#89CFF0><size=12>References</size></color></b>")]
-    [SerializeField] private TerrainGridFilter terrainGridFilter;
+    [SerializeField] private HELPER_TerrainGridFilter helperTerrainGridFilter;
     [SerializeField] private PerlinNoiseTerrainGenerator perlinNoiseTerrainGenerator;
     [SerializeField] private DEBUG_TerrainGridVisualizer debugTerrainGridVisualizer;
 
@@ -123,7 +123,7 @@ public class InnerTerrainWaterDitection : MonoBehaviour
             List<Vector2Int> cluster = waterGridClusters[i];
             foreach (Vector2Int cell in cluster)
             {
-                var gridCenterPoint = terrainGridFilter.GetGridCenter(cell.x, cell.y);
+                var gridCenterPoint = helperTerrainGridFilter.GetGridCenter(cell.x, cell.y, gridSize);
                 // Create a water plane at the grid center point
                 GameObject waterPlane = Instantiate(waterPlanePrefab, new Vector3(gridCenterPoint[0], waterHeight * terrainMaxHeight, gridCenterPoint[1]), Quaternion.identity, waterPlanesParent.transform);
             }
@@ -148,7 +148,7 @@ public class InnerTerrainWaterDitection : MonoBehaviour
     {
         
         // Get the grid center point
-        var gridCenterPoint = terrainGridFilter.GetGridCenter(gridX, gridZ);
+        var gridCenterPoint = helperTerrainGridFilter.GetGridCenter(gridX, gridZ, gridSize);
         
         // Get the height at the grid center
         float height = heights[(int)gridCenterPoint[0], (int)gridCenterPoint[1]];

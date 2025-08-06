@@ -22,13 +22,13 @@ public struct GridBounds
     }
 }
 
-public class TerrainGridFilter : MonoBehaviour
+public class HELPER_TerrainGridFilter : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private PerlinNoiseTerrainGenerator terrainGenerator;
     
-    [Header("Grid Settings")]
-    [SerializeField] private int gridSize = 8;
+    //[Header("Grid Settings")]
+    //[SerializeField] private int gridSize = 8;
     
     private void OnValidate()
     {
@@ -42,7 +42,7 @@ public class TerrainGridFilter : MonoBehaviour
     /// </summary>
     /// <param name="gridName">Grid name in format "R[x,z]"</param>
     /// <returns>GridBounds with start and end coordinates</returns>
-    public GridBounds GetGridBounds(string gridName)
+    public GridBounds GetGridBounds(string gridName, int gridSize)
     {
         Vector2Int coords = ParseGridName(gridName);
         
@@ -52,7 +52,7 @@ public class TerrainGridFilter : MonoBehaviour
             return new GridBounds(-1, -1, -1, -1);
         }
         
-        return GetGridBounds(coords.x, coords.y);
+        return GetGridBounds(coords.x, coords.y, gridSize);
     }
     
     /// <summary>
@@ -61,7 +61,7 @@ public class TerrainGridFilter : MonoBehaviour
     /// <param name="gridX">X coordinate of the grid</param>
     /// <param name="gridZ">Z coordinate of the grid</param>
     /// <returns>GridBounds with start and end coordinates</returns>
-    public GridBounds GetGridBounds(int gridX, int gridZ)
+    public GridBounds GetGridBounds(int gridX, int gridZ, int gridSize)
     {
         if (terrainGenerator == null)
         {
@@ -101,9 +101,9 @@ public class TerrainGridFilter : MonoBehaviour
     /// <param name="gridX">X coordinate of the grid</param>
     /// <param name="gridZ">Z coordinate of the grid</param>
     /// <returns>Vector2 with center coordinates</returns>
-    public Vector2 GetGridCenter(int gridX, int gridZ)
+    public Vector2 GetGridCenter(int gridX, int gridZ, int gridSize)
     {
-        GridBounds bounds = GetGridBounds(gridX, gridZ);
+        GridBounds bounds = GetGridBounds(gridX, gridZ, gridSize);
     
         if (bounds.startX == -1) // Invalid bounds
             return Vector2.zero;
@@ -119,14 +119,14 @@ public class TerrainGridFilter : MonoBehaviour
     /// </summary>
     /// <param name="gridName">Grid name in format "R[x,z]"</param>
     /// <returns>Vector2 with center coordinates</returns>
-    public Vector2 GetGridCenter(string gridName)
+    public Vector2 GetGridCenter(string gridName, int gridSize)
     {
         Vector2Int coords = ParseGridName(gridName);
     
         if (coords.x == -1 || coords.y == -1)
             return Vector2.zero;
     
-        return GetGridCenter(coords.x, coords.y);
+        return GetGridCenter(coords.x, coords.y, gridSize);
     }
     
     /// <summary>
@@ -162,24 +162,4 @@ public class TerrainGridFilter : MonoBehaviour
         
         return new Vector2Int(-1, -1);
     }
-    
-    /// <summary>
-    /// Test method to demonstrate usage
-    /// </summary>
-    [ContextMenu("Test Grid Filter")]
-    public void TestGridFilter()
-    {
-        // Test various grid names
-        string[] testNames = { "R[0,0]", "R[2,3]", "R[7,7]", "invalid", "R[1, 2]" };
-        
-        foreach (string gridName in testNames)
-        {
-            GridBounds bounds = GetGridBounds(gridName);
-            Debug.Log($"Grid: {gridName} -> {bounds}");
-        }
-    }
-    
-    #region - GETTERS -
-    public int GetGridSize() => gridSize;
-    #endregion
 }
