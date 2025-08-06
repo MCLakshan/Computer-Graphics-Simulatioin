@@ -1133,6 +1133,72 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -200, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &547839439
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 547839440}
+  - component: {fileID: 547839441}
+  m_Layer: 0
+  m_Name: '----- FrenPlant - Forest (end) ----- '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &547839440
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547839439}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1032313281}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &547839441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547839439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4fd929019455ae41acec27de088c4b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  master: {fileID: 1410145925}
+  terrain: {fileID: 1072173605}
+  player: {fileID: 1614241048}
+  playerCamera: {fileID: 1696499538}
+  objectMesh: {fileID: -6760369281798240013, guid: dcabfc85d7a0bfc4f88582a661f5b862, type: 3}
+  objectMaterial: {fileID: 2100000, guid: 9a926d993767b244593550a6a7cff7c5, type: 2}
+  objectYOffset: 0
+  blueNoiseTexture: {fileID: 2800000, guid: a207373a85d6b7840b689e6f10d97744, type: 3}
+  noiseScale: 0.125
+  noiseThreshold: 0.3
+  objectDensity: 20
+  minObjectScale: 0.8
+  maxObjectScale: 1.2
+  chunksToRender: 6
+  chunkSize: 32
+  lowerBound: 0.225
+  upperBound: 0.3
+  maxObjectsPerChunk: 1000
+  cullingDistance: 300
+  cameraFieldOfView: 100
+  enableFrustumCulling: 1
+  enableOnDrawGizmos: 0
 --- !u!1 &550499363
 GameObject:
   m_ObjectHideFlags: 0
@@ -1957,6 +2023,40 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1005884603}
   m_CullTransparentMesh: 1
+--- !u!1 &1032313280
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1032313281}
+  m_Layer: 0
+  m_Name: '[ PLANTS ]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1032313281
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032313280}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1433532000}
+  - {fileID: 1200854185}
+  - {fileID: 547839440}
+  m_Father: {fileID: 1243655700}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1072173601
 GameObject:
   m_ObjectHideFlags: 0
@@ -2519,6 +2619,72 @@ MonoBehaviour:
   cameraFieldOfView: 100
   enableFrustumCulling: 1
   enableOnDrawGizmos: 0
+--- !u!1 &1200854184
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1200854185}
+  - component: {fileID: 1200854186}
+  m_Layer: 0
+  m_Name: '----- FrenPlant - Forest (mid) ----- '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1200854185
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200854184}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1032313281}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1200854186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200854184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4fd929019455ae41acec27de088c4b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  master: {fileID: 1410145925}
+  terrain: {fileID: 1072173605}
+  player: {fileID: 1614241048}
+  playerCamera: {fileID: 1696499538}
+  objectMesh: {fileID: -6760369281798240013, guid: dcabfc85d7a0bfc4f88582a661f5b862, type: 3}
+  objectMaterial: {fileID: 2100000, guid: 9a926d993767b244593550a6a7cff7c5, type: 2}
+  objectYOffset: 0
+  blueNoiseTexture: {fileID: 2800000, guid: a207373a85d6b7840b689e6f10d97744, type: 3}
+  noiseScale: 0.125
+  noiseThreshold: 0.3
+  objectDensity: 100
+  minObjectScale: 0.8
+  maxObjectScale: 1.2
+  chunksToRender: 6
+  chunkSize: 32
+  lowerBound: 0.125
+  upperBound: 0.25
+  maxObjectsPerChunk: 1000
+  cullingDistance: 300
+  cameraFieldOfView: 100
+  enableFrustumCulling: 1
+  enableOnDrawGizmos: 0
 --- !u!1 &1201517224
 GameObject:
   m_ObjectHideFlags: 0
@@ -2834,6 +3000,7 @@ Transform:
   m_Children:
   - {fileID: 1410145924}
   - {fileID: 1380078146}
+  - {fileID: 1032313281}
   - {fileID: 1715973233}
   m_Father: {fileID: 693639553}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3484,6 +3651,72 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1433531999
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1433532000}
+  - component: {fileID: 1433532001}
+  m_Layer: 0
+  m_Name: ----- FrenPlant - Forest (start) -----
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1433532000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433531999}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1032313281}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1433532001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433531999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4fd929019455ae41acec27de088c4b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  master: {fileID: 1410145925}
+  terrain: {fileID: 1072173605}
+  player: {fileID: 1614241048}
+  playerCamera: {fileID: 1696499538}
+  objectMesh: {fileID: -6760369281798240013, guid: dcabfc85d7a0bfc4f88582a661f5b862, type: 3}
+  objectMaterial: {fileID: 2100000, guid: 9a926d993767b244593550a6a7cff7c5, type: 2}
+  objectYOffset: 0
+  blueNoiseTexture: {fileID: 2800000, guid: a207373a85d6b7840b689e6f10d97744, type: 3}
+  noiseScale: 0.125
+  noiseThreshold: 0.3
+  objectDensity: 50
+  minObjectScale: 0.8
+  maxObjectScale: 1.2
+  chunksToRender: 6
+  chunkSize: 32
+  lowerBound: 0.095
+  upperBound: 0.15
+  maxObjectsPerChunk: 1000
+  cullingDistance: 300
+  cameraFieldOfView: 100
+  enableFrustumCulling: 1
+  enableOnDrawGizmos: 0
 --- !u!1 &1501046022
 GameObject:
   m_ObjectHideFlags: 0
@@ -5452,6 +5685,10 @@ PrefabInstance:
     - target: {fileID: 6811670823155424768, guid: 6d3e7c555db345a478dfb640ef96a340, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7266976761953420940, guid: 6d3e7c555db345a478dfb640ef96a340, type: 3}
+      propertyPath: SprintSpeed
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
