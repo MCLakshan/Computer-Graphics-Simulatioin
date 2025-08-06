@@ -266,6 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrain: {fileID: 1072173605}
+  helperCombinedWaterMap: {fileID: 1072173611}
   blueNoiseTexture: {fileID: 2800000, guid: e7121dd914d72de43b6b00c3c135bb5a, type: 3}
   noiseThreshold: 0.5
   listOfObjectsToSpawn:
@@ -1906,6 +1907,7 @@ GameObject:
   - component: {fileID: 1072173610}
   - component: {fileID: 1072173609}
   - component: {fileID: 1072173608}
+  - component: {fileID: 1072173611}
   - component: {fileID: 1072173607}
   m_Layer: 0
   m_Name: Terrain - 1
@@ -2236,6 +2238,23 @@ MonoBehaviour:
   waterPlanePrefab: {fileID: 2778371901395010301, guid: f00070f58b9fe0443b92e0c848943ce2, type: 3}
   waterPlanesParent: {fileID: 567553434}
   waterDetectionInfoText: {fileID: 1583864611}
+--- !u!114 &1072173611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072173601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faf931418d8167640b73129fdf3c49b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridSize: 256
+  helperTerrainGridFilter: {fileID: 1072173608}
+  innerTerrainWaterDitectionComponents:
+  - {fileID: 1072173610}
+  - {fileID: 1072173609}
 --- !u!1 &1125489409
 GameObject:
   m_ObjectHideFlags: 0

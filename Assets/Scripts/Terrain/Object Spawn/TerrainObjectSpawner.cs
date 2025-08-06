@@ -9,6 +9,7 @@ public class TerrainObjectSpawner : MonoBehaviour
 {
     [Header("References")]
     public Terrain terrain;
+    public HELPER_CombinedWaterMap helperCombinedWaterMap; // Reference to a combined water map for terrain water detection
 
     [Header("Blue Noise Settings")]
     [Tooltip("Blue noise texture (PNG) for natural distribution - maps 1:1 with terrain size")]
@@ -103,7 +104,7 @@ public class TerrainObjectSpawner : MonoBehaviour
             
                 while (processedThisFrame < positionsPerFrame && spawnedCount < spawnCount && attempts < maxAttempts)
                 {
-                    // Generate random position
+                    // Generate random position in terrain bounds
                     int x = Random.Range(0, heightmapRes);
                     int z = Random.Range(0, heightmapRes);
                 
@@ -119,9 +120,9 @@ public class TerrainObjectSpawner : MonoBehaviour
                             terrainPos.y + heightPercent * terrainSize.y,
                             terrainPos.z + ((float)z / (heightmapRes - 1)) * terrainSize.z
                         );
-                    
+                        
                         // Check blue noise and distance constraints
-                        if (ShouldSpawnAtPosition(worldPos) && IsValidPosition(worldPos, minDistanceBetweenObjects, spawnType))
+                        if (ShouldSpawnAtPosition(worldPos) && IsValidPosition(worldPos, minDistanceBetweenObjects, spawnType) && !IsPositionInWater(x, z))
                         {
                             SpawnObjectAt(worldPos, spawnType, prefabToSpawn);
                             spawnedCount++;
@@ -142,8 +143,9 @@ public class TerrainObjectSpawner : MonoBehaviour
             }
             Debug.Log($"Spawned {spawnedCount} of {spawnCount} form  {attempts}/{maxAttempts} attempts for {objectToSpawn.Name}");
         }
-            
         isSpawning = false;
+        Debug.Log("All objects spawned successfully!");
+        poggressBarText.text = "Generation Complete! Total Spawned: " + currentSpawnedCount + " / " + totalSpawnedCount + " :: Attempts: " + currentAttemptCount;
     }
     
     bool ShouldSpawnAtPosition(Vector3 worldPos)
@@ -184,6 +186,18 @@ public class TerrainObjectSpawner : MonoBehaviour
                 return false;
         }
         return true;
+    }
+    
+    private bool IsPositionInWater(float x, float z)
+    {
+        if (helperCombinedWaterMap == null)
+        {
+            Debug.LogError("HelperCombinedWaterMap reference is missing!");
+            return false;
+        }
+        
+        // Check if the position is in water using the combined water map
+        return helperCombinedWaterMap.IsPointInWater(x, z);
     }
     
     void SpawnObjectAt(Vector3 position, SpawnType spawnType, GameObject prefabToSpawn)

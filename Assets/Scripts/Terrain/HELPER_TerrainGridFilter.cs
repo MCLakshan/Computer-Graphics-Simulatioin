@@ -162,4 +162,33 @@ public class HELPER_TerrainGridFilter : MonoBehaviour
         
         return new Vector2Int(-1, -1);
     }
+    
+    //return the grid for a specific point in the terrain
+    public Vector2Int GetGridForPoint(float x, float z, int gridSize)
+    {
+        if (terrainGenerator == null)
+        {
+            Debug.LogError("TerrainGenerator reference is missing!");
+            return new Vector2Int(-1, -1);
+        }
+        
+        // Get terrain size
+        int terrainSize = (int)terrainGenerator.GetXRange();
+        
+        // Validate point
+        if (x < 0 || x >= terrainSize || z < 0 || z >= terrainSize)
+        {
+            Debug.LogError($"Point [{x},{z}] is out of terrain bounds. Terrain size is {terrainSize}x{terrainSize}");
+            return new Vector2Int(-1, -1);
+        }
+        
+        // Calculate cell size
+        float cellSize = (float)terrainSize / gridSize;
+        
+        // Calculate grid coordinates
+        int gridX = Mathf.FloorToInt(x / cellSize);
+        int gridZ = Mathf.FloorToInt(z / cellSize);
+        
+        return new Vector2Int(gridX, gridZ);
+    }
 }

@@ -45,6 +45,13 @@ public class InnerTerrainWaterDitection : MonoBehaviour
     private int[,] waterMap;
     private int[,] waterMapTransposed;
     private List<List<Vector2Int>> waterGridClusters = new List<List<Vector2Int>>();
+
+    #region - GETTERS -
+
+    public int GetGridSize() => gridSize;
+
+    #endregion
+    
     
     [ContextMenu("Process Water Detection")]
     public void Process()
@@ -317,4 +324,37 @@ public class InnerTerrainWaterDitection : MonoBehaviour
         }
     }
     
+    // Get a Water cluster map and clear memory
+    public int[,] GetWaterMapAndClearMemory()
+    {
+        int[,] tempWaterMap = new int[gridSize, gridSize];
+        
+        // initialize the tempWaterMap with all zeros
+        for (int x = 0; x < gridSize; x++)
+        {
+            for (int z = 0; z < gridSize; z++)
+            {
+                tempWaterMap[x, z] = 0;
+            }
+        }
+        
+        // Get water clusters and fill the tempWaterMap
+        for (int i = 0; i < waterGridClusters.Count; i++)
+        {
+            List<Vector2Int> cluster = waterGridClusters[i];
+            foreach (Vector2Int cell in cluster)
+            {
+                // Fill the tempWaterMap with 1 for water cells
+                tempWaterMap[cell.x, cell.y] = 1;
+            }
+        }
+        
+        // Clear the memory of the water map for release memory (no need these arrays anymore)
+        waterMap = null;
+        waterMapTransposed = null;
+        waterGridClusters.Clear();
+        waterGridClusters = null;
+        
+        return tempWaterMap;
+    }
 }
