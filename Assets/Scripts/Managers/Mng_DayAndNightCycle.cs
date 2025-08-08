@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
 
 public class Mng_DayAndNightCycle : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class Mng_DayAndNightCycle : MonoBehaviour
     [SerializeField] private Light sunLight;
     [SerializeField] private float sunPosition = 1f;
     [SerializeField] private float sunIntensity = 1f;
+    [SerializeField] private AnimationCurve sunIntensityCurve;
+    [SerializeField] private AnimationCurve lightTemperatureCurve;
     
     
     private void Update()
@@ -27,6 +30,7 @@ public class Mng_DayAndNightCycle : MonoBehaviour
         }
         
         UpdateTimeText();
+        UpdateLight();
     }
     
     private void OnValidate()
@@ -41,7 +45,29 @@ public class Mng_DayAndNightCycle : MonoBehaviour
 
     private void UpdateLight()
     {
+        if (sunLight == null)
+            return;
+
         float sunRotation = (currentTime / 24f) * 360f;
         sunLight.transform.rotation = Quaternion.Euler(sunRotation - 90f, sunPosition, 0f);
+
+        float normalizedTime = currentTime / 24f;
+
+        if (sunIntensityCurve != null)
+        {
+            float intensityCurveValue = sunIntensityCurve.Evaluate(normalizedTime);
+            var hdData = sunLight.GetComponent<HDAdditionalLightData>();
+            if (hdData != null)
+            {
+                hdData.intensity = sunIntensity * intensityCurveValue;
+            }
+        }
+
+        if (lightTemperatureCurve != null)
+        {
+            float temperatureCurveValue = lightTemperatureCurve.Evaluate(normalizedTime);
+            sunLight.colorTemperature = temperatureCurveValue * 6750;
+        }
     }
+
 }
