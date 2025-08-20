@@ -98,7 +98,13 @@ public class Mng_ItemHandler : MonoBehaviour
                                            Random.Range(0f, 1f));
         dropVelocity += itemSpawnPoint.transform.forward * 5f; // Add a small forward velocity
         dropVelocity += new Vector3(0, Random.Range(-0.5f, 0.5f), 0); // Add a small vertical component for randomness
-        droppedItem.transform.rotation = Quaternion.Euler(Random.Range(-10f, 10f), Random.Range(-10f, 10f), Random.Range(-10f, 10f)); // Add a small tilt to the item
+        
+        // Player = parent of the item spawn point
+        // drop item rotation = player rotation + a small random tilt
+        Quaternion dropRotation = itemSpawnPoint.transform.parent.rotation * Quaternion.Euler(Random.Range(-5f, 5f),
+                                                                                        Random.Range(-5f, 5f),
+                                                                                        Random.Range(-5f, 5f));
+        droppedItem.transform.rotation = dropRotation;
         
         if (rb != null)
         {
