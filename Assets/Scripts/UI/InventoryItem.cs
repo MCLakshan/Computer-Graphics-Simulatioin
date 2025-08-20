@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
     public Item item;
     
@@ -15,12 +15,21 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public Transform parentAfterDrag;
     public int itemCount = 1; // Default item count
     
+    private Mng_ItemHandler itemHandler; // Reference to the item handler for spawning items in the world
+    
     private void Start()
     {
         // Initialize the item image when the script starts
         if (item != null)
         {
             Initialize(item);
+        }
+        
+        // Get the item handler reference from the scene
+        itemHandler = FindObjectOfType<Mng_ItemHandler>();
+        if (itemHandler == null)
+        {
+            Debug.LogError("Mng_ItemHandler not found in the scene. Please ensure it is present.");
         }
     }
     
@@ -81,5 +90,30 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         
         
         Debug.Log("Item dropped at: " + transform.position);
+    }
+    
+    // Detect right clicks to drop items
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            GameObject itemToDrop = item.gameObjectPrefab;
+            int countToDrop = itemCount;
+            
+            // Small front velocity to the item when dropped
+            Vector3 dropVelocity = new Vector3(0, 0, 5f);
+            
+            if (itemToDrop != null)
+            {
+                // Instantiate the number of items to drop
+                for (int i = 0; i < countToDrop; i++)
+                {
+                    itemHandler.DropItem(item);
+                    
+                    // Optionally, you can destroy the inventory item after dropping
+                    Destroy(gameObject);
+                }
+            }
+        }
     }
 }

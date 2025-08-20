@@ -7,6 +7,7 @@ public class Mng_ItemHandler : MonoBehaviour
 
     [Header("Player References")]
     [SerializeField] private Camera playerCamera;
+    [SerializeField] GameObject itemSpawnPoint; // This can be used to spawn the item in the world if needed
 
     [Header("Interaction Settings")]
     [SerializeField] private float rayDistance = 5f;
@@ -62,22 +63,47 @@ public class Mng_ItemHandler : MonoBehaviour
         // Pickup the item when the player presses the "E" key
         if (isUIVisible && Input.GetKeyDown(KeyCode.E))
         {
-            if (pickupItem != null)
+            PickupItem();
+        }
+    }
+
+    private void PickupItem()
+    {
+        if (pickupItem != null)
+        {
+            IItem item = pickupItem.GetComponent<IItem>();
+            if (item != null)
             {
-                IItem item = pickupItem.GetComponent<IItem>();
-                if (item != null)
+                var itemToAdd = item.UseItem();
+                if (itemToAdd != null)
                 {
-                    var itemToAdd = item.UseItem();
-                    if (itemToAdd != null)
-                    {
-                        // Add the item to the inventory
-                        inventoryManager.AddItemToMainInventory(itemToAdd);
-                    }
+                    // Add the item to the inventory
+                    inventoryManager.AddItemToMainInventory(itemToAdd);
                 }
-                Destroy(pickupItem);
-                pickupItem = null;
             }
-            isUIVisible = false;
+            Destroy(pickupItem);
+            pickupItem = null;
+        }
+        isUIVisible = false;
+    }
+
+    public void DropItem(Item item)
+    {
+        GameObject droppedItem = Instantiate(item.gameObjectPrefab, itemSpawnPoint.transform.position, Quaternion.identity);
+        Rigidbody rb = droppedItem.GetComponent<Rigidbody>();
+                    
+        // Set a small random forward velocity and small tilt to the dropped item
+        Vector3 dropVelocity = new Vector3(Random.Range(0f, 1f), 
+                                           Random.Range(0f, 1f), 
+                                           Random.Range(0f, 1f));
+        dropVelocity += itemSpawnPoint.transform.forward * 5f; // Add a small forward velocity
+        dropVelocity += new Vector3(0, Random.Range(-0.5f, 0.5f), 0); // Add a small vertical component for randomness
+        droppedItem.transform.rotation = Quaternion.Euler(Random.Range(-10f, 10f), Random.Range(-10f, 10f), Random.Range(-10f, 10f)); // Add a small tilt to the item
+        
+        if (rb != null)
+        {
+            // Add a small forward velocity to the dropped item
+            rb.linearVelocity = dropVelocity;
         }
     }
 
