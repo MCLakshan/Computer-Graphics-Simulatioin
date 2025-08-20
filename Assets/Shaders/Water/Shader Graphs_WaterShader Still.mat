@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4472136719532688242
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 13
+  hdPluginSubTargetMaterialVersions:
+    m_Keys: []
+    m_Values: 
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -59,6 +75,7 @@ Material:
     - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 2
     - _CullModeForward: 2
+    - _Depth: 1
     - _DepthOffsetEnable: 0
     - _DoubleSidedEnable: 0
     - _DoubleSidedGIMode: 0
@@ -70,10 +87,10 @@ Material:
     - _ExcludeFromTUAndAA: 0
     - _MaterialID: 1
     - _MaterialTypeMask: 2
-    - _Normal_Strenght: 0.4
-    - _Normal_Tiling: 0.5
+    - _Normal_Strenght: 0.5
+    - _Normal_Tiling: 0.15
     - _OpaqueCullMode: 2
-    - _Paning_speed: 0.25
+    - _Paning_speed: 0.5
     - _PerPixelSorting: 0
     - _RayTracing: 0
     - _ReceivesSSR: 1
@@ -81,7 +98,7 @@ Material:
     - _RefractionModel: 0
     - _RenderQueueType: 4
     - _RequireSplitLighting: 0
-    - _Smoothness: 0.67
+    - _Smoothness: 0.8
     - _SrcBlend: 1
     - _StencilRef: 0
     - _StencilRefDepth: 0
@@ -104,9 +121,9 @@ Material:
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
     - _UseShadowThreshold: 0
-    - _Wave_Scale: 11.7
-    - _Wave_Speed: 1
-    - _Wave_Strength: 0.5
+    - _Wave_Scale: 50
+    - _Wave_Speed: -0.1
+    - _Wave_Strength: 1
     - _Wave_Tiling: 0.1
     - _ZTestDepthEqualForOpaque: 4
     - _ZTestGBuffer: 4
@@ -115,24 +132,8 @@ Material:
     m_Colors:
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Simpe_Noise_Scale_or_Waves: {r: -0.4, g: 0.5, b: 0, a: 0}
-    - _Water_Color_A: {r: 0.43529412, g: 0.6392157, b: 0.7607843, a: 1}
-    - _Water_Color_B: {r: 0.101960786, g: 0.18039216, b: 0.2509804, a: 1}
+    - _Simpe_Noise_Scale_or_Waves: {r: 0.02, g: 0.5, b: 0, a: 0}
+    - _Water_Color_A: {r: 0.43529406, g: 0.6392157, b: 0.7607843, a: 1}
+    - _Water_Color_B: {r: 0.10196077, g: 0.18039218, b: 0.25098038, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &1977720206703844686
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 13
-  hdPluginSubTargetMaterialVersions:
-    m_Keys: []
-    m_Values: 
