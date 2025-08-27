@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Mng_ItemHandler : MonoBehaviour
@@ -13,11 +14,15 @@ public class Mng_ItemHandler : MonoBehaviour
     [SerializeField] private float rayDistance = 5f;
     [SerializeField] private LayerMask interactableLayer;
 
+    [Header("Spawned Item Settings")]
+    [SerializeField] private float itemSpawnDistance = 5f;
+    
     [Header("UI Elements")]
     [SerializeField] private GameObject pickupItemUI;
 
     private bool isUIVisible = false;
     private GameObject pickupItem;
+    private bool isSpawning = false;
 
     void Start()
     {
@@ -65,6 +70,17 @@ public class Mng_ItemHandler : MonoBehaviour
         {
             PickupItem();
         }
+        
+        // Spawn item in front of the player when the player presses the "F" key
+        if (Input.GetKeyDown(KeyCode.F) && !isSpawning)
+        {
+            var itemToSpawn = inventoryManager.GetSelectedHotbarItem();
+            if (itemToSpawn != null && itemToSpawn.isSpawnableInWorld)
+            {
+                isSpawning = true;
+                StartCoroutine(SpawnItem(itemToSpawn));
+            }
+        }
     }
 
     private void PickupItem()
@@ -110,6 +126,42 @@ public class Mng_ItemHandler : MonoBehaviour
         {
             // Add a small forward velocity to the dropped item
             rb.linearVelocity = dropVelocity;
+        }
+    }
+    
+    IEnumerator SpawnItem(Item item)
+    {
+        // Initial spawn in front of player
+        Vector3 spawnPosition = itemSpawnPoint.transform.position + itemSpawnPoint.transform.forward * itemSpawnDistance;
+        Quaternion spawnRotation = Quaternion.LookRotation(-itemSpawnPoint.transform.forward); // Face the player
+        GameObject spawnedItem = Instantiate(item.gameObjectPrefab, spawnPosition, spawnRotation);
+
+        while (isSpawning)
+        {
+            // Update position & rotation every frame
+            spawnPosition = itemSpawnPoint.transform.position + itemSpawnPoint.transform.forward * itemSpawnDistance;
+            // Cast a ray downward to find ground/terrain
+            Ray ray = new Ray(spawnPosition + Vector3.up * 10f, Vector3.down);
+            if (Physics.Raycast(ray, out RaycastHit hit, 100f))
+            {
+                // Make the item sit on the ground
+                spawnPosition = hit.point;
+            }
+            
+            spawnRotation = Quaternion.LookRotation(-itemSpawnPoint.transform.forward); // Face the player
+            spawnedItem.transform.position = spawnPosition;
+            spawnedItem.transform.rotation = spawnRotation;
+            
+            inventoryManager.ShowHint("Press 'G' to confirm spawn");
+
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                // Confirm the spawn
+                isSpawning = false;
+                inventoryManager.ClearHint();
+            }
+
+            yield return null; 
         }
     }
 

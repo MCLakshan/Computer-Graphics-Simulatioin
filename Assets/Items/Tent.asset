@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07985d1603e37f84ead6ffd9f58bfad9, type: 3}
   m_Name: Tent
   m_EditorClassIdentifier: 
-  gameObjectPrefab: {fileID: 8491602803740183406, guid: a3040296baaf93a4d95a97180fa5c685, type: 3}
+  gameObjectPrefab: {fileID: 8092686192756267141, guid: a3040296baaf93a4d95a97180fa5c685, type: 3}
   itemType: 1
+  isCanDroppable: 0
   isSpawnableInWorld: 1
   image: {fileID: 21300000, guid: a2bf6a366d548bf43adc04f1cf158d93, type: 3}
   isStackable: 0

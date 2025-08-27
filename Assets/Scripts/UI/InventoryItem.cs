@@ -111,7 +111,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                     Mng_InventoryManager inventoryManager = FindObjectOfType<Mng_InventoryManager>();
                     if (inventoryManager != null)
                     {
-                        inventoryManager.DisplayMessage("This item cannot be dropped.");
+                        inventoryManager.DisplayCraftingConsoleMessage("This item cannot be dropped.");
                     }
                     return;
                 }

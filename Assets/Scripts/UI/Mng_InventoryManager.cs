@@ -29,6 +29,23 @@ public class Mng_InventoryManager : MonoBehaviour
     private bool isMainInventoryOpen = false;
     private int selectedHotbarSlot = -1; // -1 means no slot is selected
 
+    #region - GETTERS -
+
+    public Item GetSelectedHotbarItem()
+    {
+        if (selectedHotbarSlot >= 0 && selectedHotbarSlot < hotbarSlots.Length)
+        {
+            var itemInSlot = hotbarSlots[selectedHotbarSlot].GetComponentInChildren<InventoryItem>();
+            if (itemInSlot != null)
+            {
+                return itemInSlot.item;
+            }
+        }
+        return null; // No item selected or slot is empty
+    }
+
+    #endregion
+
     private void Start()
     {
         isMainInventoryOpen = false;
@@ -157,7 +174,7 @@ public class Mng_InventoryManager : MonoBehaviour
 
         if (newSelectedSlot < 0 || newSelectedSlot >= hotbarSlots.Length)
         {
-            ShowHint("");
+            ClearHint();
         }
         else
         {
@@ -166,6 +183,10 @@ public class Mng_InventoryManager : MonoBehaviour
             if (itemInSlot != null && itemInSlot.item.isSpawnableInWorld)
             {
                 ShowHint("Press 'F' to spawn the item in the world.");
+            }
+            else
+            {
+                ClearHint();
             }
         }
         
@@ -312,7 +333,7 @@ public class Mng_InventoryManager : MonoBehaviour
 
     #endregion
     
-    public void DisplayMessage(string message)
+    public void DisplayCraftingConsoleMessage(string message)
     {
         craftingConsoleText.text = message;
     }
@@ -321,6 +342,12 @@ public class Mng_InventoryManager : MonoBehaviour
     {
         showHintText.text = hint;
         showHintText.gameObject.SetActive(true);
+    }
+
+    public void ClearHint()
+    {
+        showHintText.text = "";
+        showHintText.gameObject.SetActive(false);
     }
     
     
