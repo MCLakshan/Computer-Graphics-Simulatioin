@@ -8,6 +8,8 @@ public class Item : ScriptableObject
     [Header("Item Game Properties")]
     public GameObject gameObjectPrefab;
     public ItemType itemType;
+    public bool isCanDroppable = false;
+    public bool isSpawnableInWorld = false;
     
     [Header("Item UI Properties")]
     public Sprite image;

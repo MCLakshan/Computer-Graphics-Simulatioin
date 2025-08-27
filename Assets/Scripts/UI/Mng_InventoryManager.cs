@@ -20,6 +20,9 @@ public class Mng_InventoryManager : MonoBehaviour
     [Header("Craftable Items")]
     [SerializeField] private Item FirePlace; // Example of a craftable item
     
+    [Header("Hints")]
+    [SerializeField] private TMP_Text showHintText; // Text field to show hints to the player
+    
     [Header("Debugging")]
     [SerializeField] private Item testItem; // Debugging item to add to the inventory
     
@@ -51,11 +54,7 @@ public class Mng_InventoryManager : MonoBehaviour
         // Press "x" to deselect the currently selected hotbar slot
         if (Input.GetKeyDown(KeyCode.X))
         {
-            if (selectedHotbarSlot >= 0 && selectedHotbarSlot < hotbarSlots.Length)
-            {
-                hotbarSlots[selectedHotbarSlot].Deselect();
-                selectedHotbarSlot = -1; // Reset the selected slot
-            }
+            ChangeSelectedSlot(-1);
         }
         
         // Debugging: add an item to the main inventory when the "A" key is pressed
@@ -134,6 +133,15 @@ public class Mng_InventoryManager : MonoBehaviour
     // Change the selected hotbar slot
     private void ChangeSelectedSlot(int newSelectedSlot)
     {
+        if (newSelectedSlot == -1)
+        {
+            if (selectedHotbarSlot >= 0 && selectedHotbarSlot < hotbarSlots.Length)
+            {
+                hotbarSlots[selectedHotbarSlot].Deselect();
+                selectedHotbarSlot = -1; // Reset the selected slot
+            }
+        }
+        
         // Deselect the previously selected slot
         if (selectedHotbarSlot >= 0 && selectedHotbarSlot < hotbarSlots.Length)
         {
@@ -146,6 +154,21 @@ public class Mng_InventoryManager : MonoBehaviour
             hotbarSlots[newSelectedSlot].Select();
             selectedHotbarSlot = newSelectedSlot;
         }
+
+        if (newSelectedSlot < 0 || newSelectedSlot >= hotbarSlots.Length)
+        {
+            ShowHint("");
+        }
+        else
+        {
+            // If the selected slot item is spawnable in the world, show a hint
+            var itemInSlot = hotbarSlots[selectedHotbarSlot].GetComponentInChildren<InventoryItem>();
+            if (itemInSlot != null && itemInSlot.item.isSpawnableInWorld)
+            {
+                ShowHint("Press 'F' to spawn the item in the world.");
+            }
+        }
+        
     }
 
     #region - CRAFTING -
@@ -288,6 +311,17 @@ public class Mng_InventoryManager : MonoBehaviour
     }
 
     #endregion
+    
+    public void DisplayMessage(string message)
+    {
+        craftingConsoleText.text = message;
+    }
+    
+    public void ShowHint(string hint)
+    {
+        showHintText.text = hint;
+        showHintText.gameObject.SetActive(true);
+    }
     
     
 }

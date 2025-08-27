@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameObjectPrefab: {fileID: 2625569491811431142, guid: 5bb59e2d90714ca49aa46f39ee249d48, type: 3}
   itemType: 2
+  isCanDroppable: 1
+  isSpawnableInWorld: 0
   image: {fileID: 21300000, guid: 05595fa54337cff45b72f8272c014f6f, type: 3}
   isStackable: 1
   maxStackSize: 10
-  iscraftable: 0
+  isCraftable: 0
   craftingRequirements: []

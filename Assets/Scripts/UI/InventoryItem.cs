@@ -105,6 +105,17 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             
             if (itemToDrop != null)
             {
+                // Check if the item is droppable
+                if (!item.isCanDroppable)
+                {
+                    Mng_InventoryManager inventoryManager = FindObjectOfType<Mng_InventoryManager>();
+                    if (inventoryManager != null)
+                    {
+                        inventoryManager.DisplayMessage("This item cannot be dropped.");
+                    }
+                    return;
+                }
+                
                 // Instantiate the number of items to drop
                 for (int i = 0; i < countToDrop; i++)
                 {
