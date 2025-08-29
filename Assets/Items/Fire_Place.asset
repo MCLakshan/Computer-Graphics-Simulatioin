@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07985d1603e37f84ead6ffd9f58bfad9, type: 3}
   m_Name: Fire_Place
   m_EditorClassIdentifier: 
-  gameObjectPrefab: {fileID: 0}
+  gameObjectPrefab: {fileID: 5996032926338727021, guid: bab98bb1133655b4fb70e1dfc44d3fb2, type: 3}
   itemType: 1
   isCanDroppable: 0
   isSpawnableInWorld: 1

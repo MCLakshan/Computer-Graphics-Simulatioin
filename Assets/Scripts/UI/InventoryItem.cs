@@ -45,6 +45,9 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         image.sprite = newItem.image;
         RefreshCount();
         
+        // Get the parent Canvas for dragging purposes
+        var canvas = GetComponentInParent<Canvas>();
+        
         parentAfterDrag = transform.parent; // Store the initial parent for dragging
     }
 
@@ -71,7 +74,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         parentAfterDrag = transform.parent;
         
         // Set the item's parent to the canvas to ensure it is rendered on top of other UI elements
-        transform.SetParent(transform.root);
+        Transform tempHolder = GameObject.Find("Temp Inventory Item Holder").transform;
+        transform.SetParent(tempHolder);
     }
 
     public void OnDrag(PointerEventData eventData)

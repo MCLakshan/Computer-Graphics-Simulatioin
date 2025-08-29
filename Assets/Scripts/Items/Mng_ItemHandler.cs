@@ -135,6 +135,13 @@ public class Mng_ItemHandler : MonoBehaviour
         Vector3 spawnPosition = itemSpawnPoint.transform.position + itemSpawnPoint.transform.forward * itemSpawnDistance;
         Quaternion spawnRotation = Quaternion.LookRotation(-itemSpawnPoint.transform.forward); // Face the player
         GameObject spawnedItem = Instantiate(item.gameObjectPrefab, spawnPosition, spawnRotation);
+        Collider itemCollider = spawnedItem.GetComponent<Collider>();
+        
+        // Disable the collider initially to prevent immediate collisions
+        if (itemCollider != null)
+        {
+            itemCollider.enabled = false;
+        }
 
         while (isSpawning)
         {
@@ -159,6 +166,12 @@ public class Mng_ItemHandler : MonoBehaviour
                 // Confirm the spawn
                 isSpawning = false;
                 inventoryManager.ClearHint();
+                
+                // Enable the collider and after spawning
+                if (itemCollider != null)
+                {
+                    itemCollider.enabled = true;
+                }
             }
 
             yield return null; 
