@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
+[ExecuteAlways]
 public class TerrainTexturePainter : MonoBehaviour
 {
     [Header("<b><color=#FFE066>Terrain Texture Painter</color></b>\n<i><color=#FFF2B2>Automatically paints terrain textures based on height values</color></i>")]
