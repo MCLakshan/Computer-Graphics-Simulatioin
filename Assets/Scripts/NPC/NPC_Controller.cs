@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Serialization;
 
 public enum NPC_State
@@ -25,17 +26,33 @@ public class NPC_Controller : MonoBehaviour
     [SerializeField] bool isInAttackRange = false;
     [SerializeField] bool isInVisionAngle = false;
     
+    [Header("Navi Mesh Agent Settings")]
+    [SerializeField] private Transform[] roamPoints;
+    [SerializeField] private float roamSpeed = 4f;
+    [SerializeField] private float chaseSpeed = 5f;
+    
     [Header("Debug Settings")]
     [SerializeField] bool isDebug = false;
     [SerializeField] private bool showDetectionRange = true;
     
+    private NavMeshAgent agent;
+    private int currentRoamIndex = 0;
     
-    
+    private void Start()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        if (agent == null)
+        {
+            Debug.LogError("NavMeshAgent component is missing on the NPC.");
+            return;
+        }
+    }
     
     private void Update()
     {
         CkeckRanges();
         CheckNpcState();
+        PerformActions();
     }
     
     private void CkeckRanges()
@@ -70,7 +87,7 @@ public class NPC_Controller : MonoBehaviour
         // idle state
         if (!isInDetectionRange || !isInVisionAngle)
         {
-            currentState = NPC_State.Idle;
+            currentState = NPC_State.Patrol;
             return;
         }
         
@@ -86,6 +103,35 @@ public class NPC_Controller : MonoBehaviour
         {
             currentState = NPC_State.Attack;
             return;
+        }
+    }
+    
+    // Check the state and perform actions accordingly
+    private void PerformActions()
+    {
+        // roam state
+        if (currentState == NPC_State.Patrol)
+        {
+            // Simple roaming logic
+            if (roamPoints.Length == 0) return;
+            
+            // Roaming logic is running on (x,z) plane
+            // NavMeshAgent is in the current gameObject
+            agent.speed = roamSpeed;
+            if (!agent.hasPath || agent.remainingDistance < 0.5f)
+            {
+                // Roam through the points in a loop in the array
+                currentRoamIndex = (currentRoamIndex + 1) % roamPoints.Length;
+                agent.SetDestination(roamPoints[currentRoamIndex].position);
+            }
+        }
+        
+        // chase state
+        if (currentState == NPC_State.Chase)
+        {
+            if (target == null) return;
+            agent.speed = chaseSpeed;
+            agent.SetDestination(target.position);
         }
     }
     
