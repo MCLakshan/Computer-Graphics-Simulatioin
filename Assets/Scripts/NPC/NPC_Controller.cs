@@ -150,6 +150,17 @@ public class NPC_Controller : MonoBehaviour
             agent.speed = chaseSpeed;
             agent.SetDestination(target.position);
         }
+        
+        // attack state
+        if (currentState == NPC_State.Attack)
+        {
+            agent.ResetPath();
+            animator.SetBool("Attack", true);
+        }
+        else
+        {
+            animator.SetBool("Attack", false);
+        }
     }
     
     private void OnDrawGizmos()
