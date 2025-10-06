@@ -31,12 +31,17 @@ public class NPC_Controller : MonoBehaviour
     [SerializeField] private float roamSpeed = 4f;
     [SerializeField] private float chaseSpeed = 5f;
     
+    [Header("Animation Settings")]
+    
+    
     [Header("Debug Settings")]
     [SerializeField] bool isDebug = false;
     [SerializeField] private bool showDetectionRange = true;
     
     private NavMeshAgent agent;
     private int currentRoamIndex = 0;
+    private Animator animator;
+    private float npcVelocity;      // For animation blend tree
     
     private void Start()
     {
@@ -46,6 +51,13 @@ public class NPC_Controller : MonoBehaviour
             Debug.LogError("NavMeshAgent component is missing on the NPC.");
             return;
         }
+        
+        animator = GetComponentInChildren<Animator>();
+        if (animator == null)
+        {
+            Debug.LogError("Animator component is missing on the NPC or its children.");
+            return;
+        }
     }
     
     private void Update()
@@ -53,6 +65,11 @@ public class NPC_Controller : MonoBehaviour
         CkeckRanges();
         CheckNpcState();
         PerformActions();
+        
+        // Update animator with the current velocity
+        npcVelocity = agent.velocity.magnitude;
+        animator.SetFloat("Velocity", npcVelocity / chaseSpeed);
+        
     }
     
     private void CkeckRanges()
@@ -118,7 +135,7 @@ public class NPC_Controller : MonoBehaviour
             // Roaming logic is running on (x,z) plane
             // NavMeshAgent is in the current gameObject
             agent.speed = roamSpeed;
-            if (!agent.hasPath || agent.remainingDistance < 0.5f)
+            if (!agent.hasPath || agent.remainingDistance < agent.stoppingDistance)
             {
                 // Roam through the points in a loop in the array
                 currentRoamIndex = (currentRoamIndex + 1) % roamPoints.Length;
