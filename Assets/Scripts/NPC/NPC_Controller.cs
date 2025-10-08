@@ -183,7 +183,24 @@ public class NPC_Controller : MonoBehaviour
         // Draw attack range lets use another color to differentiate
         Gizmos.color = isInAttackRange ? Color.blue : Color.yellow;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+        
+        // Draw roam points and paths
+        if (roamPoints.Length > 0)
+        {
+            Gizmos.color = Color.cyan;
+            for (int i = 0; i < roamPoints.Length; i++)
+            {
+                Vector3 currentPoint = roamPoints[i].position;
+                Vector3 nextPoint = roamPoints[(i + 1) % roamPoints.Length].position;
+                Gizmos.DrawLine(currentPoint, nextPoint);
+                
+                // Draw arrow head
+                Vector3 direction = (nextPoint - currentPoint).normalized;
+                Vector3 right = Quaternion.LookRotation(direction) * Quaternion.Euler(0, 150, 0) * Vector3.forward;
+                Vector3 left = Quaternion.LookRotation(direction) * Quaternion.Euler(0, -150, 0) * Vector3.forward;
+                Gizmos.DrawLine(nextPoint, nextPoint + right * 0.5f);
+                Gizmos.DrawLine(nextPoint, nextPoint + left * 0.5f);
+            }
+        }
     }
-    
-    
 }
