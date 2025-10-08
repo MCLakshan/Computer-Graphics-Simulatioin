@@ -688,7 +688,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3938144469732883383}
   m_Layer: 0
-  m_Name: '[ Survival Player Game Module ]'
+  m_Name: '[ Player - Survival Game Module ]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
