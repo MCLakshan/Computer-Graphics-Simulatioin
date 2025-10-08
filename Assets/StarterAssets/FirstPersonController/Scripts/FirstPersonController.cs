@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -65,8 +66,7 @@ namespace StarterAssets
 		private float _fallTimeoutDelta;
 
 		// Custom References
-		[Header("Custom References")]
-		[SerializeField] private Mng_SurvivalStatsManager _survivalStatsManager;
+		private IPlayerStatsManager _playerStatsManager;
 	
 #if ENABLE_INPUT_SYSTEM
 		private PlayerInput _playerInput;
@@ -117,6 +117,14 @@ namespace StarterAssets
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
+			
+			// find the player stats manager in the scene
+			_playerStatsManager = _playerStatsManager = FindObjectsOfType<MonoBehaviour>().OfType<IPlayerStatsManager>().FirstOrDefault();
+
+			if (_playerStatsManager == null)
+			{
+				Debug.Log("No Player Stats Manager found in the scene. Stamina and other stats will not be managed.");
+			}
 		}
 
 		private void Update()
@@ -163,7 +171,7 @@ namespace StarterAssets
 		private void Move()
 		{
 			// set target speed based on move speed, sprint speed and if sprint is pressed
-			float targetSpeed = _input.sprint && _survivalStatsManager.HasStamina ? SprintSpeed : MoveSpeed;
+			float targetSpeed = _input.sprint && _playerStatsManager.HasStamina ? SprintSpeed : MoveSpeed;
 
 			// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 

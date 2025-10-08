@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class Mng_SurvivalStatsManager : MonoBehaviour
+public class Mng_SurvivalStatsManager : MonoBehaviour, IPlayerStatsManager
 {
     [Header("Health Settings")]
     [SerializeField] private float maxHealth = 100f;
