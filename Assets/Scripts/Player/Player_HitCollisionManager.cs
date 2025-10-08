@@ -29,13 +29,40 @@ public class Player_HitCollisionManager : MonoBehaviour
     [SerializeField] private bool showLayer1 = true;
     [SerializeField] private bool showLayer2 = true;
     [SerializeField] private bool showLayer3 = true;
-    
-    
-    private void CheckColltionWithLine(Vector3 pointA, Vector3 pointB)
+
+    public bool CheckCollisionWithGivenLine(Vector3 linePointA, Vector3 linePointB)
     {
-        
+        // Check collision with Layer 1
+        foreach (var point1 in Layer_1_CollitionPoints)
+        {
+            if (point1 != null && MathUtils.CheckSpereCollisionWithLine(linePointA, linePointB, point1.position, Layer_1_CollitionRadius))
+            {
+                
+                // Collision Detected with Layer 1
+                // Now check Layer 2 if it exists
+                
+                foreach(var point2 in Layer_2_CollitionPoints)
+                {
+                    if (point2 != null && MathUtils.CheckSpereCollisionWithLine(linePointA, linePointB, point2.position, Layer_2_CollitionRadius))
+                    {
+                        // Collision Detected with Layer 2
+                        // Now check Layer 3 if it exists
+                        
+                        foreach(var point3 in Layer_3_CollitionPoints)
+                        {
+                            if (point3 != null && MathUtils.CheckSpereCollisionWithLine(linePointA, linePointB, point3.position, Layer_3_CollitionRadius))
+                            {
+                                // Collision Detected with Layer 3
+                                return true; // Full collision through all layers
+                            }
+                        }
+                        return true; // Collision Detected with Layer 2 only
+                    }
+                }
+            }
+        }
+        return false;
     }
-    
     
     // Draw Gizmos to visualize collision points in the editor
     private void OnDrawGizmos()
