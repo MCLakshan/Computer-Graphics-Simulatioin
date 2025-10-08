@@ -217,6 +217,12 @@ MonoBehaviour:
   easeHealthBar: {fileID: 228036025531973293}
   maxHealth: 100
   easeHealthSpeed: 0.05
+  staminaBar: {fileID: 398638819141853907}
+  maxStamina: 100
+  staminaDecreaseRate: 5
+  staminaRecoveryRate: 10
+  staminaRecoveryDelay: 1
+  _playerInputs: {fileID: 2210872069763442542}
 --- !u!1 &1419439547886841290
 GameObject:
   m_ObjectHideFlags: 0
