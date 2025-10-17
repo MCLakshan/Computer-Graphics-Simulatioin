@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class NPC_WeponHandeller : MonoBehaviour
@@ -11,25 +12,55 @@ public class NPC_WeponHandeller : MonoBehaviour
     [SerializeField] Transform swordPointA;
     [SerializeField] Transform swordPointB;
     
+    // Attack Damage
+    [Header("Attack Damage Settings")]
+    [SerializeField] float attackDamageoOverTime = 1f;
+    
+    private Mng_PlayerHelthStaminaManager player_helthStaminaManager;
+    private bool ckeckAttackCollision = false;
+    
+    private void Start()
+    {
+        // Find the Player Health Stamina Manager in the scene
+        player_helthStaminaManager = FindObjectOfType<Mng_PlayerHelthStaminaManager>();
+        if (player_helthStaminaManager == null)
+        {
+            Debug.LogWarning("Mng_PlayerHelthStaminaManager not found in the scene.");
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        CheckAttackCollision();
+    }
+
     // Check Attack Collision
     public void CheckAttackCollision()
     {
-        if (player_hitCollisionManager != null && swordPointA != null && swordPointB != null)
+        if (player_hitCollisionManager != null && swordPointA != null && swordPointB != null && ckeckAttackCollision)
         {
             bool collisionDetected = player_hitCollisionManager.CheckCollisionWithGivenLine(swordPointA.position, swordPointB.position);
             if (collisionDetected)
             {
-                Debug.Log("Attack Hit Detected!");
-                // Handle hit logic here (e.g., apply damage, play effects, etc.)
+                // Apply damage to the player
+                if (player_helthStaminaManager != null)
+                {
+                    player_helthStaminaManager.TakeDamage(attackDamageoOverTime);
+                }
             }
-            else
-            {
-                Debug.Log("No Hit Detected.");
-            }
+            
         }
-        else
-        {
-            Debug.LogWarning("Player_HitCollisionManager or Sword Points are not assigned.");
-        }
+    }
+    
+    // Animation Event to Start Checking Attack Collision
+    public void StartCheckAttackCollisionCheck()
+    {
+        ckeckAttackCollision = true;
+    }
+    
+    // Animation Event to Stop Checking Attack Collision
+    public void StopCheckAttackCollisionCheck()
+    {
+        ckeckAttackCollision = false;
     }
 }

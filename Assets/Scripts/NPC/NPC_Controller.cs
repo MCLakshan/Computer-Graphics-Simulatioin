@@ -20,6 +20,7 @@ public class NPC_Controller : MonoBehaviour
     [SerializeField] private float detectionRange = 5f;
     [SerializeField] private float visionAngle = 60f;
     [SerializeField] private float attackRange = 1.5f;
+    [SerializeField] private Transform eyesTransform;
     
     [Header("Detection Status")]
     [SerializeField] bool isInDetectionRange = false;
@@ -92,6 +93,10 @@ public class NPC_Controller : MonoBehaviour
             float angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
             isInVisionAngle = angleToTarget <= visionAngle / 2f;
         }
+        else
+        {
+            isInVisionAngle = false;
+        }
         
         // Check attack range
         isInAttackRange = distance <= attackRange;
@@ -111,6 +116,24 @@ public class NPC_Controller : MonoBehaviour
         // chase state
         if (isInDetectionRange && isInVisionAngle && !isInAttackRange)
         {
+            // is the target is in the detection range and vision angle 
+            // check if there are obstacles between NPC and target (line of sight)
+            
+            Vector3 rayCastStart = eyesTransform.position; // use eyes position for better accuracy 
+            Vector3 rayCastEnd = new Vector3(target.position.x, rayCastStart.y, target.position.z); // keep the same height as eyes
+            
+            // Cast a ray to check for obstacles
+            RaycastHit hit;
+            if (Physics.Raycast(rayCastStart, (rayCastEnd - rayCastStart).normalized, out hit, detectionRange))
+            {
+                if (hit.transform != target)
+                {
+                    // There is an obstacle between NPC and target
+                    currentState = NPC_State.Patrol;
+                    return;
+                }
+            }
+
             currentState = NPC_State.Chase;
             return;
         }
@@ -201,6 +224,16 @@ public class NPC_Controller : MonoBehaviour
                 Gizmos.DrawLine(nextPoint, nextPoint + right * 0.5f);
                 Gizmos.DrawLine(nextPoint, nextPoint + left * 0.5f);
             }
+        }
+        
+        // Draw the obstacle check ray
+        // Change color based on whether the target is detected or not
+        if (target != null)
+        {
+            Gizmos.color = (currentState == NPC_State.Chase) ? Color.green : Color.red;
+            Vector3 rayCastStart = eyesTransform.position; // use eyes position for better accuracy 
+            Vector3 rayCastEnd = new Vector3(target.position.x, rayCastStart.y, target.position.z); // keep the same height as eyes
+            Gizmos.DrawLine(rayCastStart, rayCastEnd);
         }
     }
 }
