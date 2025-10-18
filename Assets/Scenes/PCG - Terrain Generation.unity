@@ -1019,8 +1019,14 @@ Transform:
   - {fileID: 1072173602}
   - {fileID: 1323354580}
   - {fileID: 693639553}
+  - {fileID: 382705657}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &382705657 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2812438459607891117, guid: 018b723c60ea59e4e9b4297213ccd94a, type: 3}
+  m_PrefabInstance: {fileID: 1331414830}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &384501550
 GameObject:
   m_ObjectHideFlags: 0
@@ -3343,6 +3349,63 @@ Transform:
   - {fileID: 567553435}
   m_Father: {fileID: 357942944}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1331414830
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 357942944}
+    m_Modifications:
+    - target: {fileID: 2812438459607891117, guid: 018b723c60ea59e4e9b4297213ccd94a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2048
+      objectReference: {fileID: 0}
+    - target: {fileID: 2812438459607891117, guid: 018b723c60ea59e4e9b4297213ccd94a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1300
+      objectReference: {fileID: 0}
+    - target: {fileID: 2812438459607891117, guid: 018b723c60ea59e4e9b4297213ccd94a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2048
+      objectReference: {fileID: 0}
+    - target: {fileID: 2812438459607891117, guid: 018b723c60ea59e4e9b4297213ccd94a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2812438459607891117, guid: 018b723c60ea59e4e9b4297213ccd94a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2812438459607891117, guid: 018b723c60ea59e4e9b4297213ccd94a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2812438459607891117, guid: 018b723c60ea59e4e9b4297213ccd94a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2812438459607891117, guid: 018b723c60ea59e4e9b4297213ccd94a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2812438459607891117, guid: 018b723c60ea59e4e9b4297213ccd94a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2812438459607891117, guid: 018b723c60ea59e4e9b4297213ccd94a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720832379062029886, guid: 018b723c60ea59e4e9b4297213ccd94a, type: 3}
+      propertyPath: m_Name
+      value: VolumetricClouds
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 018b723c60ea59e4e9b4297213ccd94a, type: 3}
 --- !u!1 &1333768358
 GameObject:
   m_ObjectHideFlags: 0
@@ -3400,7 +3463,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Painting Terrain Biomes ...
+  m_text: Terrain setup complete with 8 layers.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5648,10 +5711,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1564728536883781461, guid: 6d3e7c555db345a478dfb640ef96a340, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6811670823155424768, guid: 6d3e7c555db345a478dfb640ef96a340, type: 3}
       propertyPath: m_LocalPosition.x
       value: 409.52
@@ -5691,10 +5750,6 @@ PrefabInstance:
     - target: {fileID: 6811670823155424768, guid: 6d3e7c555db345a478dfb640ef96a340, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7266976761953420940, guid: 6d3e7c555db345a478dfb640ef96a340, type: 3}
-      propertyPath: SprintSpeed
-      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
