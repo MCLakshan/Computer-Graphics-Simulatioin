@@ -4,13 +4,11 @@ using System.Collections.Generic;
 // PROCEDURAL OBJECT GENERATION + GPU INSTANCING + FRUSTUM CULLING
 public class ProceduralObjectSpawnerGPU : MonoBehaviour
 {
+    [Header("Global References")]
+    [SerializeField] private Mng_GlobalReferences globalRefs; // Reference to global manager for terrain and player
+    
     [Header("GPU Instancing Master")]
     [SerializeField] private ProceduralObjectSpawnerGPUMaster master; // Reference to the master script
-    
-    [Header("Terrain Settings")]
-    public Terrain terrain;
-    public Transform player;
-    public Transform playerCamera;
     
     [Header("Object Mesh & Material")]
     public Mesh objectMesh;
@@ -49,6 +47,11 @@ public class ProceduralObjectSpawnerGPU : MonoBehaviour
     private Vector2Int _lastPlayerChunk;
     private float maxTerrainHeight; // Max height of terrain for bounds checking
     private float cosHalfFOV;       // For the edge case of frustum culling (prevent crashes)
+    
+    // References
+    private Terrain terrain;
+    private Transform player;
+    private Transform playerCamera;
     
     // GPU Instancing data
     private Dictionary<Vector2Int, ObjectChunk> objectChunks;
@@ -90,6 +93,11 @@ public class ProceduralObjectSpawnerGPU : MonoBehaviour
 
     void Start()
     {
+        // Get references
+        terrain = globalRefs.GetTerrain();
+        player = globalRefs.GetPlayer();
+        playerCamera = globalRefs.GetPlayerCamera();
+        
         cosHalfFOV = Mathf.Cos(cameraFieldOfView * 0.5f * Mathf.Deg2Rad);
         
         objectChunks = new Dictionary<Vector2Int, ObjectChunk>();

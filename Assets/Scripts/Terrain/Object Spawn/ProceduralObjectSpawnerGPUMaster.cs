@@ -6,8 +6,8 @@ public class ProceduralObjectSpawnerGPUMaster : MonoBehaviour
     // Script Description:
     [Header("Procedural Object Spawner GPU Master")]
     
-    [Header("References")]
-    [SerializeField] private Transform player;
+    [Header("Global References")]
+    [SerializeField] private Mng_GlobalReferences globalRefs; // Reference to global manager for terrain and player
     
     [Header("Settings")]
     [SerializeField] private float chunkSize = 32f;
@@ -16,6 +16,12 @@ public class ProceduralObjectSpawnerGPUMaster : MonoBehaviour
         
     private Vector2Int _lastPlayerChunk;
     private float _nextRenderTime;
+    private Transform player;
+    
+    void Start()
+    {
+        player = globalRefs.GetPlayer();
+    }
     
     void Update()
     {
