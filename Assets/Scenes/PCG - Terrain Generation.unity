@@ -308,6 +308,14 @@ MonoBehaviour:
     MinHeightPercent: 0.022
     MaxHeightPercent: 0.095
     canSpawn: 1
+  - Name: '[ GRASS ] - Dream Tree 2'
+    Type: 0
+    Prefab: {fileID: 728238686167398493, guid: a810ed0b037a58d46b0f6f4404a1f12a, type: 3}
+    SpawnCount: 1000
+    MindistanceBetweenType: 5
+    MinHeightPercent: 0.022
+    MaxHeightPercent: 0.095
+    canSpawn: 1
   - Name: '[ FOREST ] - Large Pine Tree 1'
     Type: 1
     Prefab: {fileID: 6948803800378873062, guid: f9b3b15e2aa420a4094f0734a4b10dc8, type: 3}
