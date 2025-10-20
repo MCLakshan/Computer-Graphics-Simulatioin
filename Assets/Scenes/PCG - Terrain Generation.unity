@@ -412,10 +412,34 @@ MonoBehaviour:
     MinHeightPercent: 0.105
     MaxHeightPercent: 0.3
     canSpawn: 1
+  - Name: '[ FOREST ] - Dreem Tree 2'
+    Type: 1
+    Prefab: {fileID: 728238686167398493, guid: dc3a45cdc6eb0c54daec6dd309dc14f4, type: 3}
+    SpawnCount: 1000
+    MindistanceBetweenType: 10
+    MinHeightPercent: 0.105
+    MaxHeightPercent: 0.3
+    canSpawn: 1
+  - Name: '[ FOREST ] - Sakura big summer 01'
+    Type: 1
+    Prefab: {fileID: 9184283371616552862, guid: cc88fff12702aed468f474282c8d5787, type: 3}
+    SpawnCount: 1000
+    MindistanceBetweenType: 10
+    MinHeightPercent: 0.105
+    MaxHeightPercent: 0.3
+    canSpawn: 1
+  - Name: '[ FOREST ] - Sakura big summer 05'
+    Type: 1
+    Prefab: {fileID: 8971494080335720710, guid: 1cd06dcbfa8f69342bb0795d03ac558e, type: 3}
+    SpawnCount: 1000
+    MindistanceBetweenType: 10
+    MinHeightPercent: 0.105
+    MaxHeightPercent: 0.3
+    canSpawn: 1
   - Name: '[ THUNDRA ] - Lilac Single Tree 2'
     Type: 2
     Prefab: {fileID: 3643364694243093372, guid: 9dacd38a75f19964ba7d98ec9aebdfa4, type: 3}
-    SpawnCount: 1000
+    SpawnCount: 2000
     MindistanceBetweenType: 5
     MinHeightPercent: 0.3
     MaxHeightPercent: 0.5
