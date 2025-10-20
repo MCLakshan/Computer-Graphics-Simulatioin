@@ -335,7 +335,7 @@ MonoBehaviour:
   - Name: '[ FOREST ] - Large Pine Tree 1'
     Type: 1
     Prefab: {fileID: 6948803800378873062, guid: f9b3b15e2aa420a4094f0734a4b10dc8, type: 3}
-    SpawnCount: 2000
+    SpawnCount: 4000
     MindistanceBetweenType: 3
     MinHeightPercent: 0.105
     MaxHeightPercent: 0.3
@@ -343,7 +343,7 @@ MonoBehaviour:
   - Name: '[ FOREST ] - Large Pine Tree 2'
     Type: 1
     Prefab: {fileID: 4292624513649165816, guid: 81d0bfaceee996b4badf04a58c5cb008, type: 3}
-    SpawnCount: 2000
+    SpawnCount: 4000
     MindistanceBetweenType: 3
     MinHeightPercent: 0.105
     MaxHeightPercent: 0.3
@@ -351,7 +351,7 @@ MonoBehaviour:
   - Name: '[ FOREST ] - Medium Pine Tree 2'
     Type: 1
     Prefab: {fileID: 4292624513649165816, guid: 81d0bfaceee996b4badf04a58c5cb008, type: 3}
-    SpawnCount: 1000
+    SpawnCount: 2000
     MindistanceBetweenType: 3
     MinHeightPercent: 0.105
     MaxHeightPercent: 0.3
@@ -359,7 +359,7 @@ MonoBehaviour:
   - Name: '[ FOREST ] - Medium Pine Tree 3'
     Type: 1
     Prefab: {fileID: 2772202851513751404, guid: efa056c6d11f1c14fac7afd034ce4c5e, type: 3}
-    SpawnCount: 1000
+    SpawnCount: 2000
     MindistanceBetweenType: 3
     MinHeightPercent: 0.105
     MaxHeightPercent: 0.3
@@ -367,7 +367,7 @@ MonoBehaviour:
   - Name: '[ FOREST ] - Pine Sapling 3 (small tree)'
     Type: 1
     Prefab: {fileID: 3138988572906740420, guid: 7eb7c431de794fe4581d554cf42679fa, type: 3}
-    SpawnCount: 2000
+    SpawnCount: 4000
     MindistanceBetweenType: 3
     MinHeightPercent: 0.105
     MaxHeightPercent: 0.3
@@ -375,7 +375,7 @@ MonoBehaviour:
   - Name: '[ FOREST ] - Lilac Bush 1'
     Type: 1
     Prefab: {fileID: 1883170641425228574, guid: 4c0b8208976ee3e49a67c44caecad8e2, type: 3}
-    SpawnCount: 2000
+    SpawnCount: 4000
     MindistanceBetweenType: 5
     MinHeightPercent: 0.105
     MaxHeightPercent: 0.3
@@ -383,7 +383,7 @@ MonoBehaviour:
   - Name: '[ FOREST ] - Lilac Bush 3'
     Type: 1
     Prefab: {fileID: 833014445901549575, guid: a138659f48e6cd747a1299de327e0088, type: 3}
-    SpawnCount: 2000
+    SpawnCount: 4000
     MindistanceBetweenType: 5
     MinHeightPercent: 0.105
     MaxHeightPercent: 0.3
@@ -391,7 +391,7 @@ MonoBehaviour:
   - Name: '[ FOREST ] - Lilac Single Tree 1'
     Type: 1
     Prefab: {fileID: 8705127756659204674, guid: 77ae1aa4ef1092148954fe6c9328c13d, type: 3}
-    SpawnCount: 2000
+    SpawnCount: 4000
     MindistanceBetweenType: 2
     MinHeightPercent: 0.105
     MaxHeightPercent: 0.3
