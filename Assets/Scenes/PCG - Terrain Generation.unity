@@ -310,8 +310,24 @@ MonoBehaviour:
     canSpawn: 1
   - Name: '[ GRASS ] - Dream Tree 2'
     Type: 0
-    Prefab: {fileID: 728238686167398493, guid: a810ed0b037a58d46b0f6f4404a1f12a, type: 3}
+    Prefab: {fileID: 728238686167398493, guid: dc3a45cdc6eb0c54daec6dd309dc14f4, type: 3}
     SpawnCount: 500
+    MindistanceBetweenType: 5
+    MinHeightPercent: 0.022
+    MaxHeightPercent: 0.095
+    canSpawn: 1
+  - Name: '[ GRASS ] - Sakura big summer 01'
+    Type: 0
+    Prefab: {fileID: 9184283371616552862, guid: cc88fff12702aed468f474282c8d5787, type: 3}
+    SpawnCount: 250
+    MindistanceBetweenType: 5
+    MinHeightPercent: 0.022
+    MaxHeightPercent: 0.095
+    canSpawn: 1
+  - Name: '[ GRASS ] - Sakura big summer 05'
+    Type: 0
+    Prefab: {fileID: 8971494080335720710, guid: 1cd06dcbfa8f69342bb0795d03ac558e, type: 3}
+    SpawnCount: 250
     MindistanceBetweenType: 5
     MinHeightPercent: 0.022
     MaxHeightPercent: 0.095
