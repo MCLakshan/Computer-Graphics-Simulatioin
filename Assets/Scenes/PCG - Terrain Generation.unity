@@ -311,7 +311,7 @@ MonoBehaviour:
   - Name: '[ GRASS ] - Dream Tree 2'
     Type: 0
     Prefab: {fileID: 728238686167398493, guid: a810ed0b037a58d46b0f6f4404a1f12a, type: 3}
-    SpawnCount: 1000
+    SpawnCount: 500
     MindistanceBetweenType: 5
     MinHeightPercent: 0.022
     MaxHeightPercent: 0.095
