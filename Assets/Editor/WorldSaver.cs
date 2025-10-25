@@ -10,7 +10,8 @@ public class WorldSaver
     static void SaveWorldAssets()
     {
         // Change this to your Prototype Game Scene name
-        string targetSceneName = "PCG - Terrain";
+        // string targetSceneName = "PCG - Terrain";
+        string targetSceneName = "PCG - Terrain Generation (Cinamatics Rendering)";
 
         // Get active scene
         Scene currentScene = EditorSceneManager.GetActiveScene();
@@ -22,7 +23,8 @@ public class WorldSaver
         }
 
         // Base save paths
-        string basePath = "Assets/Prototype Game ( With PCG Terrain )/TerrainSaves/";
+        // string basePath = "Assets/Prototype Game ( With PCG Terrain )/TerrainSaves/";
+        string basePath = "Assets/Scenes/Saved Assets For Cenematics Rendering/";
         string terrainPath = Path.Combine(basePath, "SavedTerrain.asset");
         string prefabFolder = Path.Combine(basePath, "Prefabs/");
 
