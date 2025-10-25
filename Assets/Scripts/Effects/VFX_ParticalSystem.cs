@@ -12,6 +12,7 @@ public class VFX_ParticalSystem : MonoBehaviour
     public float startSize = 0.1f;
     public float endSize = 0.05f;
     public Color startColor = Color.white;
+    public Color midColor = Color.white;
     public Color endColor = Color.clear;
     [Range(0f, 2f)]
     public float velocityMultiplier = 0.5f;
@@ -189,7 +190,15 @@ public class VFX_ParticalSystem : MonoBehaviour
             
             // Interpolate size and color based on age
             float currentSize = Mathf.Lerp(startSize, endSize, normalizedAge);
-            Color currentColor = Color.Lerp(startColor, endColor, normalizedAge);
+            Color currentColor;
+            if (normalizedAge < 0.5f)
+            {
+                currentColor = Color.Lerp(startColor, midColor, normalizedAge * 2f);
+            }
+            else
+            {
+                currentColor = Color.Lerp(midColor, endColor, (normalizedAge - 0.5f) * 2f);
+            }
             
             // More robust camera detection
             Camera currentCamera = Camera.main;

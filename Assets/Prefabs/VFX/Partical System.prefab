@@ -51,7 +51,8 @@ MonoBehaviour:
   gravity: {x: 0, y: 0, z: 0}
   startSize: 5
   endSize: 5
-  startColor: {r: 0.78316224, g: 0.78316224, b: 0.78316224, a: 0.078431375}
+  startColor: {r: 0.78316224, g: 0.78316224, b: 0.78316224, a: 0}
+  midColor: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 0.078431375}
   endColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0}
   velocityMultiplier: 0.5
   spawnAreaSize: {x: 32, y: 2, z: 32}
