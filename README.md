@@ -1,6 +1,6 @@
-﻿# Computer Graphics Simulation - Procedural Content Generation
+﻿﻿# Computer Graphics Simulation - Procedural Content Generation
 
-![Unity](https://img.shields.io/badge/Unity-2022+-black.svg?style=flat&logo=unity)
+![Unity](https://img.shields.io/badge/Unity-6-black.svg?style=flat&logo=unity)
 ![C#](https://img.shields.io/badge/C%23-239120?style=flat&logo=c-sharp&logoColor=white)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
@@ -40,7 +40,15 @@ This is an educational project designed to explore and implement fundamental and
 - Blue noise distribution for natural placement
 - Support for thousands of objects with minimal performance impact
 
-### 3. **Particle System**
+### 3. **Procedural Texture Generation**
+- Runtime texture generation using algorithmic methods
+- Sand texture generator with Voronoi grain distribution
+- Dirt texture generator with multi-layer composition (soil, pebbles, moisture, organic matter)
+- Perlin noise for natural variation
+- Tileable textures for seamless material application
+- Resolution-independent generation
+
+### 4. **Particle System**
 - Custom-built particle system from scratch (no Unity ParticleSystem)
 - CPU-based particle simulation with gravity and velocity
 - Color gradient transitions over particle lifetime
@@ -99,6 +107,9 @@ Computer-Graphics-Simulation/
 │   │   │   ├── NPC_Controller.cs                     # AI state machine
 │   │   │   ├── NPC_HealthManager.cs                  # Health system
 │   │   │   └── NPC_WeponHandeller.cs                 # Weapon handling
+│   │   ├── Textures/
+│   │   │   ├── TextureGenerator_Sand.cs              # Procedural sand texture
+│   │   │   └── TextureGenerator_Dirt.cs              # Procedural dirt texture
 │   │   ├── Player/
 │   │   │   ├── Player_HitCollisionManager.cs         # Collision detection
 │   │   │   ├── Mng_PlayerHelthStaminaManager.cs      # Health/stamina system
@@ -134,7 +145,7 @@ Computer-Graphics-Simulation/
 
 ### Prerequisites
 
-- **Unity 2022.3 LTS** or newer
+- **Unity 6** (6000.0.58f2 or newer)
 - **High Definition Render Pipeline (HDRP)** package
 - **TextMeshPro** package
 - **NavMesh Components** (for NPC AI)
@@ -253,7 +264,8 @@ The project implements several optimization techniques:
 ## 🧪 Testing Scenes
 
 1. **PCG - Terrain Generation**: Main procedural generation showcase
-2. **PCG - Terrain Generation (Cinematics Rendering)**: Pre-generated terrain for recording
+- **Procedural Generation Algorithms**: Perlin noise, Cellular Automata, Voronoi diagrams
+- **Procedural Texturing**: Runtime texture generation with multi-layer composition
 3. **NPC AI Module**: NPC behavior testing environment
 4. **Testing Area**: Sandbox for experimentation
 5. **Testing Cellular Automata Cloud**: Cloud generation testing
@@ -367,10 +379,12 @@ Created as a computer graphics learning project to explore procedural generation
 - The game development community for shared knowledge
 
 ---
-
+*Last Updated: October 25, 2025*
+*Unity Version: 6000.0.58f2 (Unity 6)*
 ## 📞 Contact & Support
 
-For questions or discussions about this project:
+*Last Updated: October 25, 2025*
+*Unity Version: 6000.0.58f2 (Unity 6)*
 - Open an issue on the repository
 - Check the [DOCUMENTATION.md](DOCUMENTATION.md) for technical details
 
@@ -378,5 +392,6 @@ For questions or discussions about this project:
 
 **Happy Learning! 🚀**
 
-*Last Updated: October 2025*
+*Last Updated: October 25, 2025*
+*Unity Version: 6000.0.58f2 (Unity 6)*
 

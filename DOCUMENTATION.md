@@ -1,19 +1,20 @@
-﻿# Technical Documentation - Computer Graphics Simulation
+﻿﻿# Technical Documentation - Computer Graphics Simulation
 
 ## Table of Contents
 
 1. [Architecture Overview](#architecture-overview)
 2. [Procedural Terrain Generation](#procedural-terrain-generation)
 3. [GPU Instancing System](#gpu-instancing-system)
-4. [Particle System Implementation](#particle-system-implementation)
-5. [Volumetric Cloud System](#volumetric-cloud-system)
-6. [NPC AI System](#npc-ai-system)
-7. [Collision Detection System](#collision-detection-system)
-8. [Water Detection & Rendering](#water-detection--rendering)
-9. [Environmental Systems](#environmental-systems)
-10. [Performance Optimization](#performance-optimization)
-11. [Shader Implementations](#shader-implementations)
-12. [API Reference](#api-reference)
+4. [Procedural Texture Generation](#procedural-texture-generation)
+5. [Particle System Implementation](#particle-system-implementation)
+6. [Volumetric Cloud System](#volumetric-cloud-system)
+7. [NPC AI System](#npc-ai-system)
+8. [Collision Detection System](#collision-detection-system)
+9. [Water Detection & Rendering](#water-detection--rendering)
+10. [Environmental Systems](#environmental-systems)
+11. [Performance Optimization](#performance-optimization)
+12. [Shader Implementations](#shader-implementations)
+13. [API Reference](#api-reference)
 
 ---
 
@@ -455,6 +456,347 @@ void RenderVisibleObjects() {
 - Draw calls: ~25-50 (vs thousands without instancing)
 
 ---
+## Procedural Texture Generation
+
+### Overview
+
+Two procedural texture generators create realistic terrain textures at runtime using algorithmic generation rather than pre-made image files. While not currently integrated into the main terrain system, these demonstrate advanced procedural content generation techniques.
+
+### Core Components
+
+#### 1. TextureGenerator_Sand.cs
+
+**Purpose**: Generates realistic sand textures using grain-based procedural generation.
+
+**Key Features**:
+- Voronoi-style grain distribution for realistic sand particles
+- Perlin noise for surface detail and roughness
+- Configurable grain size, contrast, and density
+- Color variation between light and dark sand
+- Tileable textures for seamless material application
+
+**Algorithm Breakdown**:
+
+**Step 1: Grain Center Generation**
+```csharp
+private Vector2[] GenerateGrainCenters(int count, int width, int height) {
+    Vector2[] centers = new Vector2[count];
+    
+    for (int i = 0; i < count; i++) {
+        centers[i] = new Vector2(
+            Random.Range(0, width),
+            Random.Range(0, height)
+        );
+    }
+    
+    return centers;
+}
+```
+
+**Step 2: Pixel Color Calculation**
+```csharp
+private Color CalculatePixelColor(int x, int y) {
+    // Find distance to nearest grain center (Voronoi)
+    float minDistance = float.MaxValue;
+    
+    foreach (Vector2 center in grainCenters) {
+        float distance = Vector2.Distance(new Vector2(x, y), center);
+        if (distance < minDistance) {
+            minDistance = distance;
+        }
+    }
+    
+    // Normalize distance for grain appearance
+    float grainValue = Mathf.Clamp01(minDistance / grainSize);
+    grainValue = Mathf.Pow(grainValue, contrast); // Apply contrast
+    
+    // Add Perlin noise for surface detail
+    float noiseX = x / (float)textureWidth * detailScale;
+    float noiseY = y / (float)textureHeight * detailScale;
+    float noiseValue = Mathf.PerlinNoise(noiseX, noiseY);
+    
+    // Combine grain and detail
+    float finalValue = grainValue + (noiseValue - 0.5f) * detailStrength;
+    finalValue = Mathf.Clamp01(finalValue);
+    
+    // Blend between light and dark sand colors
+    return Color.Lerp(darkColor, lightColor, finalValue);
+}
+```
+
+**Technical Details**:
+- **Voronoi Diagram**: Each pixel finds its nearest grain center, creating natural cell patterns
+- **Contrast Control**: Power function sharpens grain boundaries for more defined particles
+- **Detail Layer**: Perlin noise adds micro-surface roughness
+- **Color Blending**: Smooth transitions between sand color variations
+
+**Parameters**:
+- `grainCount` (500-2000): More grains = finer sand texture
+- `grainSize` (0.5-5): Larger values = bigger sand particles
+- `contrast` (0.1-3): Higher values = sharper grain edges
+- `detailScale` (5-50): Controls frequency of surface roughness
+- `detailStrength` (0-0.5): How prominent the surface detail is
+
+#### 2. TextureGenerator_Dirt.cs
+
+**Purpose**: Generates realistic dirt/soil textures with multiple layered elements.
+
+**Key Features**:
+- Multi-layer texture composition (soil base, pebbles, particles, moisture, organic matter)
+- Perlin noise for natural soil variation
+- Procedural pebble/rock placement using Voronoi cells
+- Moisture map for wet/dry patches
+- Organic matter distribution (decomposed leaves, twigs)
+- Highly configurable color palette
+
+**Algorithm Breakdown**:
+
+**Step 1: Base Soil Layer**
+```csharp
+// Generate base soil using layered Perlin noise
+float soilNoise = Mathf.PerlinNoise(
+    x / (float)textureWidth * soilScale,
+    y / (float)textureHeight * soilScale
+);
+
+// Apply contrast to make soil more varied
+soilNoise = Mathf.Pow(soilNoise, 2f - soilContrast);
+
+// Base color from light/dark dirt blend
+Color baseColor = Color.Lerp(darkDirtColor, lightDirtColor, soilNoise);
+```
+
+**Step 2: Pebble Layer**
+```csharp
+// Find nearest pebble center (Voronoi)
+float minPebbleDistance = float.MaxValue;
+
+foreach (Vector2 center in pebbleCenters) {
+    float distance = Vector2.Distance(new Vector2(x, y), center);
+    if (distance < minPebbleDistance) {
+        minPebbleDistance = distance;
+    }
+}
+
+// Calculate pebble influence
+float pebbleValue = Mathf.Clamp01(minPebbleDistance / pebbleSize);
+pebbleValue = Mathf.Pow(pebbleValue, pebbleSharpness);
+
+// Blend pebble color with base
+if (pebbleValue < 0.5f) {
+    baseColor = Color.Lerp(pebbleColor, baseColor, pebbleValue * 2f);
+}
+```
+
+**Step 3: Particle Detail Layer**
+```csharp
+// Add fine dirt particles using high-frequency noise
+float particleNoise = Mathf.PerlinNoise(
+    x / (float)textureWidth * particleScale,
+    y / (float)textureHeight * particleScale
+);
+
+// Apply particle detail to color
+baseColor = Color.Lerp(
+    baseColor,
+    baseColor * (0.8f + particleNoise * 0.4f),
+    particleStrength
+);
+```
+
+**Step 4: Moisture Layer**
+```csharp
+// Generate moisture map using Perlin noise
+float moistureNoise = Mathf.PerlinNoise(
+    x / (float)textureWidth * moistureScale,
+    y / (float)textureHeight * moistureScale
+);
+
+// Apply moisture effect (darker = wetter)
+if (moistureNoise < moistureAmount) {
+    float wetness = 1f - (moistureNoise / moistureAmount);
+    baseColor = Color.Lerp(baseColor, wetDirtColor, wetness * 0.6f);
+}
+```
+
+**Step 5: Organic Matter Layer**
+```csharp
+// Find nearest organic matter
+float minOrganicDistance = float.MaxValue;
+
+foreach (Vector2 center in organicCenters) {
+    float distance = Vector2.Distance(new Vector2(x, y), center);
+    if (distance < minOrganicDistance) {
+        minOrganicDistance = distance;
+    }
+}
+
+// Add organic matter if close enough
+float organicValue = Mathf.Clamp01(minOrganicDistance / organicSize);
+if (organicValue < organicDensity) {
+    baseColor = Color.Lerp(organicColor, baseColor, organicValue / organicDensity);
+}
+```
+
+**Layering Architecture**:
+```
+Base Soil (Perlin Noise)
+    ↓
+Add Pebbles (Voronoi)
+    ↓
+Add Fine Particles (High-Freq Noise)
+    ↓
+Apply Moisture (Noise-based Darkening)
+    ↓
+Add Organic Matter (Voronoi Dark Spots)
+    ↓
+Final Dirt Texture
+```
+
+**Parameters**:
+- `soilScale` (5-50): Base soil pattern size
+- `pebbleCount` (200-2000): Number of rocks/pebbles
+- `pebbleSize` (0.5-8): Size of individual pebbles
+- `particleScale` (20-100): Frequency of dirt grain detail
+- `moistureScale` (5-30): Size of wet/dry patches
+- `moistureAmount` (0-1): Overall wetness level
+- `organicCount` (50-500): Amount of decomposed matter
+- `organicSize` (1-10): Size of organic bits
+
+### Implementation Details
+
+#### Texture Creation
+```csharp
+private void CreateTexture() {
+    generatedTexture = new Texture2D(textureWidth, textureHeight, TextureFormat.RGB24, false);
+    generatedTexture.filterMode = FilterMode.Bilinear; // Smooth filtering
+    generatedTexture.wrapMode = TextureWrapMode.Repeat; // Seamless tiling
+}
+```
+
+#### Efficient Pixel Generation
+```csharp
+// Generate all pixels at once
+Color[] pixels = new Color[textureWidth * textureHeight];
+
+for (int y = 0; y < textureHeight; y++) {
+    for (int x = 0; x < textureWidth; x++) {
+        int pixelIndex = y * textureWidth + x;
+        pixels[pixelIndex] = CalculatePixelColor(x, y);
+    }
+}
+
+// Apply to GPU texture
+generatedTexture.SetPixels(pixels);
+generatedTexture.Apply();
+```
+
+#### Display Options
+```csharp
+// Display on UI (for preview/debugging)
+if (uiRawImage != null) {
+    uiRawImage.texture = generatedTexture;
+}
+
+// Apply to material (for actual use)
+if (applyToMaterial) {
+    Renderer renderer = GetComponent<Renderer>();
+    if (renderer != null) {
+        renderer.material.mainTexture = generatedTexture;
+    }
+}
+```
+
+### Use Cases
+
+**Current Status**: Experimental/Unused
+- Created as learning exercises in procedural texture generation
+- Not integrated into main terrain system
+- Could be used for runtime texture generation in future
+
+**Potential Applications**:
+1. **Dynamic Terrain Textures**: Generate unique textures per terrain instance
+2. **Memory Optimization**: Generate textures at runtime instead of storing large files
+3. **Texture Variation**: Create multiple variations from same algorithm with different seeds
+4. **Real-time Editing**: Adjust parameters and see immediate results
+5. **Biome-Specific Textures**: Generate appropriate textures for different terrain types
+
+### Technical Advantages
+
+**Procedural Generation Benefits**:
+- **Small Memory Footprint**: Algorithms are tiny compared to texture files
+- **Infinite Variations**: Change parameters for unique results
+- **Resolution Independence**: Generate at any resolution needed
+- **Seamless Tiling**: Easier to ensure textures tile perfectly
+- **Runtime Modification**: Adjust appearance dynamically
+
+**Algorithmic Techniques Demonstrated**:
+- **Voronoi Diagrams**: Natural cellular patterns (grains, pebbles)
+- **Perlin Noise**: Smooth, organic variation (soil, moisture)
+- **Multi-Layer Composition**: Combining multiple effects
+- **Color Blending**: Smooth transitions between elements
+- **Distance Fields**: Calculating influence zones
+
+### Performance Considerations
+
+**Generation Time**:
+- 512×512 texture: ~50-100ms (single frame)
+- 1024×1024 texture: ~200-400ms (may cause stutter)
+- 2048×2048 texture: ~800ms-1.5s (should be done at load time)
+
+**Optimization Strategies**:
+- Generate textures during loading screens
+- Use lower resolutions for distant terrain
+- Cache generated textures for reuse
+- Consider using compute shaders for GPU acceleration
+
+### Future Integration Ideas
+
+1. **Terrain Texture System Integration**:
+   - Replace static texture painting with procedural generation
+   - Generate textures based on terrain height/slope
+   - Blend multiple procedural textures per biome
+
+2. **Runtime Customization**:
+   - Allow players to adjust terrain appearance
+   - Generate seasonal variations (wet spring, dry summer)
+   - Weather-based texture changes
+
+3. **Compute Shader Port**:
+   - Move generation to GPU for real-time updates
+   - Generate normal maps procedurally
+   - Create displacement maps for tessellation
+
+### Code Example: Integration with Terrain
+
+```csharp
+// Example: How to integrate with terrain system
+public class ProceduralTerrainTextures : MonoBehaviour {
+    [SerializeField] private TextureGenerator_Sand sandGen;
+    [SerializeField] private TextureGenerator_Dirt dirtGen;
+    [SerializeField] private Terrain terrain;
+    
+    public void ApplyProceduralTextures() {
+        TerrainLayer[] layers = new TerrainLayer[2];
+        
+        // Generate sand texture
+        Texture2D sandTexture = sandGen.GenerateTexture();
+        layers[0] = new TerrainLayer();
+        layers[0].diffuseTexture = sandTexture;
+        
+        // Generate dirt texture
+        Texture2D dirtTexture = dirtGen.GenerateTexture();
+        layers[1] = new TerrainLayer();
+        layers[1].diffuseTexture = dirtTexture;
+        
+        // Apply to terrain
+        terrain.terrainData.terrainLayers = layers;
+    }
+}
+```
+
+---
+
 
 ## Particle System Implementation
 
@@ -1439,9 +1781,9 @@ private class Helper { }
 
 ---
 
-**Document Version**: 1.0  
-**Last Updated**: October 2025  
-**Project Version**: Unity 2022.3 LTS
+**Last Updated**: October 25, 2025  
+**Unity Version**: 6000.0.58f2 (Unity 6)
+**Unity Version**: 6000.0.58f2 (Unity 6)
 
 ---
 
