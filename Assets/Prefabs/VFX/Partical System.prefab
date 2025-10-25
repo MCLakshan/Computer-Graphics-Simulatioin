@@ -54,5 +54,5 @@ MonoBehaviour:
   startColor: {r: 0.78316224, g: 0.78316224, b: 0.78316224, a: 0.078431375}
   endColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0}
   velocityMultiplier: 0.5
-  spawnAreaSize: {x: 10, y: 2, z: 5}
+  spawnAreaSize: {x: 32, y: 2, z: 32}
   particleMaterial: {fileID: 2100000, guid: d6f48dc4c54e043548b70dd47b85c3fb, type: 2}

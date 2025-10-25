@@ -217,7 +217,17 @@ public class VFX_ParticalSystem : MonoBehaviour
             props.SetColor("_Color", currentColor);
             
             // Draw the particle
-            Graphics.DrawMesh(particleMesh, matrix, particleMaterial, 0, null, 0, props);
+            Graphics.DrawMesh(
+                particleMesh,
+                matrix,
+                particleMaterial,
+                gameObject.layer,
+                null,
+                0,
+                props,
+                castShadows: false,
+                receiveShadows: false
+            );
         }
     }
     
