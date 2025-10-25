@@ -876,6 +876,9 @@ MonoBehaviour:
   chunksAroundPlayer: 3
   useDistanceInstead: 1
   spawnDistance: 100
+  heightOffset: 0
+  minHeightLimit: 0.095
+  maxHeightLimit: 0.3
   updateInterval: 1
 --- !u!1 &226611696
 GameObject:

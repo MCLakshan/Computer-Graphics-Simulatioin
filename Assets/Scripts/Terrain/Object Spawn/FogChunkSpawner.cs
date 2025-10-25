@@ -18,13 +18,17 @@ public class FogChunkSpawner : MonoBehaviour
     [SerializeField] private bool useDistanceInstead = false;
     [SerializeField] private float spawnDistance = 100f; // Only used if useDistanceInstead = true
     
-    
+    [Header("Height Settings")]
+    [SerializeField] private float heightOffset = 0f; // Offset above terrain height
+    [SerializeField] private float minHeightLimit = -Mathf.Infinity; // Minimum height to spawn fog
+    [SerializeField] private float maxHeightLimit = Mathf.Infinity; // Maximum height to spawn fog
     
     [Header("Performance")]
     [SerializeField] private float updateInterval = 1f; // How often to check (in seconds)
     
     private Transform player;
     private Terrain terrain;
+    private float maxTerrainHeight; // Max height of terrain for bounds checking
     
     // Tracking
     private Dictionary<Vector2Int, GameObject> spawnedFogChunks = new Dictionary<Vector2Int, GameObject>();
@@ -57,27 +61,6 @@ public class FogChunkSpawner : MonoBehaviour
         lastPlayerChunk = GetChunkCoord(player.position);
         UpdateFogChunks();
     }
-    
-    // void Update()
-    // {
-    //     if (player == null) return;
-    //     
-    //     // Update at intervals instead of every frame for performance
-    //     updateTimer += Time.deltaTime;
-    //     if (updateTimer >= updateInterval)
-    //     {
-    //         updateTimer = 0f;
-    //         
-    //         Vector2Int currentChunk = GetChunkCoord(player.position);
-    //         
-    //         // Only update if player moved to a new chunk
-    //         if (currentChunk != lastPlayerChunk)
-    //         {
-    //             UpdateFogChunks();
-    //             lastPlayerChunk = currentChunk;
-    //         }
-    //     }
-    // }
     
     void UpdateFogChunks()
     {
@@ -147,6 +130,13 @@ public class FogChunkSpawner : MonoBehaviour
             return;
         
         Vector3 spawnPosition = GetChunkWorldPosition(chunkCoord);
+        
+        // Height limits check
+        maxTerrainHeight = terrain != null ? terrain.terrainData.size.y : 100f;
+        var normalizedHeight = spawnPosition.y / maxTerrainHeight;
+        if (normalizedHeight < minHeightLimit || normalizedHeight > maxHeightLimit)
+            return;
+        
         GameObject fogInstance = Instantiate(fogPrefab, spawnPosition, Quaternion.identity, transform);
         fogInstance.name = $"Fog_Chunk_{chunkCoord.x}_{chunkCoord.y}";
         
@@ -168,6 +158,10 @@ public class FogChunkSpawner : MonoBehaviour
         
         // Get terrain height at this position
         float y = terrain != null ? terrain.SampleHeight(new Vector3(x, 0, z)) : 0f;
+        
+        // Apply offset
+        y += heightOffset;
+        
         return new Vector3(x, y, z);
     }
     
