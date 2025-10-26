@@ -1,4 +1,4 @@
-﻿﻿# Computer Graphics Simulation - Procedural Content Generation
+﻿# Computer Graphics Simulation - Procedural Content Generation
 
 ![Unity](https://img.shields.io/badge/Unity-6-black.svg?style=flat&logo=unity)
 ![C#](https://img.shields.io/badge/C%23-239120?style=flat&logo=c-sharp&logoColor=white)
