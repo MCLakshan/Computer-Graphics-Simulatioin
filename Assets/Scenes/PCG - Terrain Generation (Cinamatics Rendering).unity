@@ -219,238 +219,6 @@ RectTransform:
   m_AnchoredPosition: {x: 25, y: 518}
   m_SizeDelta: {x: -50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &98610618
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 98610619}
-  - component: {fileID: 98610620}
-  m_Layer: 0
-  m_Name: '[ TREES ]'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &98610619
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 98610618}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 693639553}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &98610620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 98610618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59cc2cf4cf4f5a146a714011f8f1a732, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  terrain: {fileID: 1072173605}
-  helperCombinedWaterMap: {fileID: 1072173611}
-  blueNoiseTexture: {fileID: 2800000, guid: e7121dd914d72de43b6b00c3c135bb5a, type: 3}
-  noiseThreshold: 0.5
-  listOfObjectsToSpawn:
-  - Name: '[ GRASS ] - Large Pine Tree 1'
-    Type: 0
-    Prefab: {fileID: 6948803800378873062, guid: 8e956f265fb166649b9bef3f9526db0f, type: 3}
-    SpawnCount: 1000
-    MindistanceBetweenType: 5
-    MinHeightPercent: 0.022
-    MaxHeightPercent: 0.095
-    canSpawn: 1
-  - Name: '[ GRASS ] - Large Pine Tree 2'
-    Type: 0
-    Prefab: {fileID: 4292624513649165816, guid: 685bfccc4169fb041af3653e2e1aa598, type: 3}
-    SpawnCount: 1000
-    MindistanceBetweenType: 5
-    MinHeightPercent: 0.022
-    MaxHeightPercent: 0.095
-    canSpawn: 1
-  - Name: '[ GRASS ] - Lalic Single Tree 1'
-    Type: 0
-    Prefab: {fileID: 8705127756659204674, guid: fabad0763505baa49a9d434a61790383, type: 3}
-    SpawnCount: 1000
-    MindistanceBetweenType: 5
-    MinHeightPercent: 0.022
-    MaxHeightPercent: 0.095
-    canSpawn: 1
-  - Name: '[ GRASS ] - Lilac Bush 1'
-    Type: 0
-    Prefab: {fileID: 1883170641425228574, guid: 4094167fee02c2d44b23c161ee91e91e, type: 3}
-    SpawnCount: 1000
-    MindistanceBetweenType: 5
-    MinHeightPercent: 0.022
-    MaxHeightPercent: 0.095
-    canSpawn: 1
-  - Name: '[ GRASS ] - Lilac Bush 3'
-    Type: 0
-    Prefab: {fileID: 833014445901549575, guid: 38c0515601e77dc4c8def36c5ea7513c, type: 3}
-    SpawnCount: 1000
-    MindistanceBetweenType: 5
-    MinHeightPercent: 0.022
-    MaxHeightPercent: 0.095
-    canSpawn: 1
-  - Name: '[ GRASS ] - Dream Tree 2'
-    Type: 0
-    Prefab: {fileID: 728238686167398493, guid: c1ae03b47cb07b54d92d29e4af9256ed, type: 3}
-    SpawnCount: 500
-    MindistanceBetweenType: 5
-    MinHeightPercent: 0.022
-    MaxHeightPercent: 0.095
-    canSpawn: 1
-  - Name: '[ GRASS ] - Sakura big summer 01'
-    Type: 0
-    Prefab: {fileID: 9184283371616552862, guid: a980ae288f9465a4d9215ab0ed3f020b, type: 3}
-    SpawnCount: 250
-    MindistanceBetweenType: 5
-    MinHeightPercent: 0.022
-    MaxHeightPercent: 0.095
-    canSpawn: 1
-  - Name: '[ GRASS ] - Sakura big summer 05'
-    Type: 0
-    Prefab: {fileID: 8971494080335720710, guid: 47c2e727b1ff534458c0525267699a5e, type: 3}
-    SpawnCount: 250
-    MindistanceBetweenType: 5
-    MinHeightPercent: 0.022
-    MaxHeightPercent: 0.095
-    canSpawn: 1
-  - Name: '[ FOREST ] - Large Pine Tree 1'
-    Type: 1
-    Prefab: {fileID: 6948803800378873062, guid: 8e956f265fb166649b9bef3f9526db0f, type: 3}
-    SpawnCount: 4000
-    MindistanceBetweenType: 3
-    MinHeightPercent: 0.105
-    MaxHeightPercent: 0.3
-    canSpawn: 1
-  - Name: '[ FOREST ] - Large Pine Tree 2'
-    Type: 1
-    Prefab: {fileID: 4292624513649165816, guid: 685bfccc4169fb041af3653e2e1aa598, type: 3}
-    SpawnCount: 4000
-    MindistanceBetweenType: 3
-    MinHeightPercent: 0.105
-    MaxHeightPercent: 0.3
-    canSpawn: 1
-  - Name: '[ FOREST ] - Medium Pine Tree 2'
-    Type: 1
-    Prefab: {fileID: 6434323417078943923, guid: db3af65aa43f6394dbe7bf5143037210, type: 3}
-    SpawnCount: 2000
-    MindistanceBetweenType: 3
-    MinHeightPercent: 0.105
-    MaxHeightPercent: 0.3
-    canSpawn: 1
-  - Name: '[ FOREST ] - Medium Pine Tree 3'
-    Type: 1
-    Prefab: {fileID: 2772202851513751404, guid: 7073e011fef2bae4991c8fe5eeeaf892, type: 3}
-    SpawnCount: 2000
-    MindistanceBetweenType: 3
-    MinHeightPercent: 0.105
-    MaxHeightPercent: 0.3
-    canSpawn: 1
-  - Name: '[ FOREST ] - Pine Sapling 3 (small tree)'
-    Type: 1
-    Prefab: {fileID: 3138988572906740420, guid: ce1a7e9dbe6afae4ba823141ad5ec3cc, type: 3}
-    SpawnCount: 4000
-    MindistanceBetweenType: 3
-    MinHeightPercent: 0.105
-    MaxHeightPercent: 0.3
-    canSpawn: 1
-  - Name: '[ FOREST ] - Lilac Bush 1'
-    Type: 1
-    Prefab: {fileID: 1883170641425228574, guid: 4094167fee02c2d44b23c161ee91e91e, type: 3}
-    SpawnCount: 4000
-    MindistanceBetweenType: 5
-    MinHeightPercent: 0.105
-    MaxHeightPercent: 0.3
-    canSpawn: 1
-  - Name: '[ FOREST ] - Lilac Bush 3'
-    Type: 1
-    Prefab: {fileID: 833014445901549575, guid: 38c0515601e77dc4c8def36c5ea7513c, type: 3}
-    SpawnCount: 4000
-    MindistanceBetweenType: 5
-    MinHeightPercent: 0.105
-    MaxHeightPercent: 0.3
-    canSpawn: 1
-  - Name: '[ FOREST ] - Lilac Single Tree 1'
-    Type: 1
-    Prefab: {fileID: 8705127756659204674, guid: fabad0763505baa49a9d434a61790383, type: 3}
-    SpawnCount: 4000
-    MindistanceBetweenType: 2
-    MinHeightPercent: 0.105
-    MaxHeightPercent: 0.3
-    canSpawn: 1
-  - Name: '[ FOREST ] - Lilac Single Tree 2'
-    Type: 1
-    Prefab: {fileID: 3643364694243093372, guid: 6d8e3058b62058548b1e895532fc2875, type: 3}
-    SpawnCount: 2000
-    MindistanceBetweenType: 2
-    MinHeightPercent: 0.105
-    MaxHeightPercent: 0.3
-    canSpawn: 1
-  - Name: '[ FOREST ] - Lilac Single Tree 3'
-    Type: 1
-    Prefab: {fileID: 1605009373134017249, guid: 853e9b86b7e9aef43b05f20585cfc6b4, type: 3}
-    SpawnCount: 2000
-    MindistanceBetweenType: 2
-    MinHeightPercent: 0.105
-    MaxHeightPercent: 0.3
-    canSpawn: 1
-  - Name: '[ FOREST ] - Dreem Tree 2'
-    Type: 1
-    Prefab: {fileID: 728238686167398493, guid: c1ae03b47cb07b54d92d29e4af9256ed, type: 3}
-    SpawnCount: 1000
-    MindistanceBetweenType: 10
-    MinHeightPercent: 0.105
-    MaxHeightPercent: 0.3
-    canSpawn: 1
-  - Name: '[ FOREST ] - Sakura big summer 01'
-    Type: 1
-    Prefab: {fileID: 9184283371616552862, guid: a980ae288f9465a4d9215ab0ed3f020b, type: 3}
-    SpawnCount: 1000
-    MindistanceBetweenType: 10
-    MinHeightPercent: 0.105
-    MaxHeightPercent: 0.3
-    canSpawn: 1
-  - Name: '[ FOREST ] - Sakura big summer 05'
-    Type: 1
-    Prefab: {fileID: 8971494080335720710, guid: 47c2e727b1ff534458c0525267699a5e, type: 3}
-    SpawnCount: 1000
-    MindistanceBetweenType: 10
-    MinHeightPercent: 0.105
-    MaxHeightPercent: 0.3
-    canSpawn: 1
-  - Name: '[ THUNDRA ] - Lilac Single Tree 2'
-    Type: 2
-    Prefab: {fileID: 3643364694243093372, guid: 6d8e3058b62058548b1e895532fc2875, type: 3}
-    SpawnCount: 2000
-    MindistanceBetweenType: 5
-    MinHeightPercent: 0.3
-    MaxHeightPercent: 0.5
-    canSpawn: 1
-  randomRotation: 1
-  positionsPerFrame: 100
-  maxSpawnAttemptsMultiplier: 100
-  spawningObjectName: Trees
-  poggressBarText: {fileID: 1272422918}
-  spawnCountSlider: {fileID: 1410970994}
-  visualizeSpawnArea: 1
 --- !u!1 &101460514
 GameObject:
   m_ObjectHideFlags: 0
@@ -1112,7 +880,7 @@ Transform:
   - {fileID: 1713114668}
   - {fileID: 1503655988}
   - {fileID: 1072173602}
-  - {fileID: 1323354580}
+  - {fileID: 1975999195}
   - {fileID: 693639553}
   - {fileID: 382705657}
   m_Father: {fileID: 0}
@@ -1300,68 +1068,6 @@ MonoBehaviour:
   cameraFieldOfView: 100
   enableFrustumCulling: 1
   enableOnDrawGizmos: 0
---- !u!1 &550499363
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 550499364}
-  m_Layer: 0
-  m_Name: Water Level 1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &550499364
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 550499363}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1323354580}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &567553434
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 567553435}
-  m_Layer: 0
-  m_Name: Water Level 2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &567553435
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 567553434}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1323354580}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &570629926
 GameObject:
   m_ObjectHideFlags: 0
@@ -1591,9 +1297,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 98610619}
   - {fileID: 1243655700}
   - {fileID: 195407075}
+  - {fileID: 2076589733}
   m_Father: {fileID: 357942944}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &759254627
@@ -1998,7 +1704,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 98610620}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TerrainObjectSpawner, Assembly-CSharp
         m_MethodName: SpawnObjects
         m_Mode: 1
@@ -2081,7 +1787,7 @@ RectTransform:
   m_Father: {fileID: 1586297661}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2461,7 +2167,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1072173601}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a01b13e113b8bd742bb841f06d0d2a03, type: 3}
   m_Name: 
@@ -2477,7 +2183,7 @@ MonoBehaviour:
   skipDetectionWaterUpperThreshold: 0.3
   waterHeight: 0.1
   waterPlanePrefab: {fileID: 2778371901395010301, guid: f00070f58b9fe0443b92e0c848943ce2, type: 3}
-  waterPlanesParent: {fileID: 550499363}
+  waterPlanesParent: {fileID: 0}
   waterDetectionInfoText: {fileID: 2142869822}
 --- !u!114 &1072173610
 MonoBehaviour:
@@ -2486,7 +2192,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1072173601}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a01b13e113b8bd742bb841f06d0d2a03, type: 3}
   m_Name: 
@@ -2502,7 +2208,7 @@ MonoBehaviour:
   skipDetectionWaterUpperThreshold: 0.1
   waterHeight: 0.018
   waterPlanePrefab: {fileID: 2778371901395010301, guid: f00070f58b9fe0443b92e0c848943ce2, type: 3}
-  waterPlanesParent: {fileID: 567553434}
+  waterPlanesParent: {fileID: 0}
   waterDetectionInfoText: {fileID: 1583864611}
 --- !u!114 &1072173611
 MonoBehaviour:
@@ -2521,6 +2227,57 @@ MonoBehaviour:
   innerTerrainWaterDitectionComponents:
   - {fileID: 1072173610}
   - {fileID: 1072173609}
+--- !u!1 &1093555190
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1093555192}
+  - component: {fileID: 1093555191}
+  m_Layer: 0
+  m_Name: Timeline
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!320 &1093555191
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1093555190}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 539052477de5b044c91c9c985a14adf8, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 1201771098505046848, guid: 539052477de5b044c91c9c985a14adf8, type: 2}
+    value: {fileID: 1728847689}
+  m_ExposedReferences:
+    m_References: []
+--- !u!4 &1093555192
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1093555190}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.031832732, y: -0.41410816, z: -0.013494231, w: 0.90957075}
+  m_LocalPosition: {x: 3503.1138, y: 66.17794, z: 1190.0842}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1125489409
 GameObject:
   m_ObjectHideFlags: 0
@@ -3401,39 +3158,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1272422916}
   m_CullTransparentMesh: 1
---- !u!1 &1323354579
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1323354580}
-  m_Layer: 0
-  m_Name: Water Planes
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1323354580
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1323354579}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 550499364}
-  - {fileID: 567553435}
-  m_Father: {fileID: 357942944}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1331414830
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4377,11 +4101,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!4 &1614241048 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8039677883959008305, guid: 6d3e7c555db345a478dfb640ef96a340, type: 3}
-  m_PrefabInstance: {fileID: 7767290805741392191}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1676871661
 GameObject:
   m_ObjectHideFlags: 0
@@ -4446,11 +4165,6 @@ MonoBehaviour:
   cameraFieldOfView: 100
   enableFrustumCulling: 1
   enableOnDrawGizmos: 0
---- !u!4 &1696499538 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6734390637772784025, guid: 6d3e7c555db345a478dfb640ef96a340, type: 3}
-  m_PrefabInstance: {fileID: 7767290805741392191}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1713114666
 GameObject:
   m_ObjectHideFlags: 0
@@ -4737,6 +4451,7 @@ GameObject:
   - component: {fileID: 1728847686}
   - component: {fileID: 1728847685}
   - component: {fileID: 1728847688}
+  - component: {fileID: 1728847689}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4811,13 +4526,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1728847684}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.31912476, y: 0, z: 0, w: 0.9477128}
-  m_LocalPosition: {x: 2048, y: 1379, z: -757}
+  m_LocalRotation: {x: -0.0815879, y: -0.58720815, z: -0.0585189, w: 0.8031846}
+  m_LocalPosition: {x: 3450.6172, y: 28.70539, z: 925.00964}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 37.22, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 346.0777, y: 0.6397097, z: 0.1412798}
 --- !u!114 &1728847688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4957,6 +4672,28 @@ MonoBehaviour:
       enableFptlForForwardOpaque: 0
       enableBigTilePrepass: 0
       isFptlEnabled: 0
+--- !u!95 &1728847689
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728847684}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1748165242
 GameObject:
   m_ObjectHideFlags: 0
@@ -5414,7 +5151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1940748033
 Transform:
   m_ObjectHideFlags: 0
@@ -5431,6 +5168,68 @@ Transform:
   - {fileID: 843296172}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1975999194
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 357942944}
+    m_Modifications:
+    - target: {fileID: 453868484890660932, guid: 3f429161621099f4292d4a3841f96507, type: 3}
+      propertyPath: m_Name
+      value: Water Planes
+      objectReference: {fileID: 0}
+    - target: {fileID: 1231751094170854399, guid: 3f429161621099f4292d4a3841f96507, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1231751094170854399, guid: 3f429161621099f4292d4a3841f96507, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1231751094170854399, guid: 3f429161621099f4292d4a3841f96507, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1231751094170854399, guid: 3f429161621099f4292d4a3841f96507, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1231751094170854399, guid: 3f429161621099f4292d4a3841f96507, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1231751094170854399, guid: 3f429161621099f4292d4a3841f96507, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1231751094170854399, guid: 3f429161621099f4292d4a3841f96507, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1231751094170854399, guid: 3f429161621099f4292d4a3841f96507, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1231751094170854399, guid: 3f429161621099f4292d4a3841f96507, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1231751094170854399, guid: 3f429161621099f4292d4a3841f96507, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3f429161621099f4292d4a3841f96507, type: 3}
+--- !u!4 &1975999195 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1231751094170854399, guid: 3f429161621099f4292d4a3841f96507, type: 3}
+  m_PrefabInstance: {fileID: 1975999194}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2002200068
 GameObject:
   m_ObjectHideFlags: 0
@@ -5603,6 +5402,72 @@ MonoBehaviour:
   cameraFieldOfView: 100
   enableFrustumCulling: 1
   enableOnDrawGizmos: 0
+--- !u!1001 &2076589732
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 693639553}
+    m_Modifications:
+    - target: {fileID: 797553008424962800, guid: 4dacd9c2fbbf3234f8b1e2a866824968, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 797553008424962800, guid: 4dacd9c2fbbf3234f8b1e2a866824968, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 797553008424962800, guid: 4dacd9c2fbbf3234f8b1e2a866824968, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 797553008424962800, guid: 4dacd9c2fbbf3234f8b1e2a866824968, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 797553008424962800, guid: 4dacd9c2fbbf3234f8b1e2a866824968, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 797553008424962800, guid: 4dacd9c2fbbf3234f8b1e2a866824968, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 797553008424962800, guid: 4dacd9c2fbbf3234f8b1e2a866824968, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 797553008424962800, guid: 4dacd9c2fbbf3234f8b1e2a866824968, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 797553008424962800, guid: 4dacd9c2fbbf3234f8b1e2a866824968, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 797553008424962800, guid: 4dacd9c2fbbf3234f8b1e2a866824968, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7019722190421314765, guid: 4dacd9c2fbbf3234f8b1e2a866824968, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8460877654856282809, guid: 4dacd9c2fbbf3234f8b1e2a866824968, type: 3}
+      propertyPath: m_Name
+      value: '[ TREES ]'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4dacd9c2fbbf3234f8b1e2a866824968, type: 3}
+--- !u!4 &2076589733 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 797553008424962800, guid: 4dacd9c2fbbf3234f8b1e2a866824968, type: 3}
+  m_PrefabInstance: {fileID: 2076589732}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2084135372
 GameObject:
   m_ObjectHideFlags: 0
@@ -5648,8 +5513,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrain: {fileID: 1072173605}
-  player: {fileID: 1614241048}
-  playerCamera: {fileID: 1696499538}
+  player: {fileID: 1728847687}
+  playerCamera: {fileID: 1728847687}
 --- !u!1 &2142869820
 GameObject:
   m_ObjectHideFlags: 0
@@ -5892,3 +5757,4 @@ SceneRoots:
   - {fileID: 1501046025}
   - {fileID: 1201517226}
   - {fileID: 2025726817}
+  - {fileID: 1093555192}
