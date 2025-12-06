@@ -26,6 +26,9 @@ public class FogChunkSpawner : MonoBehaviour
     [Header("Performance")]
     [SerializeField] private float updateInterval = 1f; // How often to check (in seconds)
     
+    [Header("Debug")]
+    [SerializeField] private bool showGizmos = false;
+    
     private Transform player;
     private Terrain terrain;
     private float maxTerrainHeight; // Max height of terrain for bounds checking
@@ -168,7 +171,8 @@ public class FogChunkSpawner : MonoBehaviour
     // Debug visualization
     void OnDrawGizmos()
     {
-        if (player == null) return;
+        if (player == null || !showGizmos)
+            return;
         
         Vector2Int playerChunk = GetChunkCoord(player.position);
         
@@ -211,6 +215,9 @@ public class FogChunkSpawner : MonoBehaviour
     
     void DrawCircle(Vector3 center, float radius, int segments)
     {
+        if (player == null || !showGizmos)
+            return;
+        
         float angleStep = 360f / segments;
         Vector3 previousPoint = center + Vector3.forward * radius;
         
