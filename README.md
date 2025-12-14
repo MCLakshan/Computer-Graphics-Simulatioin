@@ -6,6 +6,11 @@
 
 A comprehensive Unity-based computer graphics learning project focused on **Procedural Content Generation (PCG)**, advanced rendering techniques, and AI implementations. This project demonstrates various computer graphics concepts including terrain generation, GPU instancing, particle systems, volumetric effects, and NPC AI behaviors.
 
+<video width="320" height="240" controls>
+  <source src="video.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 ---
 
 ## 🎯 Project Overview
