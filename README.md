@@ -6,10 +6,14 @@
 
 A comprehensive Unity-based computer graphics learning project focused on **Procedural Content Generation (PCG)**, advanced rendering techniques, and AI implementations. This project demonstrates various computer graphics concepts including terrain generation, GPU instancing, particle systems, volumetric effects, and NPC AI behaviors.
 
-<video width="320" height="240" controls>
-  <source src="ReadmeRendeders/GR_v03.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+<!-- Video embed: YouTube iframe (replace YOUR_VIDEO_ID with the actual YouTube ID) -->
+<!-- Note: GitHub README rendering may strip iframes; use the direct link below if the embed doesn't render. -->
+<iframe width="560" height="315" src="https://youtu.be/nBNbVOthfqU" title="Project Showcase" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<p>Or watch the included local video file (fallback):</p>
+
+
+[Watch on YouTube](https://youtu.be/nBNbVOthfqU)
 
 ---
 
@@ -399,4 +403,3 @@ Created as a computer graphics learning project to explore procedural generation
 
 *Last Updated: October 25, 2025*
 *Unity Version: 6000.0.58f2 (Unity 6)*
-
